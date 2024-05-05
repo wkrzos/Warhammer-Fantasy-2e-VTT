@@ -5,3 +5,10 @@ class Races(Enum):
     ELF = "r.2",
     DWARF = "r.3",
     HALFLING = "r.4"
+
+class MonsterCategory(Enum):
+    UNDEAD = "mc.1"
+    GREENSKIN = "mc.2"
+    HUMAN = "mc3"
+    BEAST = "mc4"
+    ETHERNAL = "mc5"

@@ -1,5 +1,6 @@
 import random
 
+from backend.mechanic.rolingMachine import RollGod
 from equipment import *
 from characteristics import *
 from races import *
@@ -21,7 +22,7 @@ class Creature:
                return self.statTest(skilsDependency(skill),modificator)
             else:
                 stat = skilsDependency(skill)
-                value = random.randrange(0, 100) +1
+                value = RollGod.rollD100(1)[0]
                 match stat:
                     case MainStats.AGILITY:
                         return (value < self.summaryAgility/2 + modificator[1], value)
@@ -45,7 +46,7 @@ class Creature:
             else:
                 return False
     def statTest(self, stat:MainStats, modificator:TestModificator = TestModificator.COMMON) -> (bool,int):
-        value = random.randrange(0, 100) + 1
+        value = RollGod.rollD100(1)[0]
         match stat:
             case MainStats.AGILITY:
                 return (value < self.summaryAgility + modificator[1], value)
