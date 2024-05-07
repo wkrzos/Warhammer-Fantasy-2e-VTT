@@ -11,8 +11,8 @@ class Creature:
     def __init__(self, name:str, statistics:Statistics):
         self.name = name
         self.statistics = statistics
-        self.skills = []
-        self.talents = []
+        self.skills = set()
+        self.talents = set()
         self.development = Development()
 
     def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int):
@@ -110,9 +110,23 @@ class Creature:
     def summaryMagic(self):
         return self.statistics.magic + self.development.getStatsBonus(SecondaryStats.MAGIC)
 class Character(Creature):
-    def __init__(self, name: str, statistics: Statistics, race: Races):
+    def __init__(self, name: str, statistics: Statistics = None, race: Races = None):
         super().__init__(name, statistics)
         self.equipment = Equipment()
         self.race = race
 
-
+class CharacterDescription:
+    def __init__(self):
+        self.colorOfEyes = None
+        self.colorOfHairs = None
+        self.weight = None
+        self.heigh = None
+        self.sex = None
+        self.age = None
+class Card:
+    def __init__(self):
+        self.playerName = None
+        self.playerCharacter = Character()
+        self.characterPicture = None
+        self.characterDescription = CharacterDescription()
+        self.history = None

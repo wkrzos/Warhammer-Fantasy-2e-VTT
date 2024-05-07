@@ -21,3 +21,4 @@ class SecondaryStats(Stats):
     MAGIC = "ss.6"
     INSANITY_POINTS = "ss.7"
     FATE_POINTS = "ss.8"
+

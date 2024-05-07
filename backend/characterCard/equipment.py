@@ -84,7 +84,7 @@ class Equipment:
 
     def __init__(self):
         self.items = []
-        self.armors = []
+        self.equiptArmors = []
         self.weapon = None
 
     def equipWeapon(self, weapon: Weapon):
