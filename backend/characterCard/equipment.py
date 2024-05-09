@@ -32,18 +32,18 @@ class Armor(Item):
 
     def __init__(self,name,price):
         super().__init__(name,price)
-        self.protectedLocalisations = []
+        self.protectedLocalisations = set()
         self.armorPoints = 0
         self.armorType = ArmorType.LIGHT
 class WeaponTrait(Enum):
     HEAVY = "wtr.1",
     DEVASTATING = "wtr.2",
-    EXPARIMENTAL = "wtr.3",
+    EXPERIMENTAL = "wtr.3",
     SHRAPNEL = "wtr.4",
     DEAFENING = "wtr.5",
     PARRYING = "wtr.6",
     SLOW = "wtr.7",
-    PRECISIVE = "wtr.8",
+    PRECISE = "wtr.8",
     PIERCING = "wtr.9",
     SPECIAL = "wtr.10",
     FAST = "wtr.11",
@@ -72,7 +72,7 @@ class ArmorType(Enum):
     MEDIUM = "atp.2",
     HEAVY = "atp.3"
 
-class ProtectedLocalisation(Enum):
+class HitLocalisation(Enum):
     HEAD = "pl.1"
     ARMS = "pl.2"
     BODY = "pl.3"
@@ -92,7 +92,7 @@ class Equipment:
 
     def equipArmor(self, armor: Armor):
 
-        if ProtectedLocalisation.ALL in armor.protectedLocalisations:
+        if HitLocalisation.ALL in armor.protectedLocalisations:
             self.armors = [armor]
         else:
             for localisation in armor.protectedLocalisations:

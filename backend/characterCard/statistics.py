@@ -60,11 +60,11 @@ class Development:
         self.exp = 0
         self.updates = {
         MainStats.WEAPON_SKILL : 0,
-        MainStats.BALISSTIC_SKILL : 0,
+        MainStats.BALLISTIC_SKILL : 0,
         MainStats.STRENGTH : 0,
         MainStats.TOUGHNESS : 0,
         MainStats.AGILITY : 0,
-        MainStats.INTELIGENCE : 0,
+        MainStats.INTELLIGENCE : 0,
         MainStats.WILL_POWER : 0,
         MainStats.FELLOWSHIP : 0,
         SecondaryStats.ATTACKS : 0,
