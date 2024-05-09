@@ -23,7 +23,7 @@ class MusicManager:
                 if file.endswith(('.mp3', '.wav', '.ogg', '.flac')):
                     self.playlist.append(os.path.join(root, file))
 
-    def checkExternalEvents(self):
+    def checkExternalEvents(self): #Temp test function
         while True:
             user_input = input("Wpisz 'stop', aby zatrzymać odtwarzanie lub 'next', aby przejść do następnego utworu: ")
             if user_input.lower() == "stop":
@@ -36,8 +36,6 @@ class MusicManager:
                     self.command = MusicEventTypes.PLAY
     def run(self):
         mixer.init()
-
-
         while True:
             time.sleep(0.1)
             match self.command:
