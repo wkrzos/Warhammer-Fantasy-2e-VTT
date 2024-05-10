@@ -39,26 +39,27 @@ class MusicManager:
         self.play()
         while True:
             time.sleep(0.1)
-            match self.command:
-                case MusicEventTypes.UNPAUSE:
-                    self.unpause()
-                case MusicEventTypes.PAUSE:
-                    self.pause()
-                    self.command = MusicEventTypes.WAIT
-                case MusicEventTypes.NEXT:
-                    self.next()
-                    self.command = MusicEventTypes.PLAY
-                case MusicEventTypes.PREVIOUS:
-                    self.previous()
-                    self.command = MusicEventTypes.PLAY
-                case MusicEventTypes.REWIND:
-                    self.rewind()
-                    self.command = MusicEventTypes.PLAY
-                case MusicEventTypes.UNPAUSE:
-                    self.unpause()
-                    self.command = MusicEventTypes.PLAY
-            if MusicEventTypes.PLAY == self.command and not mixer.music.get_busy():
-                    self.next()
+            with self.lock:
+                match self.command:
+                    case MusicEventTypes.UNPAUSE:
+                        self.unpause()
+                    case MusicEventTypes.PAUSE:
+                        self.pause()
+                        self.command = MusicEventTypes.WAIT
+                    case MusicEventTypes.NEXT:
+                        self.next()
+                        self.command = MusicEventTypes.PLAY
+                    case MusicEventTypes.PREVIOUS:
+                        self.previous()
+                        self.command = MusicEventTypes.PLAY
+                    case MusicEventTypes.REWIND:
+                        self.rewind()
+                        self.command = MusicEventTypes.PLAY
+                    case MusicEventTypes.UNPAUSE:
+                        self.unpause()
+                        self.command = MusicEventTypes.PLAY
+                if MusicEventTypes.PLAY == self.command and not mixer.music.get_busy():
+                        self.next()
 
 
     def play(self):
