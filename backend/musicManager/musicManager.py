@@ -25,7 +25,7 @@ class MusicManager:
 
     def checkExternalEvents(self): #Temp test function
         while True:
-            user_input = input("Wpisz 'stop', aby zatrzymać odtwarzanie lub 'next', aby przejść do następnego utworu: ")
+            user_input = input("Wpisz 'stop', aby zatrzymać odtwarzanie lub 'play', aby wznowic: ")
             if user_input.lower() == "stop":
                 with self.lock:
 
