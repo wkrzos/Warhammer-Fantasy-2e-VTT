@@ -8,14 +8,14 @@ from skillsAndTalents import *
 from statistics import *
 
 class Creature:
-    def __init__(self, name:str, statistics:Statistics):
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
         self.name = name
         self.statistics = statistics
-        self.skills = set()
-        self.talents = set()
-        self.development = Development()
-        self.attributes = Attributes()
-        self.currentHp = self.statistics.wounds
+        self.skills = skills
+        self.talents = talents
+        self.development = development
+        self.attributes = attributes
+        self.currentHp = self.statistics.wounds if currentHp is None else currentHp
 
     def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int): #(Test sucsesfully, Value of roll, Number of succeses)
 
@@ -67,7 +67,18 @@ class Creature:
             case MainStats.WEAPON_SKILL:
                 return (value < self.summaryWeaponSkill + modificator[1], value,(self.summaryWeaponSkill - value) / 10)
 
+    def __dict__(self):
+        return {
+            "class" : "creature",
+            "name" : self.name,
+            "statistics" : self.statistics.__dict__(),
+            "skills" : list(self.skills),
+            "talents" : list(self.talents),
+            "development" : self.development.__dict__(),
+            "attributes" : self.attributes.__dict__(),
+            "currentHp" : self.currentHp
 
+        }
 
     @property
     def summaryWeaponSkill(self):
@@ -122,26 +133,61 @@ class Creature:
         return self.statistics.strengthBonus
 
 class Character(Creature):
-    def __init__(self, name: str, statistics: Statistics = None, race: Races = None):
-        super().__init__(name, statistics)
-        self.equipment = Equipment()
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
+        super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
+        self.equipment = equipment
         self.race = race
 
+    def __dict__(self):
+        return {
+            'class' : "character",
+            'name': self.name,
+            'statistics': self.statistics.__dict__(),
+            'skills': list(self.skills),
+            'talents': list(self.talents),
+            'development': self.development.__dict__(),
+            'attributes': self.attributes.__dict__(),
+            'currentHp': self.currentHp,
+            'equipment': self.equipment.__dict__(),
+            'race' : self.race
+        }
 
 
 class CharacterDescription:
-    def __init__(self):
-        self.colorOfEyes = None
-        self.colorOfHairs = None
-        self.weight = None
-        self.heigh = None
-        self.sex = None
-        self.age = None
+    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0):
+        self.colorOfEyes =  colorOfEyes
+        self.colorOfHairs = colorOfHairs
+        self.weight = weight
+        self.height = height
+        self.sex = sex
+        self.age = age
+
+    def __dict__(self):
+        return {
+            'colorOfEyes' : self.colorOfEyes,
+            'colorOfHairs' : self.colorOfHairs,
+            'weight' : self.weight,
+            'height' : self.height,
+            'sex' : self.sex,
+            'age' : self.age
+        }
+
+
 class Card:
-    def __init__(self):
-        self.playerName = None
-        self.playerCharacter = Character()
-        self.characterPicture = None
-        self.characterDescription = CharacterDescription()
-        self.history = None
+    def __init__(self, playerName:str = "", playerCharacter:Character = Character(), characterPicture = "", characterDescription:CharacterDescription = CharacterDescription(),history:str =""):
+        self.playerName = playerName
+        self.playerCharacter =  playerCharacter
+        self.characterPicture = characterPicture
+        self.characterDescription = characterDescription
+        self.history = history
+
+    def __dict__(self):
+        return {
+            'playerName' : self.playerName,
+            'playerCharacter' : self.playerCharacter.__dict__(),
+            'characterPicture' : self.characterPicture,
+            'characterDescription' : self.characterDescription.__dict__(),
+            'history' : self.history
+
+        }
 
