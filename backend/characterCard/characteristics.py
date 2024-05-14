@@ -32,9 +32,9 @@ class AttributesType(Enum):
     FURIOUS = "at.7"
 
 class Attributes:
-    def __init__(self):
-        self.actionsRemain = 2
-        self.attributesActive = set()
+    def __init__(self, actionsRemain:int = 2, attributesActive:set = set):
+        self.actionsRemain = actionsRemain
+        self.attributesActive = attributesActive
 
     def __contains__(self, attributes: AttributesType):
         return attributes in self.attributesActive

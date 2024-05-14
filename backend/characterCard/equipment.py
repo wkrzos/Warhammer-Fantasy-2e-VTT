@@ -68,7 +68,7 @@ class Item:
         }
 
 class Weapon(Item):
-    def __init__(self,name:str = "", price:int = 0, description:str = "", weight:int = 0, traits:set = set(), type:WeaponType = WeaponType.ORDINARY, range:int = 1, dmgModifier:int = 0, strengthModificator = True ):
+    def __init__(self,name:str = "", price:int = 0, description:str = "", weight:int = 0, traits:set = set(), type:WeaponType = WeaponType.ORDINARY, range:int = 1, dmgModifier:int = -3, strengthModificator = True ):
         super().__init__(name,price,description,weight)
         self.traits = traits
         self.type = type
@@ -95,7 +95,7 @@ class Weapon(Item):
 
 class Armor(Item):
 
-    def __init__(self,name,price, description:str = "", weight:int = 0,protectedLocalisations:set = set(), armorPoints:int = 0,  armorType:ArmorType = ArmorType.LIGHT ):
+    def __init__(self,name,price, description:str = "", weight:int = 0,protectedLocalisations:set = set, armorPoints:int = 0,  armorType:ArmorType = ArmorType.LIGHT ):
         super().__init__(name,price,description,weight)
         self.protectedLocalisations = protectedLocalisations
         self.armorPoints = armorPoints
@@ -117,7 +117,7 @@ class Armor(Item):
 
 class Equipment:
 
-    def __init__(self, items:list = [], equiptArmors:list= [], weapon: Weapon = None):
+    def __init__(self, items:list = [], equiptArmors:list= [], weapon: Weapon = Weapon()):
         self.items = items
         self.equiptArmors = equiptArmors
         self.weapon = weapon

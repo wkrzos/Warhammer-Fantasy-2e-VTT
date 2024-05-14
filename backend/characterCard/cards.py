@@ -8,14 +8,14 @@ from skillsAndTalents import *
 from statistics import *
 
 class Creature:
-    def __init__(self, name:str, statistics:Statistics = Statistics()):
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
         self.name = name
         self.statistics = statistics
-        self.skills = set()
-        self.talents = set()
-        self.development = Development()
-        self.attributes = Attributes()
-        self.currentHp = self.statistics.wounds
+        self.skills = skills
+        self.talents = talents
+        self.development = development
+        self.attributes = attributes
+        self.currentHp = self.statistics.wounds if currentHp is None else currentHp
 
     def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int): #(Test sucsesfully, Value of roll, Number of succeses)
 
@@ -69,6 +69,7 @@ class Creature:
 
     def __dict__(self):
         return {
+            "class" : "creature",
             "name" : self.name,
             "statistics" : self.statistics.__dict__(),
             "skills" : list(self.skills),
@@ -132,13 +133,14 @@ class Creature:
         return self.statistics.strengthBonus
 
 class Character(Creature):
-    def __init__(self, name: str, statistics: Statistics = Statistics(), race: Races = Races.HUMAN):
-        super().__init__(name, statistics)
-        self.equipment = Equipment()
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
+        super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
+        self.equipment = equipment
         self.race = race
 
     def __dict__(self):
         return {
+            'class' : "character",
             'name': self.name,
             'statistics': self.statistics.__dict__(),
             'skills': list(self.skills),
