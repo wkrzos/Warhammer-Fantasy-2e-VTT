@@ -1,0 +1,12 @@
+Test Modificators - tm.*
+Advanced Skils - as.*
+Basic Skils - bs.*
+Races - r.*
+Monster Categories - mc.*
+Weapon traits - wtr.*
+Weapon types - wtp.*
+Armor types - atp.*
+Hit localisation - hl.*
+Main Stats - ms.*
+Secondary stats - ss.*
+Attribute Type - at.*

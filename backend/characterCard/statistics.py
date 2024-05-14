@@ -1,10 +1,10 @@
 from enum import Enum
 
-from characteristics import *
+from backend.characterCard.characteristics import *
 
 
 class Statistics:
-    def __init__(self, ws, bs,s,t,ag,int,wp,fel,w,m,fp):
+    def __init__(self, ws=0, bs=0,s=0,t=0,ag=0,int=0,wp=0,fel=0,attacks=1,w=0,m=0,magic=0,ip=0,fp=0):
         self.weaponSkill = ws #Weapon Skill
         self.ballisticSkill = bs #Ballistic Skill
         self.strength = s #Strength
@@ -13,11 +13,11 @@ class Statistics:
         self.intelligence = int #Inteligence
         self.willPower = wp #Will Power
         self.fellowship = fel #Fellowship
-        self.attacks = 1 #Attacks
+        self.attacks = attacks #Attacks
         self.wounds = w #Wounds
         self.movement = m #Movement
-        self.magic = 0 #Magic
-        self.insanityPoints = 0 #Insanity Points
+        self.magic = magic #Magic
+        self.insanityPoints = ip #Insanity Points
         self.fatePoint = fp #Fate Point
 
     # def __init__(self):
@@ -45,6 +45,24 @@ class Statistics:
     @property
     def burden(self):
         return self.strength * 10
+
+    def __dict__(self):
+        return {
+            "weaponSkill" : self.weaponSkill,
+            "ballisticSkill" : self.ballisticSkill,
+            "strength" : self.strength,
+            "toughness" : self.toughness,
+            "agility" : self.agility,
+            "intelligence" : self.intelligence,
+            "willPower" : self.willPower,
+            "fellowship" : self.fellowship,
+            "attacks" : self.attacks,
+            "wounds" : self.wounds,
+            "movement" : self.movement,
+            "magic" : self.magic,
+            "insanityPoints" : self.insanityPoints,
+            "fatePoints" : self.fatePoint
+        }
 class TestModificator(Enum):
     VERY_EASY = ("tm.1",30),
     EASY = ("tm.2", 20),
@@ -85,3 +103,9 @@ class Development:
             return self.updates[stat] * 5
         else:
             return self.updates[stat]
+
+    def __dict__(self):
+        return {
+            "exp" : self.exp,
+            "updates" : self.updates
+        }

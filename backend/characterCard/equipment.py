@@ -1,40 +1,5 @@
 from enum import Enum
 
-
-class Item:
-    def __init__(self, name:str, price:int, descriptionId:str, weight:int):
-        self.name = name
-        self.price = price
-        self.descriptionId = descriptionId
-        self.weight = weight
-
-    @property
-    def priceInSilver(self):
-        return self.price / 20
-    @property
-    def priceInGold(self):
-        return self.priceInSilver/12
-
-class Weapon(Item):
-    def __init__(self,name,price):
-        super().__init__(name,price)
-        self.traits = []
-        self.type = WeaponType.ORDINARY
-        self.range = 1
-        self.dmgModificator = 0
-        self.strengthModificator = True
-
-    @property
-    def isRange(self):
-        return self.range > 1
-
-class Armor(Item):
-
-    def __init__(self,name,price):
-        super().__init__(name,price)
-        self.protectedLocalisations = set()
-        self.armorPoints = 0
-        self.armorType = ArmorType.LIGHT
 class WeaponTrait(Enum):
     HEAVY = "wtr.1",
     DEVASTATING = "wtr.2",
@@ -73,19 +38,89 @@ class ArmorType(Enum):
     HEAVY = "atp.3"
 
 class HitLocalisation(Enum):
-    HEAD = "pl.1"
-    ARMS = "pl.2"
-    BODY = "pl.3"
-    LEGS = "pl.4"
-    ALL = "pl.5"
+    HEAD = "hl.1"
+    ARMS = "hl.2"
+    BODY = "hl.3"
+    LEGS = "hl.4"
+    ALL = "hl.5"
+
+
+class Item:
+    def __init__(self, name:str = "", price:int = 0, description:str= "", weight:int = 0):
+        self.name = name
+        self.price = price
+        self.description = description
+        self.weight = weight
+
+    @property
+    def priceInSilver(self):
+        return self.price / 20
+    @property
+    def priceInGold(self):
+        return self.priceInSilver/12
+    def __dict__(self):
+        return {
+            'class' : 'item',
+            'name': self.name,
+            'price': self.price,
+            'description': self.description,
+            'weight': self.weight
+        }
+
+class Weapon(Item):
+    def __init__(self,name:str = "", price:int = 0, description:str = "", weight:int = 0, traits:set = set(), type:WeaponType = WeaponType.ORDINARY, range:int = 1, dmgModifier:int = 0, strengthModificator = True ):
+        super().__init__(name,price,description,weight)
+        self.traits = traits
+        self.type = type
+        self.range = range
+        self.dmgModificator = dmgModifier
+        self.strengthModificator = strengthModificator
+
+    def __dict__(self):
+        return {
+            'class' : "weapon",
+            'name': self.name,
+            'price': self.price,
+            'description': self.description,
+            'weight': self.weight,
+            'traits': list(self.traits),
+            'type': self.type,
+            'range': self.range,
+            'dmgModificator': self.dmgModificator,
+            'strengthModificator': self.strengthModificator
+        }
+    @property
+    def isRange(self):
+        return self.range > 1
+
+class Armor(Item):
+
+    def __init__(self,name,price, description:str = "", weight:int = 0,protectedLocalisations:set = set(), armorPoints:int = 0,  armorType:ArmorType = ArmorType.LIGHT ):
+        super().__init__(name,price,description,weight)
+        self.protectedLocalisations = protectedLocalisations
+        self.armorPoints = armorPoints
+        self.armorType = armorType
+
+    def __dict__(self):
+        return {
+            'class' : "armor",
+            'name': self.name,
+            'price': self.price,
+            'description': self.description,
+            'weight': self.weight,
+            'protectedLocalisations': list(self.protectedLocalisations),
+            'armorPoints': self.armorPoints,
+            'armorType': self.armorType
+
+        }
 
 
 class Equipment:
 
-    def __init__(self):
-        self.items = []
-        self.equiptArmors = []
-        self.weapon = None
+    def __init__(self, items:list = [], equiptArmors:list= [], weapon: Weapon = None):
+        self.items = items
+        self.equiptArmors = equiptArmors
+        self.weapon = weapon
 
     def equipWeapon(self, weapon: Weapon):
         self.weapon = weapon
@@ -102,3 +137,15 @@ class Equipment:
     def addItem(self, item: Item):
         self.items.append(item)
 
+    def __dict__(self):
+        serializedItems = []
+        for item in self.items:
+            serializedItems.append(item.__dict__())
+        serializedArmors = []
+        for armor in self.equiptArmors:
+            serializedArmors.append(armor.__dict__())
+        return {
+            'items': serializedItems,
+            'equipArmors': serializedArmors,
+            'weapon' : self.weapon.__dict__()
+        }

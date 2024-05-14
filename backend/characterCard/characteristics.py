@@ -44,3 +44,9 @@ class Attributes:
 
     def remove(self, attributes: AttributesType):
         self.attributesActive.remove(attributes)
+
+    def __dict__(self):
+        return {
+            "actionsRemain": self.actionsRemain,
+            "attributesActive": list(self.attributesActive)
+        }
