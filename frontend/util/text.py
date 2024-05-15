@@ -1,14 +1,15 @@
 import pygame
 from pygame.locals import *
+from util.color_constants import *
 
 class Text:
     def __init__(self, text, pos, **options):
         self.text = text
         self.pos = pos
         
-        self.fontname = None
-        self.fontsize = 72
-        self.fontcolor = Color('black')
+        self.fontname = options.get('fontname', None)
+        self.fontsize = options.get('fontsize', 72)
+        self.fontcolor = options.get('fontcolor', BLACK)
         self.set_font()
         self.render()
         
@@ -20,5 +21,5 @@ class Text:
         self.rect = self.img.get_rect()
         self.rect.topleft = self.pos
         
-    def draw(self):
-        App.screen.blit(self.img, self.rect)
+    def draw(self, surface):
+        surface.blit(self.img, self.rect)
