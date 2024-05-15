@@ -1,5 +1,5 @@
 from enum import Enum
-from characteristics import MainStats
+from backend.characterCard.characteristics import MainStats
 
 class Skills(Enum):
     pass
@@ -143,50 +143,50 @@ class Talents(Enum):
 
 
 skilsDependency = {
-    BasicSkills.ANIMAL_CARE : MainStats.INTELIGENCE,
+    BasicSkills.ANIMAL_CARE : MainStats.INTELLIGENCE,
     BasicSkills.CHARM : MainStats.FELLOWSHIP,
     BasicSkills.COMMAND : MainStats.FELLOWSHIP,
     BasicSkills.CONCEALMENT : MainStats.AGILITY,
     BasicSkills.CONSUME_ALCOHOL : MainStats.TOUGHNESS,
     BasicSkills.DISGUISE : MainStats.FELLOWSHIP,
     BasicSkills.DRIVE : MainStats.STRENGTH,
-    BasicSkills.EVALUATE : MainStats.INTELIGENCE,
-    BasicSkills.GAMBLE : MainStats.INTELIGENCE,
+    BasicSkills.EVALUATE : MainStats.INTELLIGENCE,
+    BasicSkills.GAMBLE : MainStats.INTELLIGENCE,
     BasicSkills.GOSSIP : MainStats.FELLOWSHIP,
     BasicSkills.HAGGLE : MainStats.FELLOWSHIP,
     BasicSkills.INTIMIDATE : MainStats.STRENGTH,
-    BasicSkills.OUTDOOR_SURVIVAL : MainStats.INTELIGENCE,
-    BasicSkills.PERCEPTION : MainStats.INTELIGENCE,
+    BasicSkills.OUTDOOR_SURVIVAL : MainStats.INTELLIGENCE,
+    BasicSkills.PERCEPTION : MainStats.INTELLIGENCE,
     BasicSkills.RIDE : MainStats.AGILITY,
     BasicSkills.ROW : MainStats.STRENGTH,
     BasicSkills.SCALE_SHEER_SURFACE : MainStats.STRENGTH,
-    BasicSkills.SEARCH : MainStats.INTELIGENCE,
+    BasicSkills.SEARCH : MainStats.INTELLIGENCE,
     BasicSkills.SILENT_MOVE : MainStats.AGILITY,
     BasicSkills.SWIM : MainStats.STRENGTH,
-    AdvancedSkills.ACADEMIC_KNOWLEDGE : MainStats.INTELIGENCE,  # Need to Add Specialization
+    AdvancedSkills.ACADEMIC_KNOWLEDGE : MainStats.INTELLIGENCE,  # Need to Add Specialization
     AdvancedSkills.ANIMAL_TRAINING : MainStats.FELLOWSHIP,
     AdvancedSkills.BLATHER : MainStats.FELLOWSHIP,
     AdvancedSkills.CHANNELING : MainStats.WILL_POWER,
     AdvancedSkills.CHARM_ANIMAL : MainStats.AGILITY,
-    AdvancedSkills.COMMON_KNOWLEDGE : MainStats.INTELIGENCE,
+    AdvancedSkills.COMMON_KNOWLEDGE : MainStats.INTELLIGENCE,
     AdvancedSkills.DODGE_BLOW : MainStats.AGILITY,
-    AdvancedSkills.FOLLOW_TRAIL : MainStats.INTELIGENCE,
-    AdvancedSkills.HEAL : MainStats.INTELIGENCE,
+    AdvancedSkills.FOLLOW_TRAIL : MainStats.INTELLIGENCE,
+    AdvancedSkills.HEAL : MainStats.INTELLIGENCE,
     AdvancedSkills.HYPNOTISM : MainStats.WILL_POWER,
-    AdvancedSkills.LIP_READING : MainStats.INTELIGENCE,
+    AdvancedSkills.LIP_READING : MainStats.INTELLIGENCE,
     AdvancedSkills.MAGICAL_SENSE : MainStats.WILL_POWER,
-    AdvancedSkills.NAVIGATION : MainStats.INTELIGENCE,
+    AdvancedSkills.NAVIGATION : MainStats.INTELLIGENCE,
     AdvancedSkills.PERFORMER : MainStats.FELLOWSHIP,
     AdvancedSkills.PICK_LOCK : MainStats.AGILITY,
-    AdvancedSkills.PREPARE_POISON : MainStats.INTELIGENCE,
-    AdvancedSkills.READ_AND_WRITE : MainStats.INTELIGENCE,
+    AdvancedSkills.PREPARE_POISON : MainStats.INTELLIGENCE,
+    AdvancedSkills.READ_AND_WRITE : MainStats.INTELLIGENCE,
     AdvancedSkills.SAIL : MainStats.AGILITY,
-    AdvancedSkills.SECRET_LANGUAGE : MainStats.INTELIGENCE,  # Need to Add Specialization
-    AdvancedSkills.SECRET_SIGNS : MainStats.INTELIGENCE,  # Need to Add Specialization
+    AdvancedSkills.SECRET_LANGUAGE : MainStats.INTELLIGENCE,  # Need to Add Specialization
+    AdvancedSkills.SECRET_SIGNS : MainStats.INTELLIGENCE,  # Need to Add Specialization
     AdvancedSkills.SET_TRAP : MainStats.AGILITY,
     AdvancedSkills.SHADOWING : MainStats.AGILITY,
     AdvancedSkills.SLEIGHT_OF_HAND : MainStats.AGILITY,
-    AdvancedSkills.SPEAK_LANGUAGE : MainStats.INTELIGENCE,  # Need to Add Specialization
+    AdvancedSkills.SPEAK_LANGUAGE : MainStats.INTELLIGENCE,  # Need to Add Specialization
     AdvancedSkills.TORTURE : MainStats.FELLOWSHIP,
     AdvancedSkills.TRADE : MainStats.FELLOWSHIP,  # Need to Add Specialization
     AdvancedSkills.VENTRILOQUISM : MainStats.FELLOWSHIP

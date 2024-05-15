@@ -8,14 +8,16 @@ from skillsAndTalents import *
 from statistics import *
 
 class Creature:
-    def __init__(self, name:str, statistics:Statistics):
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
         self.name = name
         self.statistics = statistics
-        self.skills = set()
-        self.talents = set()
-        self.development = Development()
+        self.skills = skills
+        self.talents = talents
+        self.development = development
+        self.attributes = attributes
+        self.currentHp = self.statistics.wounds if currentHp is None else currentHp
 
-    def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int):
+    def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int): #(Test sucsesfully, Value of roll, Number of succeses)
 
         if isinstance(skill,BasicSkills):
             if skill in self.skills:
@@ -25,19 +27,19 @@ class Creature:
                 value = RollGod.rollD100(1)[0]
                 match stat:
                     case MainStats.AGILITY:
-                        return (value < self.summaryAgility/2 + modificator[1], value)
+                        return (value < self.summaryAgility/2 + modificator[1], value, (self.summaryAgility/2 - value)/10)
                     case MainStats.FELLOWSHIP:
-                        return (value < self.summaryFellowship/2 + modificator[1], value)
-                    case MainStats.INTELIGENCE:
-                        return (value < self.summaryInteligence/2 + modificator[1], value)
+                        return (value < self.summaryFellowship/2 + modificator[1], value,(self.summaryFellowship/2 - value)/10)
+                    case MainStats.INTELLIGENCE:
+                        return (value < self.summaryInteligence/2 + modificator[1], value,(self.summaryInteligence/2 - value)/10)
                     case MainStats.WILL_POWER:
-                        return (value < self.summaryWillPower/2 + modificator[1], value)
+                        return (value < self.summaryWillPower/2 + modificator[1], value,(self.summaryWillPower/2 - value)/10)
                     case MainStats.STRENGTH:
-                        return (value < self.summaryStrength/2 + modificator[1], value)
+                        return (value < self.summaryStrength/2 + modificator[1], value,(self.summaryStrength/2 - value)/10)
                     case MainStats.TOUGHNESS:
-                        return (value < self.summaryToughness/2 + modificator[1], value)
-                    case MainStats.BALISSTIC_SKILL:
-                        return (value < self.summaryBalisticSkill/2 + modificator[1], value)
+                        return (value < self.summaryToughness/2 + modificator[1], value,(self.summaryAgility/2 - value)/10)
+                    case MainStats.BALLISTIC_SKILL:
+                        return (value < self.summaryBalisticSkill/2 + modificator[1], value,(self.summaryAgility/2 - value)/10)
                     case MainStats.WEAPON_SKILL:
                         return (value < self.summaryWeaponSkill/2 + modificator[1], value)
         elif isinstance(skill,AdvancedSkills):
@@ -45,25 +47,38 @@ class Creature:
                 return self.statTest(skilsDependency(skill),modificator)
             else:
                 return False
-    def statTest(self, stat:MainStats, modificator:TestModificator = TestModificator.COMMON) -> (bool,int):
+    def statTest(self, stat:MainStats, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int):
         value = RollGod.rollD100(1)[0]
         match stat:
             case MainStats.AGILITY:
-                return (value < self.summaryAgility + modificator[1], value)
+                return (value < self.summaryAgility + modificator[1], value, (self.summaryAgility - value) / 10)
             case MainStats.FELLOWSHIP:
-                return (value < self.summaryFellowship + modificator[1], value)
-            case MainStats.INTELIGENCE:
-                return (value < self.summaryInteligence + modificator[1], value)
+                return (value < self.summaryFellowship + modificator[1], value,(self.summaryFellowship - value) / 10)
+            case MainStats.INTELLIGENCE:
+                return (value < self.summaryInteligence + modificator[1], value,(self.summaryInteligence - value) / 10)
             case MainStats.WILL_POWER:
-                return (value < self.summaryWillPower + modificator[1], value)
+                return (value < self.summaryWillPower + modificator[1], value,(self.summaryWillPower - value) / 10)
             case MainStats.STRENGTH:
-                return (value < self.summaryStrength + modificator[1], value)
+                return (value < self.summaryStrength + modificator[1], value,(self.summaryStrength - value) / 10)
             case MainStats.TOUGHNESS:
-                return (value < self.summaryToughness + modificator[1], value)
-            case MainStats.BALISSTIC_SKILL:
-                return (value < self.summaryBalisticSkill+ modificator[1], value)
+                return (value < self.summaryToughness + modificator[1], value,(self.summaryToughness - value) / 10)
+            case MainStats.BALLISTIC_SKILL:
+                return (value < self.summaryBalisticSkill+ modificator[1], value,(self.summaryBalisticSkill - value) / 10)
             case MainStats.WEAPON_SKILL:
-                return (value < self.summaryWeaponSkill + modificator[1], value)
+                return (value < self.summaryWeaponSkill + modificator[1], value,(self.summaryWeaponSkill - value) / 10)
+
+    def __dict__(self):
+        return {
+            "class" : "creature",
+            "name" : self.name,
+            "statistics" : self.statistics.__dict__(),
+            "skills" : list(self.skills),
+            "talents" : list(self.talents),
+            "development" : self.development.__dict__(),
+            "attributes" : self.attributes.__dict__(),
+            "currentHp" : self.currentHp
+
+        }
 
     @property
     def summaryWeaponSkill(self):
@@ -71,7 +86,7 @@ class Creature:
 
     @property
     def summaryBalisticSkill(self):
-        return self.statistics.ballisticSkill + self.development.getStatsBonus(MainStats.BALISSTIC_SKILL) + (5 if Talents.MARKSMAN in self.talents else 0)
+        return self.statistics.ballisticSkill + self.development.getStatsBonus(MainStats.BALLISTIC_SKILL) + (5 if Talents.MARKSMAN in self.talents else 0)
 
     @property
     def summaryStrength(self):
@@ -87,7 +102,7 @@ class Creature:
 
     @property
     def summaryInteligence(self):
-        return self.statistics.intelligence + self.development.getStatsBonus(MainStats.INTELIGENCE) + (5 if Talents.SAVVY in self.talents else 0)
+        return self.statistics.intelligence + self.development.getStatsBonus(MainStats.INTELLIGENCE) + (5 if Talents.SAVVY in self.talents else 0)
 
     @property
     def summaryWillPower(self):
@@ -109,24 +124,70 @@ class Creature:
     @property
     def summaryMagic(self):
         return self.statistics.magic + self.development.getStatsBonus(SecondaryStats.MAGIC)
+
+    @property
+    def toughnessBonus(self):
+        return self.statistics.toughnessBonus
+    @property
+    def strengthBonus(self):
+        return self.statistics.strengthBonus
+
 class Character(Creature):
-    def __init__(self, name: str, statistics: Statistics = None, race: Races = None):
-        super().__init__(name, statistics)
-        self.equipment = Equipment()
+    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
+        super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
+        self.equipment = equipment
         self.race = race
 
+    def __dict__(self):
+        return {
+            'class' : "character",
+            'name': self.name,
+            'statistics': self.statistics.__dict__(),
+            'skills': list(self.skills),
+            'talents': list(self.talents),
+            'development': self.development.__dict__(),
+            'attributes': self.attributes.__dict__(),
+            'currentHp': self.currentHp,
+            'equipment': self.equipment.__dict__(),
+            'race' : self.race
+        }
+
+
 class CharacterDescription:
-    def __init__(self):
-        self.colorOfEyes = None
-        self.colorOfHairs = None
-        self.weight = None
-        self.heigh = None
-        self.sex = None
-        self.age = None
+    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0):
+        self.colorOfEyes =  colorOfEyes
+        self.colorOfHairs = colorOfHairs
+        self.weight = weight
+        self.height = height
+        self.sex = sex
+        self.age = age
+
+    def __dict__(self):
+        return {
+            'colorOfEyes' : self.colorOfEyes,
+            'colorOfHairs' : self.colorOfHairs,
+            'weight' : self.weight,
+            'height' : self.height,
+            'sex' : self.sex,
+            'age' : self.age
+        }
+
+
 class Card:
-    def __init__(self):
-        self.playerName = None
-        self.playerCharacter = Character()
-        self.characterPicture = None
-        self.characterDescription = CharacterDescription()
-        self.history = None
+    def __init__(self, playerName:str = "", playerCharacter:Character = Character(), characterPicture = "", characterDescription:CharacterDescription = CharacterDescription(),history:str =""):
+        self.playerName = playerName
+        self.playerCharacter =  playerCharacter
+        self.characterPicture = characterPicture
+        self.characterDescription = characterDescription
+        self.history = history
+
+    def __dict__(self):
+        return {
+            'playerName' : self.playerName,
+            'playerCharacter' : self.playerCharacter.__dict__(),
+            'characterPicture' : self.characterPicture,
+            'characterDescription' : self.characterDescription.__dict__(),
+            'history' : self.history
+
+        }
+

@@ -1,49 +1,185 @@
-from backend.characterCard.cards import Creature
-from backend.characterCard.equipment import Item
-
-
+from backend.characterCard.cards import Creature, Character
+from backend.characterCard.equipment import Item, HitLocalisation
+from backend.characterCard.skillsAndTalents import Skills, AdvancedSkills
+from backend.characterCard.statistics import TestModificator
+from backend.mechanic.token import Token
+from backend.characterCard.characteristics import *
+from backend.mechanic.rolingMachine import *
 class Action:
     pass
 
 
 class SelfAction(Action):
 
-    def useItem(self,player:Creature,item:Item):
-        pass
-    def parry(self,player:Creature):
-        pass
-    def aiming(self,player:Creature):
-        pass
-    def wakeUp(self,player:Creature):
-        pass
-    def defenseStand(self,player:Creature):
-        pass
-    def useTalent(self,player:Creature):
+    @staticmethod
+    def parry(player:Token):
+        player.creature.attributes.add(AttributesType.IS_PARING)
+
+    @staticmethod
+    def aiming(player:Token):
+        player.creature.attributes.add(AttributesType.IS_AIMING)
+
+    @staticmethod
+    def wakeUp(player:Token):
+        player.creature.attributes.remove(AttributesType.IS_LYING)
+
+    @staticmethod
+    def defenseStand(player:Token):
+        player.creature.attributes.add(AttributesType.IS_IN_DEFENCE)
+
+    @staticmethod
+    def useTalent(player:Token):
         pass
 
 class ActionOnAnother(Action):
 
     @staticmethod
-    def simpleAtack(self,player:Creature,other:Creature):
-        pass
+    def simpleAtack(player:Token,other:Token, mod: TestModificator = TestModificator.COMMON):
+        dmg = 0
+
+        mod = DmgManager.calculateMod(player, mod)
+
+        if player.creature.statTest(MainStats.WEAPON_SKILL,mod)[0]:
+            if AttributesType.FURIOUS in  other.creature.attributes:
+                dmg = DmgManager.calculateDmg(player, other)
+            elif AdvancedSkills.DODGE_BLOW in other.creature.skills:
+                if AttributesType.ALREADY_DODGED not in other.creature.attributes:
+                    other.creature.attributes.append(AttributesType.ALREADY_DODGED)
+                    if not PassiveAction.tryDoge(other):
+                        dmg = DmgManager.calculateDmg(player,other)
+            elif AttributesType.IS_IN_DEFENCE in other.creature.attributes and not PassiveAction.tryParry(other):
+                    dmg = DmgManager.calculateDmg(player,other)
+            elif AttributesType.IS_PARING in other.creature.attributes:
+                other.creature.attributes.remove(AttributesType.IS_PARING)
+                if not PassiveAction.tryParry(other):
+                    dmg = DmgManager.calculateDmg(player,other)
+            else:
+                dmg = DmgManager.calculateDmg(player,other)
+        other.creature.currentHp -= dmg
+
     @staticmethod
-    def multipleAtack(self,player:Creature,other:Creature):
-        pass
+    def multipleAtack(player:Token,other:Token):
+        for i in range(player.creature.statistics.attacks):
+            ActionOnAnother.simpleAtack(player,other)
     @staticmethod
-    def atackAtack(self,player:Creature,other:Creature):
-        pass
+    def furiousAtack(player:Token,other:Token):
+        player.creature.attributes.add(AttributesType.FURIOUS)
+        ActionOnAnother.simpleAtack(player,other)
     @staticmethod
-    def carefullAtack(self,player:Creature,other:Creature):
-        pass
+    def carefullAtack(player:Token,other:Token):
+        ActionOnAnother.simpleAtack(player,other)
+        player.creature.attributes.add(AttributesType.IS_PARING)
     @staticmethod
-    def push(self,player:Creature,other:Creature):
-        pass
+    def push(player: Token,other: Token):
+        if player.creature.statTest(MainStats.STRENGTH)[2] > other.creature.statTest(MainStats.STRENGTH)[2]:
+            other.posistion += other.posistion - player.posistion #Check good operation
     @staticmethod
-    def feint(self,player:Creature,other:Creature):
+    def feint(player:Token,other:Token):
         pass
 
 
-class MoveAction(Action):
-    pass
+class SpecialAction(Action):
+    @staticmethod
+    def useItem(player: Creature, item: Item):
+        pass
+
+class PassiveAction(Action):
+    @staticmethod
+    def tryDoge(player:Token,mod: TestModificator = TestModificator.COMMON) -> bool:
+        return player.creature.skillTest(AdvancedSkills.DODGE_BLOW,mod)[0]
+    @staticmethod
+    def tryParry(player:Token, mod: TestModificator = TestModificator.COMMON) -> bool:
+        return player.creature.statTest(MainStats.WEAPON_SKILL, mod)[0]
+
+class DmgManager(Observable):
+
+    # _instance = None
+    #
+    # def __new__(cls, *args, **kwargs):
+    #     if cls._instance is None:
+    #         cls._instance = super().__new__(cls, *args, **kwargs)
+    #     return cls._instance
+
+    @staticmethod
+    def calculateHitLocalisation() -> HitLocalisation:
+        roll = RollGod.rollD100()[0]
+        if roll <= 15:
+            DmgManager.notify(HitLocalisation.HEAD)
+            return HitLocalisation.HEAD
+        elif roll <= 55:
+            DmgManager.notify(HitLocalisation.ARMS)
+            return HitLocalisation.ARMS
+        elif roll <= 80:
+            DmgManager.notify(HitLocalisation.BODY)
+            return HitLocalisation.BODY
+        else:
+            DmgManager.notify(HitLocalisation.LEGS)
+            return HitLocalisation.LEGS
 
 
+    @staticmethod
+    def calculateDmgReduction(player: Token, location: HitLocalisation) -> int:
+        reduction = player.creature.toughnessBonus
+        if isinstance(player.creature, Character):
+            for item in player.creature.equipment.armors:
+                if location in item.protectedLocalisations:
+                    reduction += item.armorPoints
+        return reduction
+
+    @staticmethod
+    def calculateDmgBonus(player: Token) -> int:
+        if isinstance(player.creature, Creature):
+            return player.creature.strengthBonus
+        elif isinstance(player.creature, Character):
+            weapon = player.creature.equipment.weapon
+            if weapon is not None:
+                if weapon.strengthModificator:
+                    return player.creature.strengthBonus + weapon.dmgModificator
+                else:
+                    return weapon.dmgModificator + player.creature.strengthBonus
+            else:
+                return player.creature.strengthBonus - 3
+    @staticmethod
+    def calculateDmg(player: Token, other: Token) -> int:
+        dmg = DmgManager.calculaterDmgBonus(player) - DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation()) + RollGod.rollD10()[0]
+        DmgManager.notify(dmg)
+        return dmg
+
+    @staticmethod
+    def calculateMod(player: Token, baseMod: TestModificator = TestModificator.COMMON) -> TestModificator:
+        match baseMod:
+            case TestModificator.VERY_EASY:
+                return TestModificator.VERY_EASY
+            case TestModificator.EASY:
+                if AttributesType.IS_AIMING in player.creature.attributes or AttributesType.FURIOUS in player.creature.attributes:
+                    return TestModificator.VERY_EASY
+                else:
+                    return TestModificator.EASY
+            case TestModificator.SIMPLE:
+                if AttributesType.FURIOUS in player.creature.attributes:
+                    return TestModificator.VERY_EASY
+                elif AttributesType.IS_AIMING in player.creature.attributes:
+                    return TestModificator.EASY
+                else:
+                    return TestModificator.SIMPLE
+            case TestModificator.COMMON:
+                if AttributesType.FURIOUS in player.creature.attributes:
+                    return TestModificator.EASY
+                elif AttributesType.IS_AIMING in player.creature.attributes:
+                    return TestModificator.SIMPLE
+                else:
+                    return TestModificator.COMMON
+            case TestModificator.HARD:
+                if AttributesType.FURIOUS in player.creature.attributes:
+                    return TestModificator.SIMPLE
+                elif AttributesType.IS_AIMING in player.creature.attributes:
+                    return TestModificator.COMMON
+                else:
+                    return TestModificator.HARD
+            case TestModificator.VERY_HARD:
+                if AttributesType.FURIOUS in player.creature.attributes:
+                    return TestModificator.COMMON
+                elif AttributesType.IS_AIMING in player.creature.attributes:
+                    return TestModificator.HARD
+                else:
+                    return TestModificator.VERY_HARD
