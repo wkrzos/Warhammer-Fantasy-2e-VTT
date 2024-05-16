@@ -37,7 +37,6 @@ except ModuleNotFoundError:
     print('Absolute import failed')
 ############################## """
 
-
 def draw_character_section(surface, font):
     pygame.draw.rect(surface, BLACK, pygame.Rect(50, 50, 700, 100), 2)
     Text('CHARACTER', (55, 55), fontsize=30).draw(surface)
