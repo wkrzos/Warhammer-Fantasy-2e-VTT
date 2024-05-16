@@ -1,40 +1,40 @@
 from enum import Enum
 
 class WeaponTrait(Enum):
-    HEAVY = "wtr.1",
-    DEVASTATING = "wtr.2",
-    EXPERIMENTAL = "wtr.3",
-    SHRAPNEL = "wtr.4",
-    DEAFENING = "wtr.5",
-    PARRYING = "wtr.6",
-    SLOW = "wtr.7",
-    PRECISE = "wtr.8",
-    PIERCING = "wtr.9",
-    SPECIAL = "wtr.10",
-    FAST = "wtr.11",
-    IMMOBILIZING = "wtr.12",
-    BALANCED = "wtr.13",
-    UNRELIABLE = "wtr.14",
+    HEAVY = "wtr.1"
+    DEVASTATING = "wtr.2"
+    EXPERIMENTAL = "wtr.3"
+    SHRAPNEL = "wtr.4"
+    DEAFENING = "wtr.5"
+    PARRYING = "wtr.6"
+    SLOW = "wtr.7"
+    PRECISE = "wtr.8"
+    PIERCING = "wtr.9"
+    SPECIAL = "wtr.10"
+    FAST = "wtr.11"
+    IMMOBILIZING = "wtr.12"
+    BALANCED = "wtr.13"
+    UNRELIABLE = "wtr.14"
 
 class WeaponType(Enum):
-    ORDINARY = "wtp.1",
-    TWO_HANDED = "wtp.2",
-    CAVALRY = "wtp.3",
-    FLAIL = "wtp.4",
-    PARRYING = "wtp.5",
-    FENCING = "wtp.6",
-    IMMOBILIZING = "wtp.7",
-    LONG_BOW = "wtp.8",
-    FIREARM = "wtp.9",
-    CROSSBOW = "wtp.10",
-    MECHANICAL = "wtp.11",
-    THROWN = "wtp.12",
+    ORDINARY = "wtp.1"
+    TWO_HANDED = "wtp.2"
+    CAVALRY = "wtp.3"
+    FLAIL = "wtp.4"
+    PARRYING = "wtp.5"
+    FENCING = "wtp.6"
+    IMMOBILIZING = "wtp.7"
+    LONG_BOW = "wtp.8"
+    FIREARM = "wtp.9"
+    CROSSBOW = "wtp.10"
+    MECHANICAL = "wtp.11"
+    THROWN = "wtp.12"
     SLINGSHOT = "wtp.13"
 
 
 class ArmorType(Enum):
-    LIGHT = "atp.1",
-    MEDIUM = "atp.2",
+    LIGHT = "atp.1"
+    MEDIUM = "atp.2"
     HEAVY = "atp.3"
 
 class HitLocalisation(Enum):
@@ -77,16 +77,19 @@ class Weapon(Item):
         self.strengthModificator = strengthModificator
 
     def __dict__(self):
+        traits = []
+        for trait in self.traits:
+            traits.append(trait.value)
         return {
             'class' : "weapon",
             'name': self.name,
             'price': self.price,
             'description': self.description,
             'weight': self.weight,
-            'traits': list(self.traits),
-            'type': self.type,
+            'traits': traits,
+            'type': self.type.value,
             'range': self.range,
-            'dmgModificator': self.dmgModificator,
+            'dmgModifier': self.dmgModificator,
             'strengthModificator': self.strengthModificator
         }
     @property
@@ -95,22 +98,25 @@ class Weapon(Item):
 
 class Armor(Item):
 
-    def __init__(self,name,price, description:str = "", weight:int = 0,protectedLocalisations:set = set, armorPoints:int = 0,  armorType:ArmorType = ArmorType.LIGHT ):
+    def __init__(self,name:str = "",price:int = 0, description:str = "", weight:int = 0,protectedLocalisations:set = set(), armorPoints:int = 0,  armorType:ArmorType = ArmorType.LIGHT ):
         super().__init__(name,price,description,weight)
         self.protectedLocalisations = protectedLocalisations
         self.armorPoints = armorPoints
         self.armorType = armorType
 
     def __dict__(self):
+        localisations = []
+        for localisation in self.protectedLocalisations:
+            localisation.append(localisation.value)
         return {
             'class' : "armor",
             'name': self.name,
             'price': self.price,
             'description': self.description,
             'weight': self.weight,
-            'protectedLocalisations': list(self.protectedLocalisations),
+            'protectedLocalisations': localisations,
             'armorPoints': self.armorPoints,
-            'armorType': self.armorType
+            'armorType': self.armorType.value
 
         }
 
@@ -122,10 +128,10 @@ class Equipment:
         self.equiptArmors = equiptArmors
         self.weapon = weapon
 
-    def equipWeapon(self, weapon: Weapon):
+    def equipWeapon(self, weapon: Weapon) -> None:
         self.weapon = weapon
 
-    def equipArmor(self, armor: Armor):
+    def equipArmor(self, armor: Armor) -> None:
 
         if HitLocalisation.ALL in armor.protectedLocalisations:
             self.armors = [armor]
@@ -134,7 +140,7 @@ class Equipment:
                 self.armors = filter(lambda x: localisation not in x.protectedLocalisations, self.armors)
         self.armors.append(armor)
 
-    def addItem(self, item: Item):
+    def addItem(self, item: Item) -> None:
         self.items.append(item)
 
     def __dict__(self):
@@ -146,6 +152,6 @@ class Equipment:
             serializedArmors.append(armor.__dict__())
         return {
             'items': serializedItems,
-            'equipArmors': serializedArmors,
+            'equiptArmors': serializedArmors,
             'weapon' : self.weapon.__dict__()
         }

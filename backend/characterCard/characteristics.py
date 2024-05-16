@@ -4,14 +4,15 @@ class Stats(Enum):
     pass
 
 class MainStats(Stats):
-    WEAPON_SKILL = "ms.1",
-    BALLISTIC_SKILL = "ms.2",
-    STRENGTH = "ms.3",
-    TOUGHNESS = "ms.4",
-    AGILITY = "ms.5",
-    INTELLIGENCE = "ms.6",
-    WILL_POWER = "ms.7",
+    WEAPON_SKILL = "ms.1"
+    BALLISTIC_SKILL = "ms.2"
+    STRENGTH = "ms.3"
+    TOUGHNESS = "ms.4"
+    AGILITY = "ms.5"
+    INTELLIGENCE = "ms.6"
+    WILL_POWER = "ms.7"
     FELLOWSHIP = "ms.8"
+
 class SecondaryStats(Stats):
     ATTACKS = "ss.1"
     WOUNDS = "ss.2"
@@ -32,17 +33,17 @@ class AttributesType(Enum):
     FURIOUS = "at.7"
 
 class Attributes:
-    def __init__(self, actionsRemain:int = 2, attributesActive:set = set):
+    def __init__(self, actionsRemain:int = 2, attributesActive:set = set()):
         self.actionsRemain = actionsRemain
         self.attributesActive = attributesActive
 
     def __contains__(self, attributes: AttributesType):
         return attributes in self.attributesActive
 
-    def add(self, attributes: AttributesType):
+    def add(self, attributes: AttributesType) -> None:
         self.attributesActive.add(attributes)
 
-    def remove(self, attributes: AttributesType):
+    def remove(self, attributes: AttributesType) -> None:
         self.attributesActive.remove(attributes)
 
     def __dict__(self):

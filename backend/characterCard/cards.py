@@ -1,14 +1,14 @@
 import random
 
 from backend.mechanic.rolingMachine import RollGod
-from equipment import *
-from characteristics import *
-from races import *
-from skillsAndTalents import *
-from statistics import *
+from backend.characterCard.equipment import *
+from backend.characterCard.characteristics import *
+from backend.characterCard.races import *
+from backend.characterCard.skillsAndTalents import *
+from backend.characterCard.statistics import *
 
 class Creature:
-    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
+    def __init__(self, name:str = "", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
         self.name = name
         self.statistics = statistics
         self.skills = skills
@@ -68,12 +68,18 @@ class Creature:
                 return (value < self.summaryWeaponSkill + modificator[1], value,(self.summaryWeaponSkill - value) / 10)
 
     def __dict__(self):
+        skills = []
+        talents = []
+        for skill in self.skills:
+            skills.append(skill.value)
+        for talent in self.talents:
+            talents.append(talent.value)
         return {
             "class" : "creature",
             "name" : self.name,
             "statistics" : self.statistics.__dict__(),
-            "skills" : list(self.skills),
-            "talents" : list(self.talents),
+            "skills" : skills,
+            "talents" : talents,
             "development" : self.development.__dict__(),
             "attributes" : self.attributes.__dict__(),
             "currentHp" : self.currentHp
@@ -133,23 +139,29 @@ class Creature:
         return self.statistics.strengthBonus
 
 class Character(Creature):
-    def __init__(self, name:str, statistics:Statistics = Statistics(), skills:set = set, talents:set = set, development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
+    def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
         super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
         self.equipment = equipment
         self.race = race
 
     def __dict__(self):
+        skills = []
+        talents = []
+        for skill in self.skills:
+            skills.append(skill.value)
+        for talent in self.talents:
+            talents.append(talent.value)
         return {
             'class' : "character",
             'name': self.name,
             'statistics': self.statistics.__dict__(),
-            'skills': list(self.skills),
-            'talents': list(self.talents),
+            'skills': skills,
+            'talents': talents,
             'development': self.development.__dict__(),
             'attributes': self.attributes.__dict__(),
             'currentHp': self.currentHp,
             'equipment': self.equipment.__dict__(),
-            'race' : self.race
+            'race' : self.race.value
         }
 
 
