@@ -1,5 +1,3 @@
-"""Provide RGB color constants and a colors dictionary with elements formatted: colors[colorname] = CONSTANT"""
-
 from collections import namedtuple, OrderedDict
 
 Color = namedtuple('RGB','red, green, blue')
