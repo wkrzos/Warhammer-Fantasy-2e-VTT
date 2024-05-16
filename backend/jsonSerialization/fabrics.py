@@ -41,7 +41,7 @@ class ItemsFabric:
             weight=dic["weight"],
             armorPoints=dic["armorPoints"],
             protectedLocalisations=EnumFabric.createEnumSet(dic["protectedLocalisations"]),
-            armorType = EnumFabric.createEnum(dic["type"])
+            armorType = EnumFabric.createEnum(dic["armorType"])
         )
     @staticmethod
     def _createWeapon(dic : dict) ->Weapon:
@@ -73,7 +73,7 @@ class EnumFabric:
                 return Races(s)
             case "mc":
                 return MonsterCategory(s)
-            case "wt":
+            case "wtp":
                 return WeaponType(s)
             case "wtr":
                 return WeaponTrait(s)
@@ -107,7 +107,7 @@ class CreaturesFabric:
             development=CreaturesFabric._createDevelopmnets(dic["development"]),
             attributes=CreaturesFabric._createAtributes(dic["attributes"]),
             currentHp=dic["currentHp"],
-            race=dic["race"],
+            race=EnumFabric.createEnum(dic["race"]),
             equipment=CreaturesFabric._createEquipment(dic["equipment"])
         )
     @staticmethod
@@ -176,12 +176,14 @@ class CardFabric:
 
     @staticmethod
     def createCard(dic:dict)->Card:
-        return Card(
+        result = Card(
             playerName=dic["playerName"],
             playerCharacter=CreaturesFabric.createCharacter(dic['playerCharacter']),
             characterPicture= dic['characterPicture'],
             history=dic['history']
         )
+        print(result.__dict__())
+        return result
     @staticmethod
     def _createDescription(dic:dict)->CharacterDescription:
         return CharacterDescription(

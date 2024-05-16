@@ -92,13 +92,13 @@ class Development:
 
         }
 
-    def levelUp(self, stat:Stats):
+    def levelUp(self, stat:Stats) -> None:
         if self.exp >= 100:
             self.exp -= 100
             self.updates[stat] += 1
 
 
-    def getStatsBonus(self, stat:Stats):
+    def getStatsBonus(self, stat:Stats) -> int:
         if isinstance(stat,MainStats):
             return self.updates[stat] * 5
         else:
@@ -107,5 +107,19 @@ class Development:
     def __dict__(self):
         return {
             "exp" : self.exp,
-            "updates" : self.updates
+            "updates" : {
+                MainStats.WEAPON_SKILL.value : 0,
+                MainStats.BALLISTIC_SKILL.value : 0,
+                MainStats.STRENGTH.value : 0,
+                MainStats.TOUGHNESS.value : 0,
+                MainStats.AGILITY.value : 0,
+                MainStats.INTELLIGENCE.value : 0,
+                MainStats.WILL_POWER.value : 0,
+                MainStats.FELLOWSHIP.value : 0,
+                SecondaryStats.ATTACKS.value : 0,
+                SecondaryStats.WOUNDS.value : 0,
+                SecondaryStats.MAGIC.value : 0,
+                SecondaryStats.MOVEMENT.value : 0
+
+            }
         }
