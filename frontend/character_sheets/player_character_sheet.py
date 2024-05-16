@@ -1,7 +1,42 @@
 import sys
+import os
 import pygame
-from util.color_constants import *
-from util.text import Text
+
+import frontend.util as util
+from frontend.util.color_constants import *
+from frontend.util.text import Text
+
+""" ##############################
+# Testing imports
+print(__name__)
+
+try:
+    # Trying to find module in the parent package
+    from . import color_constants
+    print("debug1")
+except ImportError:
+    print('Relative import failed')
+
+try:
+    # Trying to find module on sys.path
+    import frontend.util.color_constants
+    print("debug2")
+except ModuleNotFoundError:
+    print('Absolute import failed')
+    
+try:
+    from util.color_constants import *
+    print("debug3")
+except ModuleNotFoundError:
+    print('Absolute import failed')
+    
+try:
+    from frontend.util.color_constants import *
+    print("debug4")
+except ModuleNotFoundError:
+    print('Absolute import failed')
+############################## """
+
 
 def draw_character_section(surface, font):
     pygame.draw.rect(surface, BLACK, pygame.Rect(50, 50, 700, 100), 2)

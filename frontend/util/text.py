@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from util.color_constants import *
+from frontend.util.color_constants import *
 
 class Text:
     def __init__(self, text, pos, **options):
