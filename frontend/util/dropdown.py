@@ -5,7 +5,7 @@ from frontend.util.color_constants import *
 class Dropdown:
     def __init__(self, x, y, w, h, font, options, default_text='Select'):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color = BLACK
+        self.color = pygame.Color('black')
         self.font = font
         self.options = options
         self.text = default_text
@@ -31,9 +31,9 @@ class Dropdown:
                         self.active = False
                         self.selected = True
                         break
+        self.color = BLUE if self.active else BLACK
 
     def draw(self, surface):
-        # Draw the dropdown main box
         pygame.draw.rect(surface, self.color, self.rect, 2)
         surface.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
 

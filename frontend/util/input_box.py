@@ -1,12 +1,13 @@
 import pygame
 from pygame.locals import *
+from frontend.util.color_constants import *
 
 class InputBox:
     def __init__(self, x, y, w, h, text=''):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color = pygame.Color('black')
+        self.color = BLACK
         self.text = text
-        self.font = pygame.font.Font(None, 32)
+        self.font = pygame.font.Font(None, 20)
         self.txt_surface = self.font.render(text, True, self.color)
         self.active = False
 
@@ -19,7 +20,7 @@ class InputBox:
             else:
                 self.active = False
             # Change the current color of the input box.
-            self.color = pygame.Color('dodgerblue2') if self.active else pygame.Color('black')
+            self.color = BLUE if self.active else BLACK
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
