@@ -7,7 +7,8 @@ from backend.characterCard.characteristics import *
 from backend.mechanic.rolingMachine import *
 class Action:
     pass
-
+class ActionDescriptions(Enum):
+    DMG_ROLL = "ADsc.1"
 
 class SelfAction(Action):
 
@@ -38,23 +39,24 @@ class ActionOnAnother(Action):
         dmg = 0
 
         mod = DmgManager.calculateMod(player, mod)
+        testResult, rollValue, _ = player.creature.statTest(MainStats.WEAPON_SKILL,mod)
 
-        if player.creature.statTest(MainStats.WEAPON_SKILL,mod)[0]:
-            if AttributesType.FURIOUS in  other.creature.attributes:
-                dmg = DmgManager.calculateDmg(player, other)
+        if testResult:
+            if AttributesType.FURIOUS in other.creature.attributes:
+                dmg = DmgManager.calculateDmg(player, other,rollValue)
             elif AdvancedSkills.DODGE_BLOW in other.creature.skills:
                 if AttributesType.ALREADY_DODGED not in other.creature.attributes:
                     other.creature.attributes.append(AttributesType.ALREADY_DODGED)
                     if not PassiveAction.tryDoge(other):
-                        dmg = DmgManager.calculateDmg(player,other)
+                        dmg = DmgManager.calculateDmg(player, other,rollValue)
             elif AttributesType.IS_IN_DEFENCE in other.creature.attributes and not PassiveAction.tryParry(other):
-                    dmg = DmgManager.calculateDmg(player,other)
+                    dmg = DmgManager.calculateDmg(player, other,rollValue)
             elif AttributesType.IS_PARING in other.creature.attributes:
                 other.creature.attributes.remove(AttributesType.IS_PARING)
                 if not PassiveAction.tryParry(other):
-                    dmg = DmgManager.calculateDmg(player,other)
+                    dmg = DmgManager.calculateDmg(player, other,rollValue)
             else:
-                dmg = DmgManager.calculateDmg(player,other)
+                dmg = DmgManager.calculateDmg(player, other,rollValue)
         other.creature.currentHp -= dmg
 
     @staticmethod
@@ -93,6 +95,10 @@ class PassiveAction(Action):
 
 class DmgManager(Observable):
 
+    descriptions = {
+        ActionDescriptions.DMG_ROLL : ""
+    }
+
     # _instance = None
     #
     # def __new__(cls, *args, **kwargs):
@@ -101,15 +107,15 @@ class DmgManager(Observable):
     #     return cls._instance
 
     @staticmethod
-    def calculateHitLocalisation() -> HitLocalisation:
-        roll = RollGod.rollD100()[0]
-        if roll <= 15:
+    def calculateHitLocalisation(roll:int) -> HitLocalisation:
+        reversRoll = roll / 10 + roll % 10 * 10
+        if reversRoll <= 15:
             DmgManager.notify(HitLocalisation.HEAD)
             return HitLocalisation.HEAD
-        elif roll <= 55:
+        elif reversRoll <= 55:
             DmgManager.notify(HitLocalisation.ARMS)
             return HitLocalisation.ARMS
-        elif roll <= 80:
+        elif reversRoll <= 80:
             DmgManager.notify(HitLocalisation.BODY)
             return HitLocalisation.BODY
         else:
@@ -140,8 +146,8 @@ class DmgManager(Observable):
             else:
                 return player.creature.strengthBonus - 3
     @staticmethod
-    def calculateDmg(player: Token, other: Token) -> int:
-        dmg = DmgManager.calculaterDmgBonus(player) - DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation()) + RollGod.rollD10()[0]
+    def calculateDmg(player: Token, other: Token, rollValue:int) -> int:
+        dmg = DmgManager.calculateDmgBonus(player) - DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation(rollValue)) + RollGod.rollD10(dsc= player.creature.name + " " + DmgManager.descriptions[ActionDescriptions.DMG_ROLL])[0]
         DmgManager.notify(dmg)
         return dmg
 

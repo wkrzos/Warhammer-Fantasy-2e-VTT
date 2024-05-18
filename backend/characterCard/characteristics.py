@@ -45,6 +45,14 @@ class Attributes:
 
     def remove(self, attributes: AttributesType) -> None:
         self.attributesActive.remove(attributes)
+    def restartAttributes(self) -> None:
+        self.actionsRemain = 2
+        if AttributesType.IS_LYING in self.attributesActive:
+            self.attributesActive.clear()
+            self.attributesActive.add(AttributesType.IS_LYING)
+        else:
+            self.attributesActive.clear()
+
 
     def __dict__(self):
         return {

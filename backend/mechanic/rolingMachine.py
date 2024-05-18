@@ -16,59 +16,59 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
  #   def __init__(self):
 
     @staticmethod
-    def rollD4(d:int = 1)-> list[int]:
+    def rollD4(d:int = 1, dsc:str = "" )-> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 4)+1)
 
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
     @staticmethod
-    def rollD6(d: int = 1) -> list[int]:
+    def rollD6(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 6) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
     @staticmethod
-    def rollD8(d: int = 1) -> list[int]:
+    def rollD8(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 8) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
     @staticmethod
-    def rollD10(d: int = 1) -> list[int]:
+    def rollD10(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 10) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
     @staticmethod
-    def rollD12(d: int = 1) -> list[int]:
+    def rollD12(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 12) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
     @staticmethod
-    def rollD20(d: int = 1) -> list[int]:
+    def rollD20(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 20) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
     @staticmethod
-    def rollD100(d: int = 1) -> list[int]:
+    def rollD100(d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 100) + 1)
-        RollGod.notify(result)
+        RollGod.notify((result,dsc))
         return result
 
 

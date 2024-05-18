@@ -28,9 +28,11 @@ class Observable:
 class RollObserver(Observer):
     def __init__(self):
         self.lastRoll = []
+        self.description = ""
 
     def update(self, subject):
-        self.lastRoll = subject
+        self.lastRoll = subject[0]
+        self.description = subject[1]
 
 class  FightObserver(Observer):
     def __init__(self):

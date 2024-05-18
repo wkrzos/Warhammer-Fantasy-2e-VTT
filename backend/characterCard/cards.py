@@ -137,6 +137,9 @@ class Creature:
     @property
     def strengthBonus(self):
         return self.statistics.strengthBonus
+    @property
+    def initiative(self):
+        return self.summaryAgility + RollGod.rollD10()[0] #TODO add description
 
 class Character(Creature):
     def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
