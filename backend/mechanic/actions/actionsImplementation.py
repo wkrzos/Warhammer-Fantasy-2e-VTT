@@ -5,10 +5,11 @@ from backend.characterCard.statistics import TestModificator
 from backend.mechanic.token import Token
 from backend.characterCard.characteristics import *
 from backend.mechanic.rolingMachine import *
+from localisation.descriptions import RollDescriptionAggregator, FightDescriptionsType
+
+
 class Action:
     pass
-class ActionDescriptions(Enum):
-    DMG_ROLL = "ADsc.1"
 
 class SelfAction(Action):
 
@@ -95,9 +96,7 @@ class PassiveAction(Action):
 
 class DmgManager(Observable):
 
-    descriptions = {
-        ActionDescriptions.DMG_ROLL : ""
-    }
+
 
     # _instance = None
     #
@@ -147,7 +146,10 @@ class DmgManager(Observable):
                 return player.creature.strengthBonus - 3
     @staticmethod
     def calculateDmg(player: Token, other: Token, rollValue:int) -> int:
-        dmg = DmgManager.calculateDmgBonus(player) - DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation(rollValue)) + RollGod.rollD10(dsc= player.creature.name + " " + DmgManager.descriptions[ActionDescriptions.DMG_ROLL])[0]
+        dmgBonus = DmgManager.calculateDmgBonus(player)
+        dmgReduction = DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation(rollValue))
+        dmgRoll = RollGod.rollD10(dsc= player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL])[0]
+        dmg = dmgBonus - dmgReduction  + dmgRoll
         DmgManager.notify(dmg)
         return dmg
 
