@@ -1,6 +1,7 @@
 from enum import Enum
 
-
+class ActionDescriptions(Enum):
+    DMG_ROLL = "ADsc.1"
 
 class ActionTypes(Enum):
     pass

@@ -7,21 +7,21 @@ class Observer:
 class Observable:
 
     _observers = []
-    @staticmethod
-    def attach(observer):
-        if observer not in Observable._observers:
-            Observable._observers.append(observer)
+    @classmethod
+    def attach(cls, observer):
+        if observer not in cls._observers:
+            cls._observers.append(observer)
 
-    @staticmethod
-    def detach(observer):
+    @classmethod
+    def detach(cls,observer):
         try:
-            Observable._observers.remove(observer)
+            cls._observers.remove(observer)
         except ValueError:
             pass
 
-    @staticmethod
-    def notify(rolls):
-        for observer in Observable._observers:
+    @classmethod
+    def notify(cls,rolls):
+        for observer in cls._observers:
             observer.update(rolls)
 
 

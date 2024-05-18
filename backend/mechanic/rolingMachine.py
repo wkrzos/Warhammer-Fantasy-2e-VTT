@@ -15,60 +15,60 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
 
  #   def __init__(self):
 
-    @staticmethod
-    def rollD4(d:int = 1, dsc:str = "" )-> list[int]:
+    @classmethod
+    def rollD4(cls,d:int = 1, dsc:str = "" )-> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 4)+1)
 
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
-    @staticmethod
-    def rollD6(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD6(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 6) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
-    @staticmethod
-    def rollD8(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD8(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 8) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
-    @staticmethod
-    def rollD10(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD10(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 10) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
-    @staticmethod
-    def rollD12(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD12(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 12) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
-    @staticmethod
-    def rollD20(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD20(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 20) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
-    @staticmethod
-    def rollD100(d: int = 1,dsc:str = "") -> list[int]:
+    @classmethod
+    def rollD100(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 100) + 1)
-        RollGod.notify((result,dsc))
+        cls.notify((result,dsc))
         return result
 
 

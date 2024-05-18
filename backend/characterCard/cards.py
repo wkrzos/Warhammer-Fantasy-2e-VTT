@@ -6,6 +6,8 @@ from backend.characterCard.characteristics import *
 from backend.characterCard.races import *
 from backend.characterCard.skillsAndTalents import *
 from backend.characterCard.statistics import *
+from localisation.descriptions import RollDescriptionAggregator, FightDescriptionsType
+
 
 class Creature:
     def __init__(self, name:str = "", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
@@ -21,10 +23,10 @@ class Creature:
 
         if isinstance(skill,BasicSkills):
             if skill in self.skills:
-               return self.statTest(skilsDependency(skill),modificator)
+               return self.statTest(skilsDependency[skill],modificator)
             else:
                 stat = skilsDependency(skill)
-                value = RollGod.rollD100(1)[0]
+                value = RollGod.rollD100(dsc=RollDescriptionAggregator.testDescriptions[skilsDependency[skill]] + " " + self.name)[0]
                 match stat:
                     case MainStats.AGILITY:
                         return (value < self.summaryAgility/2 + modificator[1], value, (self.summaryAgility/2 - value)/10)
@@ -48,7 +50,7 @@ class Creature:
             else:
                 return False
     def statTest(self, stat:MainStats, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int):
-        value = RollGod.rollD100(1)[0]
+        value = RollGod.rollD100(dsc=RollDescriptionAggregator.testDescriptions[stat] + " " + self.name)[0]
         match stat:
             case MainStats.AGILITY:
                 return (value < self.summaryAgility + modificator[1], value, (self.summaryAgility - value) / 10)
@@ -139,7 +141,7 @@ class Creature:
         return self.statistics.strengthBonus
     @property
     def initiative(self):
-        return self.summaryAgility + RollGod.rollD10()[0] #TODO add description
+        return self.summaryAgility + RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.INITIATIVE_ROLL] + " " + self.name)[0]
 
 class Character(Creature):
     def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
@@ -191,7 +193,7 @@ class CharacterDescription:
 class Card:
     def __init__(self, playerName:str = "", playerCharacter:Character = Character(), characterPicture = "", characterDescription:CharacterDescription = CharacterDescription(),history:str =""):
         self.playerName = playerName
-        self.playerCharacter =  playerCharacter
+        self.playerCharacter = playerCharacter
         self.characterPicture = characterPicture
         self.characterDescription = characterDescription
         self.history = history
