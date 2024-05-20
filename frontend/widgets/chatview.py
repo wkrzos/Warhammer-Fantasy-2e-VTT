@@ -56,7 +56,9 @@ class MusicPlayerView(QWidget, Observer):
         layout.addWidget(QLabel("Music Player"))
         self.playlist = QListWidget()
         self.playlist.setCurrentRow(0)
-        self.playlist.itemClicked.connect(self.select_song_on_list)
+        self.playlist.currentRowChanged.connect(self.select_song_on_list)
+        self.playlist.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+
         layout.addWidget(self.playlist)
         
         controls_layout = QHBoxLayout()
@@ -146,5 +148,8 @@ class MusicPlayerView(QWidget, Observer):
 
     def select_song_on_list(self, item):
         with self.music_manager.lock:
-            self.music_manager.currentSong = self.playlist.indexFromItem(item)
+            self.music_manager.currentIndex = item
+            self.music_manager.command = MusicEventTypes.PAUSE
+        time.sleep(0.03)
+        with self.music_manager.lock:
             self.music_manager.command = MusicEventTypes.PLAY
