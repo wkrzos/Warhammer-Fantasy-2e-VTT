@@ -1,11 +1,14 @@
 import time
 
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QFileDialog, QTextEdit
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QFileDialog, \
+    QTextEdit, QAbstractItemView
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
 import threading
 import os
 from backend.musicManager.musicManager import *
+from backend.paterns.observer.observer import Observer
+
 
 class ChatView(QWidget):
     def __init__(self, parent=None):
@@ -34,7 +37,7 @@ class CharactersView(QWidget):
         layout.addWidget(add_button)
         self.setLayout(layout)
 
-class MusicPlayerView(QWidget):
+class MusicPlayerView(QWidget, Observer):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.initUI()
@@ -42,6 +45,7 @@ class MusicPlayerView(QWidget):
         # Correct path to the music folder
         music_folder_path = os.path.join(os.path.dirname(__file__), '../../music')
         self.music_manager = MusicManager(music_folder_path)
+        MusicManager.attach(self)
         self.music_thread = threading.Thread(target=self.music_manager.run)
         self.music_thread.start()
 
@@ -51,6 +55,8 @@ class MusicPlayerView(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(QLabel("Music Player"))
         self.playlist = QListWidget()
+        self.playlist.setCurrentRow(0)
+        self.playlist.itemClicked.connect(self.select_song_on_list)
         layout.addWidget(self.playlist)
         
         controls_layout = QHBoxLayout()
@@ -135,3 +141,10 @@ class MusicPlayerView(QWidget):
     def prev_music(self):
         with self.music_manager.lock:
             self.music_manager.command = MusicEventTypes.PREVIOUS
+    def reactForNotify(self, subject):
+        self.playlist.setCurrentRow(subject)
+
+    def select_song_on_list(self, item):
+        with self.music_manager.lock:
+            self.music_manager.currentSong = self.playlist.indexFromItem(item)
+            self.music_manager.command = MusicEventTypes.PLAY

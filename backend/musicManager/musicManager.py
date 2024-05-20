@@ -5,7 +5,10 @@ import time
 from enum import Enum
 from pygame import mixer
 
-class MusicManager:
+from backend.paterns.observer.observer import Observable
+
+
+class MusicManager(Observable):
     def __init__(self, musicFolderPath):
         self.musicFolderPath = musicFolderPath
         self.currentIndex = 0
@@ -23,6 +26,7 @@ class MusicManager:
 
     def run(self) -> int:
         mixer.init()
+        MusicManager.notify(self.currentIndex)
         self.play()
         while True:
             time.sleep(0.025)
@@ -36,9 +40,11 @@ class MusicManager:
                 elif self.command == MusicEventTypes.NEXT:
                     self.next()
                     self.command = MusicEventTypes.WAIT
+                    MusicManager.notify(self.currentIndex)
                 elif self.command == MusicEventTypes.PREVIOUS:
                     self.previous()
                     self.command = MusicEventTypes.WAIT
+                    MusicManager.notify(self.currentIndex)
                 elif self.command == MusicEventTypes.REWIND:
                     self.rewind()
                     self.command = MusicEventTypes.WAIT
