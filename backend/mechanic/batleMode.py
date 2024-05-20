@@ -1,3 +1,4 @@
+from backend.characterCard.characteristics import AttributesType
 
 
 class FightManager:
@@ -15,7 +16,13 @@ class FightManager:
         self.currentCreature.attributes.restartAttributes()
 
     def nextCreature(self):
+
         self._currentIndex = self._currentIndex + 1
+        while AttributesType.DEAD in  self.involvedCreatures[self._currentIndex].attributes:
+            self.involvedCreatures.remove(self.involvedCreatures[self._currentIndex])
+            if self._currentIndex >= len(self.involvedCreatures):
+                self._currentIndex = 0
+                self.tourCounter += 1
         if self._currentIndex >= len(self.involvedCreatures):
             self._currentIndex = 0
             self.tourCounter += 1
