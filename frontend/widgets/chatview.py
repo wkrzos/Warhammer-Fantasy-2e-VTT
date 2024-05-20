@@ -108,7 +108,7 @@ class MusicPlayerView(QWidget):
 
     def play_music(self):
         with self.music_manager.lock:
-            self.music_manager.command = MusicEventTypes.PLAY
+            self.music_manager.command = MusicEventTypes.UNPAUSE
         self.toggle_button.setIcon(self.stop_icon)
         self.is_playing = True
             
