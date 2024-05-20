@@ -14,17 +14,18 @@ class MusicManager:
         self.command = MusicEventTypes.WAIT
         self.lock = threading.Lock()
 
-    def loadPlaylist(self):
+
+    def loadPlaylist(self) -> None:
         for root, dirs, files in os.walk(self.musicFolderPath):
             for file in files:
                 if file.endswith(('.mp3', '.wav', '.ogg', '.flac')):
                     self.playlist.append(os.path.join(root, file))
 
-    def run(self):
+    def run(self) -> int:
         mixer.init()
         self.play()
         while True:
-            time.sleep(0.1)
+            time.sleep(0.025)
             with self.lock:
                 if self.command == MusicEventTypes.UNPAUSE:
                     self.unpause()
@@ -45,29 +46,39 @@ class MusicManager:
                     if not mixer.music.get_busy():
                         self.play()
                     self.command = MusicEventTypes.WAIT
-
-    def play(self):
+                elif self.command == MusicEventTypes.CLOSE:
+                    return 0
+    def play(self) -> None:
         mixer.music.load(self.playlist[self.currentIndex])
         mixer.music.play()
 
-    def pause(self):
+    def pause(self) -> None:
         mixer.music.pause()
 
-    def unpause(self):
+    def unpause(self) -> None:
         mixer.music.unpause()
 
-    def next(self):
+    def next(self) -> None:
         self.currentIndex = (self.currentIndex + 1) % len(self.playlist)
         self.play()
 
-    def previous(self):
+    def previous(self) -> None:
         self.currentIndex = (self.currentIndex - 1) % len(self.playlist)
         self.play()
 
-    def rewind(self):
+    def rewind(self) -> None:
         mixer.music.rewind()
 
+    def setVolume(self, volume: int) -> None:
+        if volume < 0:
+            mixer.music.set_volume(0)
+        elif volume > 1:
+            mixer.music.set_volume(1)
+        else:
+            mixer.music.set_volume(volume)
+
 class MusicEventTypes(Enum):
+    CLOSE = -2,
     WAIT = -1
     PLAY = 0
     PAUSE = 1
