@@ -1,3 +1,5 @@
+import time
+
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QFileDialog, QTextEdit
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
@@ -63,10 +65,10 @@ class MusicPlayerView(QWidget):
 
         # Create a toggle button for play/stop
         self.toggle_button = QPushButton()
-        self.toggle_button.setIcon(play_icon)
+        self.toggle_button.setIcon(pause_icon)
         self.toggle_button.setIconSize(QSize(32, 32))
         self.toggle_button.clicked.connect(self.toggle_play_stop)
-        self.is_playing = False
+        self.is_playing = True
         self.play_icon = play_icon
         self.stop_icon = pause_icon
 
@@ -114,15 +116,18 @@ class MusicPlayerView(QWidget):
             
     def stop_music(self):
         with self.music_manager.lock:
-            self.music_manager.command = MusicEventTypes.REWIND
             self.music_manager.command = MusicEventTypes.PAUSE
         self.toggle_button.setIcon(self.play_icon)
         self.is_playing = False
             
     def pause_music(self):
         with self.music_manager.lock:
+            self.music_manager.command = MusicEventTypes.REWIND
+        time.sleep(0.03)
+        with self.music_manager.lock:
             self.music_manager.command = MusicEventTypes.PAUSE
-            
+        self.toggle_button.setIcon(self.play_icon)
+        self.is_playing = False
     def next_music(self):
         with self.music_manager.lock:
             self.music_manager.command = MusicEventTypes.NEXT

@@ -24,7 +24,7 @@ class MusicManager:
         mixer.init()
         self.play()
         while True:
-            time.sleep(0.1)
+            time.sleep(0.025)
             with self.lock:
                 if self.command == MusicEventTypes.UNPAUSE:
                     self.unpause()
@@ -45,7 +45,8 @@ class MusicManager:
                     if not mixer.music.get_busy():
                         self.play()
                     self.command = MusicEventTypes.WAIT
-
+                elif self.command == MusicEventTypes.CLOSE:
+                    return 0
     def play(self):
         mixer.music.load(self.playlist[self.currentIndex])
         mixer.music.play()
@@ -67,7 +68,9 @@ class MusicManager:
     def rewind(self):
         mixer.music.rewind()
 
+
 class MusicEventTypes(Enum):
+    CLOSE = -2,
     WAIT = -1
     PLAY = 0
     PAUSE = 1

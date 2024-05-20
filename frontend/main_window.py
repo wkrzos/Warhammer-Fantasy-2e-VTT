@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayou
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
+from backend.musicManager.musicManager import MusicEventTypes
 from frontend.widgets.toolbar import Toolbar
 from frontend.widgets.mapview import MapView
 from frontend.widgets.chatview import ChatView, CharactersView, MusicPlayerView
@@ -62,8 +63,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
     def closeEvent(self, event):
-        self.music_player_view.music_manager.command = MusicEventTypes.REWIND
-        self.music_player_view.music_manager.command = MusicEventTypes.PAUSE
+        self.music_player_view.music_manager.command = MusicEventTypes.CLOSE
         self.music_player_view.music_thread.join()
         event.accept()
 
