@@ -69,7 +69,7 @@ class MapView(QWidget):
         if self.dragging:
             delta = event.position() - self.last_mouse_pos
             if self.selected_character:
-                self.move_character(delta)
+                self.move_character(delta, event.modifiers() & Qt.ShiftModifier)
             else:
                 self.offset += delta.toPoint()
             self.last_mouse_pos = event.position()
@@ -79,6 +79,13 @@ class MapView(QWidget):
         if event.button() == Qt.LeftButton:
             self.dragging = False
             self.selected_character = None
+
+    def wheelEvent(self, event):
+        # Zoom in and out with the mouse wheel
+        if event.angleDelta().y() > 0:
+            self.zoom_in()
+        else:
+            self.zoom_out()
 
     def select_character(self, position):
         for character in self.characters:
@@ -91,12 +98,23 @@ class MapView(QWidget):
                 self.selected_character = character
                 break
 
-    def move_character(self, delta):
+    def move_character(self, delta, shift_pressed):
         if self.selected_character:
-            dx = delta.x() / self.grid_size
-            dy = delta.y() / self.grid_size
-            self.selected_character.move(dx, dy)
+            if shift_pressed:
+                # Free movement
+                dx = delta.x() / (self.grid_size * self.zoom_level)
+                dy = delta.y() / (self.grid_size * self.zoom_level)
+                new_x = self.selected_character.get_position()[0] + dx
+                new_y = self.selected_character.get_position()[1] + dy
+            else:
+                # Snap to grid
+                dx = delta.x() / (self.grid_size * self.zoom_level)
+                dy = delta.y() / (self.grid_size * self.zoom_level)
+                new_x = round(self.selected_character.get_position()[0] + dx)
+                new_y = round(self.selected_character.get_position()[1] + dy)
             
+            self.selected_character.set_position(new_x, new_y)
+
     def zoom_in(self):
         self.zoom_level = min(self.zoom_level + 0.1, 2.0)
         self.update()
@@ -104,13 +122,6 @@ class MapView(QWidget):
     def zoom_out(self):
         self.zoom_level = max(self.zoom_level - 0.1, 0.1)
         self.update()
-
-    def wheelEvent(self, event):
-        # Zoom in and out with the mouse wheel
-        if event.angleDelta().y() > 0:
-            self.zoom_in()
-        else:
-            self.zoom_out()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
