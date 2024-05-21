@@ -80,8 +80,6 @@ class MapView(QWidget):
             self.dragging = False
             self.selected_character = None
 
-
-
     def select_character(self, position):
         for character in self.characters:
             x, y = character.get_position()
@@ -98,8 +96,21 @@ class MapView(QWidget):
             dx = delta.x() / self.grid_size
             dy = delta.y() / self.grid_size
             self.selected_character.move(dx, dy)
+            
+    def zoom_in(self):
+        self.zoom_level = min(self.zoom_level + 0.1, 2.0)
+        self.update()
 
+    def zoom_out(self):
+        self.zoom_level = max(self.zoom_level - 0.1, 0.1)
+        self.update()
 
+    def wheelEvent(self, event):
+        # Zoom in and out with the mouse wheel
+        if event.angleDelta().y() > 0:
+            self.zoom_in()
+        else:
+            self.zoom_out()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
