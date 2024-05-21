@@ -1,7 +1,7 @@
 import sys
-from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QFormLayout, QLineEdit, QComboBox, QLabel, QGridLayout, QGroupBox, QHBoxLayout)
-from PySide6.QtGui import QFont
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QFormLayout, QLineEdit, QComboBox, QLabel, QGridLayout, QGroupBox, QHBoxLayout, QPushButton, QFileDialog)
+from PySide6.QtGui import QFont, QIcon, QPixmap
+from PySide6.QtCore import Qt, QSize
 
 class CharacterSheet(QMainWindow):
     def __init__(self):
@@ -19,13 +19,26 @@ class CharacterSheet(QMainWindow):
 
         # Character Section
         character_group = QGroupBox("Character")
-        character_layout = QFormLayout()
-        character_layout.addRow('Name:', QLineEdit())
+        character_layout = QHBoxLayout()
+
+        form_layout = QFormLayout()
+        form_layout.addRow('Name:', QLineEdit())
         race_combo = QComboBox()
         race_combo.addItems(['Human', 'Elf', 'Dwarf', 'Halfling'])
-        character_layout.addRow('Race:', race_combo)
-        character_layout.addRow('Current Career:', QLineEdit())
-        character_layout.addRow('Previous Careers:', QLineEdit())
+        form_layout.addRow('Race:', race_combo)
+        form_layout.addRow('Current Career:', QLineEdit())
+        form_layout.addRow('Previous Careers:', QLineEdit())
+
+        character_layout.addLayout(form_layout)
+
+        # Character icon button
+        self.character_icon_button = QPushButton()
+        self.character_icon_button.setIcon(QIcon("frontend/resources/icons/default_user.png"))
+        self.character_icon_button.setIconSize(QSize(100, 100))
+        self.character_icon_button.setFixedSize(120, 120)
+        self.character_icon_button.clicked.connect(self.choose_image)
+
+        character_layout.addWidget(self.character_icon_button)
         character_group.setLayout(character_layout)
         layout.addWidget(character_group)
 
@@ -45,11 +58,10 @@ class CharacterSheet(QMainWindow):
         personal_group.setLayout(personal_layout)
         layout.addWidget(personal_group)
 
-        # Character Profile Section
-        profile_group = QGroupBox("Character Profile")
+        # Character Profile Main Section
+        profile_group = QGroupBox("Character Profile Main")
         profile_layout = QGridLayout()
         stats = ['WS', 'BS', 'S', 'T', 'Ag', 'Int', 'WP', 'Fel']
-        profile_layout.addWidget(QLabel("Main"), 0, 0)
         for i, stat in enumerate(stats):
             profile_layout.addWidget(QLabel(stat), 0, i + 1)
         for i in range(3):  # 3 rows for Starting, Advance, Current
@@ -57,7 +69,19 @@ class CharacterSheet(QMainWindow):
                 profile_layout.addWidget(QLineEdit(), i + 1, j + 1)
         profile_group.setLayout(profile_layout)
         layout.addWidget(profile_group)
-
+        
+        # Character Profile Secondary Section
+        profile_group_secondary = QGroupBox("Character Profile Secondary")
+        profile_layout_secondary = QGridLayout()
+        stats_secondary = ['A', 'W', 'SB', 'TB', 'M', 'Mag', 'IP', 'FP']
+        for i, stat in enumerate(stats_secondary):
+            profile_layout_secondary.addWidget(QLabel(stat), 0, i + 1)
+        for i in range(3):  # 3 rows for Starting, Advance, Current
+            for j in range(8):  # 8 stats columns
+                profile_layout_secondary.addWidget(QLineEdit(), i + 1, j + 1)
+        profile_group_secondary.setLayout(profile_layout_secondary)
+        layout.addWidget(profile_group_secondary)
+        
         # Weapons Section
         weapons_group = QGroupBox("Weapons")
         weapons_layout = QGridLayout()
@@ -70,7 +94,7 @@ class CharacterSheet(QMainWindow):
         weapons_group.setLayout(weapons_layout)
         layout.addWidget(weapons_group)
 
-        # Armour and Experience Points Sections Side by Side
+        # Armour, Experience Points and Combat Movement Sections Side by Side
         armour_exp_layout = QHBoxLayout()
 
         # Armour Section
@@ -84,10 +108,13 @@ class CharacterSheet(QMainWindow):
         # Experience Points Section
         exp_group = QGroupBox("Experience Points")
         exp_layout = QFormLayout()
+        exp_layout.addRow('Current:', QLineEdit())
         exp_layout.addRow('Total:', QLineEdit())
         exp_group.setLayout(exp_layout)
         armour_exp_layout.addWidget(exp_group)
-        
+
+        layout.addLayout(armour_exp_layout)
+
         # Combat Movement Section
         combat_group = QGroupBox("Combat Movement")
         combat_layout = QFormLayout()
@@ -97,9 +124,8 @@ class CharacterSheet(QMainWindow):
         combat_group.setLayout(combat_layout)
         armour_exp_layout.addWidget(combat_group)
 
-        layout.addLayout(armour_exp_layout)
-
-        # Action Summary Section
+        """
+        # Action Summary Section, optional in the future
         action_group = QGroupBox("Action Summary")
         action_layout = QVBoxLayout()
         action_summary = QLabel("Basic Action | Type | Advanced Action | Type")
@@ -107,9 +133,17 @@ class CharacterSheet(QMainWindow):
         action_layout.addWidget(action_summary)
         action_group.setLayout(action_layout)
         layout.addWidget(action_group)
+        """
 
         widget.setLayout(layout)
         self.show()
+
+    def choose_image(self):
+        file_dialog = QFileDialog()
+        file_path, _ = file_dialog.getOpenFileName(self, "Choose Character Image", "", "Image Files (*.png *.jpg *.bmp)")
+        if file_path:
+            self.character_icon_button.setIcon(QIcon(file_path))
+            self.character_icon_button.setIconSize(QSize(100, 100))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

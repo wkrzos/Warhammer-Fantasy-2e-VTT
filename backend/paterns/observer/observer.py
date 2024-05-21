@@ -1,7 +1,7 @@
 from backend.characterCard.equipment import HitLocalisation
 
 class Observer:
-    def update(self, subject):
+    def reactForNotify(self, subject):
         pass
 
 class Observable:
@@ -20,16 +20,16 @@ class Observable:
             pass
 
     @staticmethod
-    def notify(rolls):
+    def notify(signal):
         for observer in Observable._observers:
-            observer.update(rolls)
+            observer.reactForNotify(signal)
 
 
 class RollObserver(Observer):
     def __init__(self):
         self.lastRoll = []
 
-    def update(self, subject):
+    def reactForNotify(self, subject):
         self.lastRoll = subject
 
 class  FightObserver(Observer):
@@ -37,7 +37,7 @@ class  FightObserver(Observer):
         self.lastHitLocalisation = None
         self.lastDmgDealed = None
 
-    def update(self, subject):
+    def reactForNotify(self, subject):
         if isinstance(subject, HitLocalisation):
             self.lastHitLocalisation = subject
         elif isinstance(subject,int):
