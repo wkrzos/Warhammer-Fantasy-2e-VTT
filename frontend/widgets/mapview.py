@@ -1,6 +1,7 @@
-from PySide6.QtWidgets import QWidget, QApplication
-from PySide6.QtGui import QPainter, QPen, QColor, QMouseEvent
-from PySide6.QtCore import Qt, QPoint
+import sys
+from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout
+from PySide6.QtGui import QPainter, QPen, QColor
+from PySide6.QtCore import Qt, QPoint, QRect
 
 class Character:
     def __init__(self, name, position=(0, 0)):
@@ -25,33 +26,37 @@ class MapView(QWidget):
         self.last_mouse_pos = QPoint(0, 0)
         self.characters = [Character("Hero", (5, 5))]
         self.selected_character = None
+        self.zoom_level = 1.0  # Initial zoom level
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         self.draw_grid(painter)
         self.draw_characters(painter)
+        painter.end()
 
     def draw_grid(self, painter):
         pen = QPen(QColor(200, 200, 200), 1)
         painter.setPen(pen)
 
-        start_x = self.offset.x() % self.grid_size
-        start_y = self.offset.y() % self.grid_size
+        scaled_grid_size = int(self.grid_size * self.zoom_level)
+        start_x = self.offset.x() % scaled_grid_size
+        start_y = self.offset.y() % scaled_grid_size
 
-        for x in range(start_x, self.width(), self.grid_size):
+        for x in range(start_x, self.width(), scaled_grid_size):
             painter.drawLine(x, 0, x, self.height())
         
-        for y in range(start_y, self.height(), self.grid_size):
+        for y in range(start_y, self.height(), scaled_grid_size):
             painter.drawLine(0, y, self.width(), y)
 
     def draw_characters(self, painter):
         for character in self.characters:
             x, y = character.get_position()
-            screen_x = x * self.grid_size + self.offset.x()
-            screen_y = y * self.grid_size + self.offset.y()
+            scaled_grid_size = self.grid_size * self.zoom_level
+            screen_x = x * scaled_grid_size + self.offset.x()
+            screen_y = y * scaled_grid_size + self.offset.y()
             painter.setBrush(QColor(255, 0, 0))
-            painter.drawEllipse(screen_x, screen_y, self.grid_size, self.grid_size)
+            painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
             painter.drawText(screen_x + 10, screen_y + 30, character.name)
 
     def mousePressEvent(self, event):
@@ -75,21 +80,26 @@ class MapView(QWidget):
             self.dragging = False
             self.selected_character = None
 
+
+
     def select_character(self, position):
         for character in self.characters:
             x, y = character.get_position()
-            screen_x = x * self.grid_size + self.offset.x()
-            screen_y = y * self.grid_size + self.offset.y()
-            rect = QRect(screen_x, screen_y, self.grid_size, self.grid_size)
+            scaled_grid_size = self.grid_size * self.zoom_level
+            screen_x = x * scaled_grid_size + self.offset.x()
+            screen_y = y * scaled_grid_size + self.offset.y()
+            rect = QRect(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
             if rect.contains(position.toPoint()):
                 self.selected_character = character
                 break
 
     def move_character(self, delta):
         if self.selected_character:
-            dx = delta.x() // self.grid_size
-            dy = delta.y() // self.grid_size
+            dx = delta.x() / self.grid_size
+            dy = delta.y() / self.grid_size
             self.selected_character.move(dx, dy)
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
