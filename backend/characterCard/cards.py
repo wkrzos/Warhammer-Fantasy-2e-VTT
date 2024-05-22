@@ -171,13 +171,16 @@ class Character(Creature):
 
 
 class CharacterDescription:
-    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0):
+    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0, starSign:str = "", birthplace:str = "", distenguishingMarks:str = ""):
         self.colorOfEyes =  colorOfEyes
         self.colorOfHairs = colorOfHairs
         self.weight = weight
         self.height = height
         self.sex = sex
         self.age = age
+        self.starSign = starSign
+        self.birthplace = birthplace
+        self.distenguishingMarks = distenguishingMarks
 
     def __dict__(self):
         return {
@@ -186,7 +189,10 @@ class CharacterDescription:
             'weight' : self.weight,
             'height' : self.height,
             'sex' : self.sex,
-            'age' : self.age
+            'age' : self.age,
+            'starSign' : self.starSign,
+            'birthplace' : self.birthplace,
+            'distenguishingMarks' : self.distenguishingMarks
         }
 
 

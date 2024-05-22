@@ -192,5 +192,8 @@ class CardFabric:
             weight=dic['weight'],
             height=dic['height'],
             sex=dic['sex'],
-            age=dic['age']
+            age=dic['age'],
+            starSign=dic['starSign'],
+            birthplace=dic['birthplace'],
+            distenguishingMarks=dic['distenguishingMarks']
         )
