@@ -148,7 +148,7 @@ class DmgManager(Observable):
     def calculateDmg(player: Token, other: Token, rollValue:int) -> int:
         dmgBonus = DmgManager.calculateDmgBonus(player)
         dmgReduction = DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation(rollValue))
-        dmgRoll = RollGod.rollD10(dsc= player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL])[0]
+        dmgRoll = RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL] + " " + player.creature.name )[0]
         dmg = dmgBonus - dmgReduction  + dmgRoll
         DmgManager.notify(dmg)
         return dmg
