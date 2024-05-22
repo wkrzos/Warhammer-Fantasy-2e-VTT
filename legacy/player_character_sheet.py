@@ -144,7 +144,7 @@ class CharacterSheet:
             self.draw_armour_points_section(self.window)
 
             for box in self.input_boxes.values():
-                box.update()
+                box.reactForNotify()
 
             pygame.display.flip()
             self.clock.tick(30)

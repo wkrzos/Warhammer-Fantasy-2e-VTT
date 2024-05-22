@@ -5,88 +5,86 @@ import time
 from enum import Enum
 from pygame import mixer
 
+from backend.paterns.observer.observer import Observable
 
 
-class MusicManager:
+class MusicManager(Observable):
     def __init__(self, musicFolderPath):
         self.musicFolderPath = musicFolderPath
         self.currentIndex = 0
         self.playlist = []
         self.loadPlaylist()
-        self.command = MusicEventTypes.PLAY
+        self.command = MusicEventTypes.WAIT
         self.lock = threading.Lock()
 
 
-    def loadPlaylist(self) -> list[str]:
+    def loadPlaylist(self) -> None:
         for root, dirs, files in os.walk(self.musicFolderPath):
             for file in files:
                 if file.endswith(('.mp3', '.wav', '.ogg', '.flac')):
                     self.playlist.append(os.path.join(root, file))
 
-    def checkExternalEvents(self): #Temp test function
-        while True:
-            user_input = input("Wpisz 'stop', aby zatrzymać odtwarzanie lub 'play', aby wznowic: ")
-            if user_input.lower() == "stop":
-                with self.lock:
-
-                    self.command = MusicEventTypes.PAUSE
-            elif user_input.lower() == "play":
-                with self.lock:
-
-                    self.command = MusicEventTypes.UNPAUSE
-    def run(self):
+    def run(self) -> int:
         mixer.init()
+        MusicManager.notify(self.currentIndex)
         self.play()
         while True:
-            time.sleep(0.1)
+            time.sleep(0.025)
             with self.lock:
-                match self.command:
-                    case MusicEventTypes.UNPAUSE:
-                        self.unpause()
-                    case MusicEventTypes.PAUSE:
-                        self.pause()
-                        self.command = MusicEventTypes.WAIT
-                    case MusicEventTypes.NEXT:
-                        self.next()
-                        self.command = MusicEventTypes.PLAY
-                    case MusicEventTypes.PREVIOUS:
-                        self.previous()
-                        self.command = MusicEventTypes.PLAY
-                    case MusicEventTypes.REWIND:
-                        self.rewind()
-                        self.command = MusicEventTypes.PLAY
-                    case MusicEventTypes.UNPAUSE:
-                        self.unpause()
-                        self.command = MusicEventTypes.PLAY
-                if MusicEventTypes.PLAY == self.command and not mixer.music.get_busy():
-                        self.next()
-
-
-    def play(self):
+                if self.command == MusicEventTypes.UNPAUSE:
+                    self.unpause()
+                    self.command = MusicEventTypes.WAIT
+                elif self.command == MusicEventTypes.PAUSE:
+                    self.pause()
+                    self.command = MusicEventTypes.WAIT
+                elif self.command == MusicEventTypes.NEXT:
+                    self.next()
+                    self.command = MusicEventTypes.WAIT
+                    MusicManager.notify(self.currentIndex)
+                elif self.command == MusicEventTypes.PREVIOUS:
+                    self.previous()
+                    self.command = MusicEventTypes.WAIT
+                    MusicManager.notify(self.currentIndex)
+                elif self.command == MusicEventTypes.REWIND:
+                    self.rewind()
+                    self.command = MusicEventTypes.WAIT
+                elif self.command == MusicEventTypes.PLAY:
+                    if not mixer.music.get_busy():
+                        self.play()
+                    self.command = MusicEventTypes.WAIT
+                elif self.command == MusicEventTypes.CLOSE:
+                    return 0
+    def play(self) -> None:
         mixer.music.load(self.playlist[self.currentIndex])
         mixer.music.play()
 
-    def pause(self):
+    def pause(self) -> None:
         mixer.music.pause()
-    def unpause(self):
-        mixer.music.unpause()
-    def next(self):
-        mixer.music.stop()
-        self.currentIndex = (self.currentIndex - 1) % len(self.playlist) if self.currentIndex > 0 else len(
-            self.playlist) - 1
-        mixer.music.load(self.playlist[self.currentIndex])
-        mixer.music.play()
 
-    def previous(self):
-        mixer.music.stop()
+    def unpause(self) -> None:
+        mixer.music.unpause()
+
+    def next(self) -> None:
         self.currentIndex = (self.currentIndex + 1) % len(self.playlist)
-        mixer.music.load(self.playlist[self.currentIndex])
-        mixer.music.play()
-    def rewind(self):
+        self.play()
+
+    def previous(self) -> None:
+        self.currentIndex = (self.currentIndex - 1) % len(self.playlist)
+        self.play()
+
+    def rewind(self) -> None:
         mixer.music.rewind()
 
+    def setVolume(self, volume: int) -> None:
+        if volume < 0:
+            mixer.music.set_volume(0)
+        elif volume > 1:
+            mixer.music.set_volume(1)
+        else:
+            mixer.music.set_volume(volume)
 
 class MusicEventTypes(Enum):
+    CLOSE = -2,
     WAIT = -1
     PLAY = 0
     PAUSE = 1
@@ -94,10 +92,3 @@ class MusicEventTypes(Enum):
     PREVIOUS = 3
     REWIND = 4
     UNPAUSE = 5
-
-if __name__ == "__main__":
-    test = MusicManager(r"C:\Users\FilipPuszko(272731)\PycharmProjects\bardzofajenvtt\music")
-    music_thread = threading.Thread(target=test.run)
-    music_thread.start()
-    test.checkExternalEvents()
-    time.sleep(10)
