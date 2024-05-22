@@ -31,6 +31,8 @@ class AttributesType(Enum):
     ALREADY_DODGED = "at.5"
     IS_LYING = "at.6"
     FURIOUS = "at.7"
+    UNCONSCIOUS = "at.8"
+    DEAD = "at.9"
 
 class Attributes:
     def __init__(self, actionsRemain:int = 2, attributesActive:set = set()):
@@ -45,6 +47,15 @@ class Attributes:
 
     def remove(self, attributes: AttributesType) -> None:
         self.attributesActive.remove(attributes)
+    def restartAttributes(self) -> None:
+        if AttributesType.DEAD not in self.attributesActive or AttributesType.UNCONSCIOUS not in self.attributesActive:
+            self.actionsRemain = 2
+            if AttributesType.IS_LYING in self.attributesActive:
+                self.attributesActive.clear()
+                self.attributesActive.add(AttributesType.IS_LYING)
+            else:
+                self.attributesActive.clear()
+
 
     def __dict__(self):
         return {

@@ -7,30 +7,36 @@ class Observer:
 class Observable:
 
     _observers = []
-    @staticmethod
-    def attach(observer):
-        if observer not in Observable._observers:
-            Observable._observers.append(observer)
+    @classmethod
+    def attach(cls, observer):
+        if observer not in cls._observers:
+            cls._observers.append(observer)
 
-    @staticmethod
-    def detach(observer):
+    @classmethod
+    def detach(cls,observer):
         try:
-            Observable._observers.remove(observer)
+            cls._observers.remove(observer)
         except ValueError:
             pass
 
-    @staticmethod
+
+    @classmethod
     def notify(signal):
         for observer in Observable._observers:
             observer.reactForNotify(signal)
 
 
+
 class RollObserver(Observer):
     def __init__(self):
         self.lastRoll = []
+        self.description = ""
+
 
     def reactForNotify(self, subject):
-        self.lastRoll = subject
+        self.lastRoll = subject[0]
+        self.description = subject[1]
+
 
 class  FightObserver(Observer):
     def __init__(self):
