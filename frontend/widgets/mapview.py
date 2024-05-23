@@ -1,6 +1,6 @@
 import sys
 from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton
-from PySide6.QtGui import QPainter, QPen, QColor
+from PySide6.QtGui import QPainter, QPen, QColor, QFont
 from PySide6.QtCore import Qt, QPoint, QRect
 
 class Character:
@@ -85,6 +85,17 @@ class MapView(QWidget):
             pen = QPen(QColor(0, 0, 255), 2)
             painter.setPen(pen)
             painter.drawLine(self.measure_start, self.measure_end)
+
+            # Calculate distance in grid squares
+            dx = abs(self.measure_end.x() - self.measure_start.x())
+            dy = abs(self.measure_end.y() - self.measure_start.y())
+            distance = max(dx, dy) // (self.grid_size * self.zoom_level)
+            
+            # Display the distance
+            mid_point = (self.measure_start + self.measure_end) / 2
+            painter.setFont(QFont('Arial', 14))
+            painter.setPen(QColor(0, 0, 0))
+            painter.drawText(mid_point, f"{distance:.0f} squares")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
