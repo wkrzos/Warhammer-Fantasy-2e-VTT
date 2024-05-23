@@ -21,8 +21,8 @@ class Observable:
 
 
     @classmethod
-    def notify(signal):
-        for observer in Observable._observers:
+    def notify(cls, signal):
+        for observer in cls._observers:
             observer.reactForNotify(signal)
 
 
