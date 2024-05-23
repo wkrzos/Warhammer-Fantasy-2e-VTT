@@ -1,6 +1,6 @@
 import sys
 from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton
-from PySide6.QtGui import QPainter, QPen, QColor, QFont
+from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush
 from PySide6.QtCore import Qt, QPoint, QRect
 
 class Character:
@@ -42,11 +42,14 @@ class MapView(QWidget):
             Character("Enemy", (10, 10))
         ]
         self.tokens = [Token(character) for character in self.characters]
-        self.selected_token = None
+        self.selected_tokens = []
         self.zoom_level = 1.0  # Initial zoom level
         self.measuring = False
         self.measure_start = None
         self.measure_end = None
+        self.selecting = False
+        self.selection_start = None
+        self.selection_end = None
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -54,6 +57,7 @@ class MapView(QWidget):
         self.draw_grid(painter)
         self.draw_tokens(painter)
         self.draw_measurement(painter)
+        self.draw_selection(painter)
         painter.end()
 
     def draw_grid(self, painter):
@@ -76,7 +80,7 @@ class MapView(QWidget):
             scaled_grid_size = self.grid_size * self.zoom_level
             screen_x = x * scaled_grid_size + self.offset.x()
             screen_y = y * scaled_grid_size + self.offset.y()
-            painter.setBrush(QColor(255, 0, 0))
+            painter.setBrush(QColor(255, 0, 0) if token not in self.selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
             painter.drawText(screen_x + 10, screen_y + 30, token.character.name)
 
@@ -97,12 +101,29 @@ class MapView(QWidget):
             painter.setPen(QColor(0, 0, 0))
             painter.drawText(mid_point, f"{distance:.0f} squares")
 
+    def draw_selection(self, painter):
+        if self.selecting and self.selection_start and self.selection_end:
+            rect = QRect(QPoint(self.selection_start.toPoint()), QPoint(self.selection_end.toPoint()))
+            painter.setPen(QPen(QColor(0, 0, 255), 1, Qt.DashLine))
+            painter.setBrush(QBrush(QColor(0, 0, 255, 50)))
+            painter.drawRect(rect)
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.last_mouse_pos = event.position()
             if self.main_window.toolbar.selected_tool == "select":
-                self.dragging = True
-                self.select_token(event.position())
+                token = self.get_token_at_position(event.position())
+                if token:
+                    if token in self.selected_tokens:
+                        self.dragging = True
+                    else:
+                        self.selected_tokens = [token]
+                        self.dragging = True
+                else:
+                    self.selected_tokens = []
+                    self.selection_start = event.position()
+                    self.selection_end = event.position()
+                    self.selecting = True
             elif self.main_window.toolbar.selected_tool == "pan":
                 self.dragging = True
             elif self.main_window.toolbar.selected_tool == "measure":
@@ -113,8 +134,8 @@ class MapView(QWidget):
     def mouseMoveEvent(self, event):
         if self.dragging:
             delta = event.position() - self.last_mouse_pos
-            if self.main_window.toolbar.selected_tool == "select" and self.selected_token:
-                self.move_token(delta, event.modifiers() & Qt.ShiftModifier)
+            if self.main_window.toolbar.selected_tool == "select" and self.selected_tokens:
+                self.move_tokens(delta, event.modifiers() & Qt.ShiftModifier)
             elif self.main_window.toolbar.selected_tool == "pan":
                 self.offset += delta.toPoint()
             self.last_mouse_pos = event.position()
@@ -122,13 +143,19 @@ class MapView(QWidget):
         elif self.measuring:
             self.measure_end = event.position()
             self.update()
+        elif self.selecting:
+            self.selection_end = event.position()
+            self.update_selection()
+            self.update()
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.dragging = False
-            if self.selected_token and not (event.modifiers() & Qt.ShiftModifier):
-                self.snap_to_grid(self.selected_token)
-            self.selected_token = None
+            if self.main_window.toolbar.selected_tool == "select" and self.selecting:
+                self.selecting = False
+                self.update_selection()
+            elif self.selected_tokens and not (event.modifiers() & Qt.ShiftModifier):
+                self.snap_to_grid_multiple(self.selected_tokens)
             self.measuring = False
 
     def wheelEvent(self, event):
@@ -138,37 +165,40 @@ class MapView(QWidget):
         else:
             self.zoom_out()
 
-    def select_token(self, position):
-        for token in self.tokens:
+    def update_selection(self):
+        self.selected_tokens = []
+        if self.selection_start and self.selection_end:
+            rect = QRect(QPoint(self.selection_start.toPoint()), QPoint(self.selection_end.toPoint())).normalized()
+            for token in self.tokens:
+                x, y = token.get_position()
+                scaled_grid_size = self.grid_size * self.zoom_level
+                screen_x = x * scaled_grid_size + self.offset.x()
+                screen_y = y * scaled_grid_size + self.offset.y()
+                token_rect = QRect(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
+                if rect.intersects(token_rect):
+                    self.selected_tokens.append(token)
+        self.update()
+
+    def move_tokens(self, delta, shift_pressed):
+        if self.selected_tokens:
+            dx = delta.x() / (self.grid_size * self.zoom_level)
+            dy = delta.y() / (self.grid_size * self.zoom_level)
+            for token in self.selected_tokens:
+                if shift_pressed:
+                    # Free movement
+                    new_x = token.get_position()[0] + dx
+                    new_y = token.get_position()[1] + dy
+                else:
+                    # Snap to grid
+                    new_x = round(token.get_position()[0] + dx)
+                    new_y = round(token.get_position()[1] + dy)
+                token.set_position(new_x, new_y)
+            self.update()
+
+    def snap_to_grid_multiple(self, tokens):
+        for token in tokens:
             x, y = token.get_position()
-            scaled_grid_size = self.grid_size * self.zoom_level
-            screen_x = x * scaled_grid_size + self.offset.x()
-            screen_y = y * scaled_grid_size + self.offset.y()
-            rect = QRect(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
-            if rect.contains(position.toPoint()):
-                self.selected_token = token
-                break
-
-    def move_token(self, delta, shift_pressed):
-        if self.selected_token:
-            if shift_pressed:
-                # Free movement
-                dx = delta.x() / (self.grid_size * self.zoom_level)
-                dy = delta.y() / (self.grid_size * self.zoom_level)
-                new_x = self.selected_token.get_position()[0] + dx
-                new_y = self.selected_token.get_position()[1] + dy
-            else:
-                # Snap to grid
-                dx = delta.x() / (self.grid_size * self.zoom_level)
-                dy = delta.y() / (self.grid_size * self.zoom_level)
-                new_x = round(self.selected_token.get_position()[0] + dx)
-                new_y = round(self.selected_token.get_position()[1] + dy)
-            
-            self.selected_token.set_position(new_x, new_y)
-
-    def snap_to_grid(self, token):
-        x, y = token.get_position()
-        token.set_position(round(x), round(y))
+            token.set_position(round(x), round(y))
         self.update()
 
     def zoom_in(self):
@@ -178,6 +208,17 @@ class MapView(QWidget):
     def zoom_out(self):
         self.zoom_level = max(self.zoom_level - 0.1, 0.1)
         self.update()
+
+    def get_token_at_position(self, position):
+        for token in self.tokens:
+            x, y = token.get_position()
+            scaled_grid_size = self.grid_size * self.zoom_level
+            screen_x = x * scaled_grid_size + self.offset.x()
+            screen_y = y * scaled_grid_size + self.offset.y()
+            token_rect = QRect(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
+            if token_rect.contains(position.toPoint()):
+                return token
+        return None
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
