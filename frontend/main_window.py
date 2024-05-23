@@ -8,6 +8,7 @@ from backend.musicManager.musicManager import MusicEventTypes
 from frontend.widgets.toolbar import Toolbar
 from frontend.widgets.mapview import MapView
 from frontend.widgets.chatview import ChatView, CharactersView, MusicPlayerView
+from frontend.widgets.actionpanel import ActionPanel
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -53,9 +54,14 @@ class MainWindow(QMainWindow):
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 0)
 
+        # Create the action panel
+        self.action_panel = ActionPanel(self)
+        self.action_panel.setFixedWidth(200)
+
         # Add components to the main layout
         main_layout.addWidget(self.toolbar)
         main_layout.addWidget(splitter)
+        main_layout.addWidget(self.action_panel)
 
         # Set the central widget
         central_widget = QWidget()
@@ -66,6 +72,9 @@ class MainWindow(QMainWindow):
         self.music_player_view.music_manager.command = MusicEventTypes.CLOSE
         self.music_player_view.music_thread.join()
         event.accept()
+
+    def update_action_panel(self):
+        self.action_panel.update_actions(self.map_view.selected_tokens)
 
 def main():
     app = QApplication(sys.argv)

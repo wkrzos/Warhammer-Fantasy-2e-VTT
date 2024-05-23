@@ -29,6 +29,8 @@ class Token:
     def get_position(self):
         return self.position
 
+# Update MapView class (previously defined) to include a call to update_action_panel
+
 class MapView(QWidget):
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
@@ -130,6 +132,7 @@ class MapView(QWidget):
                 self.measuring = True
                 self.measure_start = event.position()
                 self.measure_end = event.position()
+            self.main_window.update_action_panel()  # Update action panel on mouse press
 
     def mouseMoveEvent(self, event):
         if self.dragging:
@@ -157,6 +160,7 @@ class MapView(QWidget):
             elif self.selected_tokens and not (event.modifiers() & Qt.ShiftModifier):
                 self.snap_to_grid_multiple(self.selected_tokens)
             self.measuring = False
+            self.main_window.update_action_panel()  # Update action panel on mouse release
 
     def wheelEvent(self, event):
         # Zoom in and out with the mouse wheel
