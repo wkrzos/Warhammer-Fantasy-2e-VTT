@@ -28,11 +28,11 @@ class MainWindow(QMainWindow):
         main_layout = QHBoxLayout()
 
         # Create the toolbar
-        toolbar = Toolbar(self)
-        toolbar.setFixedWidth(60)
+        self.toolbar = Toolbar(self)
+        self.toolbar.setFixedWidth(60)
 
-        # Create the map view
-        map_view = MapView()
+        # Create the map view and pass a reference to the main window
+        self.map_view = MapView(self)
 
         # Create the tab widget for the right panel
         right_tab_widget = QTabWidget()
@@ -48,13 +48,13 @@ class MainWindow(QMainWindow):
 
         # Splitter to allow resizing
         splitter = QSplitter(Qt.Horizontal)
-        splitter.addWidget(map_view)
+        splitter.addWidget(self.map_view)
         splitter.addWidget(right_tab_widget)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 0)
 
         # Add components to the main layout
-        main_layout.addWidget(toolbar)
+        main_layout.addWidget(self.toolbar)
         main_layout.addWidget(splitter)
 
         # Set the central widget
