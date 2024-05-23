@@ -143,6 +143,21 @@ class Creature:
     def initiative(self):
         return self.summaryAgility + RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.INITIATIVE_ROLL] + " " + self.name)[0]
 
+    @property
+    def walk(self):
+        return self.statistics.walk
+
+    @property
+    def chargeRange(self):
+        return self.statistics.chargeRange
+
+    @property
+    def runRange(self):
+        return self.statistics.runRange
+
+    @property
+    def maxHP(self):
+        return self.statistics.wounds
 class Character(Creature):
     def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
         super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
@@ -171,7 +186,7 @@ class Character(Creature):
 
 
 class CharacterDescription:
-    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0, starSign:str = "", birthplace:str = "", distenguishingMarks:str = ""):
+    def __init__(self, colorOfEyes:str = "", colorOfHairs:str = "", weight:int = 0, height:int = 0, sex:str = "",age:int = 0, starSign:str = "", birthplace:str = "", distenguishingMarks:str = "", previousProfession: str = "", currentProfession:str = ""):
         self.colorOfEyes =  colorOfEyes
         self.colorOfHairs = colorOfHairs
         self.weight = weight
@@ -181,6 +196,9 @@ class CharacterDescription:
         self.starSign = starSign
         self.birthplace = birthplace
         self.distenguishingMarks = distenguishingMarks
+        self.previousProfession = previousProfession
+        self.currentProfession = currentProfession
+
 
     def __dict__(self):
         return {
@@ -192,7 +210,10 @@ class CharacterDescription:
             'age' : self.age,
             'starSign' : self.starSign,
             'birthplace' : self.birthplace,
-            'distenguishingMarks' : self.distenguishingMarks
+            'distenguishingMarks' : self.distenguishingMarks,
+            'previousProfession' : self.previousProfession,
+            'currentProfession' : self.currentProfession
+
         }
 
 

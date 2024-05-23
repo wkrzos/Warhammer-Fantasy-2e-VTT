@@ -45,7 +45,15 @@ class Statistics:
     @property
     def burden(self):
         return self.strength * 10
-
+    @property
+    def walk(self):
+        return self.movement * 2
+    @property
+    def chargeRange(self):
+        return self.movement * 3
+    @property
+    def runRange(self):
+        return self.movement * 4
     def __dict__(self):
         return {
             "weaponSkill" : self.weaponSkill,
