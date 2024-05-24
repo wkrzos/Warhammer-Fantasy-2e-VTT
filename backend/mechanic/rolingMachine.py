@@ -14,7 +14,7 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
     #     return cls._instance
 
  #   def __init__(self):
-
+    _observers = []
     @classmethod
     def rollD4(cls,d:int = 1, dsc:str = "" )-> list[int]:
         result = []
@@ -68,7 +68,25 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 100) + 1)
+        print(cls._observers)
         cls.notify((result,dsc))
         return result
 
+    @classmethod
+    def attach(cls, observer):
+        if observer not in cls._observers:
+            cls._observers.append(observer)
+
+    @classmethod
+    def detach(cls,observer):
+        try:
+            cls._observers.remove(observer)
+        except ValueError:
+            pass
+
+
+    @classmethod
+    def notify(cls, signal):
+        for observer in cls._observers:
+            observer.reactForNotify(signal)
 

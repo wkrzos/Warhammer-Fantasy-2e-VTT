@@ -9,6 +9,7 @@ from backend.paterns.observer.observer import Observable
 
 
 class MusicManager(Observable):
+    _observers = []
     def __init__(self, musicFolderPath):
         self.musicFolderPath = musicFolderPath
         self.currentIndex = 0
@@ -82,6 +83,25 @@ class MusicManager(Observable):
             mixer.music.set_volume(1)
         else:
             mixer.music.set_volume(volume)
+
+    @classmethod
+    def attach(cls, observer):
+        if observer not in cls._observers:
+            cls._observers.append(observer)
+
+    @classmethod
+    def detach(cls,observer):
+        try:
+            cls._observers.remove(observer)
+        except ValueError:
+            pass
+
+
+    @classmethod
+    def notify(cls, signal):
+        for observer in cls._observers:
+            observer.reactForNotify(signal)
+
 
 class MusicEventTypes(Enum):
     CLOSE = -2,
