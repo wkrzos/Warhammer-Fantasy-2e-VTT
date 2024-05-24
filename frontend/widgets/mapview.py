@@ -3,31 +3,21 @@ from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, Q
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush
 from PySide6.QtCore import Qt, QPoint, QRect
 
-class Character:
-    def __init__(self, name, position=(0, 0)):
-        self.name = name
-        self.position = position
+from backend.characterCard.cards import Character
+from backend.mechanic.token import Token
 
-    def set_position(self, x, y):
-        self.position = (x, y)
 
-    def get_position(self):
-        return self.position
-
-    def move(self, dx, dy):
-        self.position = (self.position[0] + dx, self.position[1] + dy)
-
-class Token:
-    def __init__(self, character):
-        self.character = character
-        self.position = character.get_position()
-
-    def set_position(self, x, y):
-        self.position = (x, y)
-        self.character.set_position(x, y)
-
-    def get_position(self):
-        return self.position
+# class Token:
+#     def __init__(self, character):
+#         self.character = character
+#         self.position = character.get_position()
+#
+#     def set_position(self, x, y):
+#         self.position = (x, y)
+#         self.character.set_position(x, y)
+#
+#     def get_position(self):
+#         return self.position
 
 # Update MapView class (previously defined) to include a call to update_action_panel
 
@@ -40,10 +30,12 @@ class MapView(QWidget):
         self.dragging = False
         self.last_mouse_pos = QPoint(0, 0)
         self.characters = [
-            Character("Hero", (5, 5)),
-            Character("Enemy", (10, 10))
+            Character("Hero" ),
+            Character("Enemy" )
         ]
         self.tokens = [Token(character) for character in self.characters]
+        self.tokens[0].position = (5,5)
+        self.tokens[1].position = (10,10)
         self.selected_tokens = []
         self.zoom_level = 1.0  # Initial zoom level
         self.measuring = False
@@ -84,7 +76,7 @@ class MapView(QWidget):
             screen_y = y * scaled_grid_size + self.offset.y()
             painter.setBrush(QColor(255, 0, 0) if token not in self.selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
-            painter.drawText(screen_x + 10, screen_y + 30, token.character.name)
+            painter.drawText(screen_x + 10, screen_y + 30, token.creature.name)
 
     def draw_measurement(self, painter):
         if self.measure_start and self.measure_end:
