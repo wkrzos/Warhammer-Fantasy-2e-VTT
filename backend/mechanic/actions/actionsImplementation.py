@@ -75,7 +75,7 @@ class ActionOnAnother(Action):
     @staticmethod
     def push(player: Token,other: Token):
         if player.creature.statTest(MainStats.STRENGTH)[2] > other.creature.statTest(MainStats.STRENGTH)[2]:
-            other.posistion += other.posistion - player.posistion #Check good operation
+            other.move(other.position[0] - player.position[0],other.position[1] - player.position[1] )  #Check good operation
     @staticmethod
     def feint(player:Token,other:Token):
         pass
