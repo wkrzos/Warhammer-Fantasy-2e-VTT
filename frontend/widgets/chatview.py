@@ -36,6 +36,34 @@ class CharactersView(QWidget):
         add_button = QPushButton("Add Character")
         layout.addWidget(add_button)
         self.setLayout(layout)
+        
+class CreaturesView(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.initUI()
+
+    def initUI(self):
+        layout = QVBoxLayout()
+        layout.addWidget(QLabel("Creatures"))
+        self.character_list = QListWidget()
+        layout.addWidget(self.character_list)
+        add_button = QPushButton("Add Creature")
+        layout.addWidget(add_button)
+        self.setLayout(layout)
+        
+class ItemsView(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.initUI()
+
+    def initUI(self):
+        layout = QVBoxLayout()
+        layout.addWidget(QLabel("Items"))
+        self.character_list = QListWidget()
+        layout.addWidget(self.character_list)
+        add_button = QPushButton("Add Item")
+        layout.addWidget(add_button)
+        self.setLayout(layout)
 
 class MusicPlayerView(QWidget, Observer):
     def __init__(self, parent=None):
@@ -153,3 +181,17 @@ class MusicPlayerView(QWidget, Observer):
         time.sleep(0.03)
         with self.music_manager.lock:
             self.music_manager.command = MusicEventTypes.PLAY
+            
+class OptionsView(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.initUI()
+
+    def initUI(self):
+        layout = QVBoxLayout()
+        layout.addWidget(QLabel("Options"))
+        self.character_list = QListWidget()
+        layout.addWidget(self.character_list)
+        add_button = QPushButton("Exit")
+        layout.addWidget(add_button)
+        self.setLayout(layout)

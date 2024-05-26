@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt
 from backend.musicManager.musicManager import MusicEventTypes
 from frontend.widgets.toolbar import Toolbar
 from frontend.widgets.mapview import MapView
-from frontend.widgets.chatview import ChatView, CharactersView, MusicPlayerView
+from frontend.widgets.chatview import ChatView, CharactersView, ItemsView, CreaturesView, MusicPlayerView, OptionsView
 from frontend.widgets.actionpanel import ActionPanel
 
 class MainWindow(QMainWindow):
@@ -42,10 +42,17 @@ class MainWindow(QMainWindow):
         # Add tabs
         chat_view = ChatView()
         characters_view = CharactersView()
+        creatures_view = CreaturesView()
+        items_view = ItemsView()
+        options_view = OptionsView()
+        
 
         right_tab_widget.addTab(chat_view, "Chat")
         right_tab_widget.addTab(characters_view, "Characters")
+        right_tab_widget.addTab(creatures_view, "Creatures")
+        right_tab_widget.addTab(items_view, "Items")
         right_tab_widget.addTab(self.music_player_view, "Music Player")
+        right_tab_widget.addTab(options_view, "Options")
 
         # Splitter to allow resizing
         splitter = QSplitter(Qt.Horizontal)
