@@ -1,187 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl" sourcelanguage="en">
+<TS version="2.1" language="pl_PL" sourcelanguage="en_US">
 <context>
     <name>CharacterSheet</name>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="13"/>
         <source>Warhammer Fantasy Roleplay Character Sheet</source>
-        <translation>Warhammer Fantasy Roleplay Karta Postaci</translation>
+        <translation type="vanished">Warhammer Fantasy Roleplay Karta Postaci</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="21"/>
         <source>Character</source>
-        <translation>Postać</translation>
+        <translation type="vanished">Postać</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="25"/>
         <source>Name:</source>
-        <translation>Imię:</translation>
+        <translation type="vanished">Imię:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="27"/>
         <source>Human</source>
-        <translation>Człowiek</translation>
+        <translation type="vanished">Człowiek</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="27"/>
         <source>Elf</source>
-        <translation>Elf</translation>
+        <translation type="vanished">Elf</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="27"/>
         <source>Dwarf</source>
-        <translation>Krasnolud</translation>
+        <translation type="vanished">Krasnolud</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="27"/>
         <source>Halfling</source>
-        <translation>Niziołek</translation>
+        <translation type="vanished">Niziołek</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="28"/>
         <source>Race:</source>
-        <translation>Rasa:</translation>
+        <translation type="vanished">Rasa:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="29"/>
         <source>Current Career:</source>
-        <translation>Aktualna kariera:</translation>
+        <translation type="vanished">Aktualna kariera:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="30"/>
         <source>Previous Careers:</source>
-        <translation>Poprzednia kariera:</translation>
+        <translation type="vanished">Poprzednia kariera:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="46"/>
         <source>Personal Details</source>
-        <translation>Personalia</translation>
+        <translation type="vanished">Personalia</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="48"/>
         <source>Age:</source>
-        <translation>Wiek:</translation>
+        <translation type="vanished">Wiek:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="49"/>
         <source>Gender:</source>
-        <translation>Płeć:</translation>
+        <translation type="vanished">Płeć:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="50"/>
         <source>Height:</source>
-        <translation>Wzrost:</translation>
+        <translation type="vanished">Wzrost:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="51"/>
         <source>Weight:</source>
-        <translation>Waga:</translation>
+        <translation type="vanished">Waga:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="52"/>
         <source>Eyes Color:</source>
-        <translation>Kolor oczu:</translation>
+        <translation type="vanished">Kolor oczu:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="53"/>
         <source>Hair Color:</source>
-        <translation>Kolor włosów:</translation>
+        <translation type="vanished">Kolor włosów:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="54"/>
         <source>Star Sign:</source>
-        <translation>Znak zodiaku:</translation>
+        <translation type="vanished">Znak zodiaku:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="55"/>
         <source>Number of Siblings:</source>
-        <translation>Liczba rodzeństwa:</translation>
+        <translation type="vanished">Liczba rodzeństwa:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="56"/>
         <source>Birthplace:</source>
-        <translation>Miejsce urodzenia:</translation>
+        <translation type="vanished">Miejsce urodzenia:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="57"/>
         <source>Distinguishing Marks:</source>
-        <translation>Cechy wyróżniające:</translation>
+        <translation type="vanished">Cechy wyróżniające:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="62"/>
         <source>Character Profile Main</source>
-        <translation>Statystyki główne</translation>
+        <translation type="vanished">Statystyki główne</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="74"/>
         <source>Character Profile Secondary</source>
-        <translation>Statystyki poboczne</translation>
+        <translation type="vanished">Statystyki poboczne</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="86"/>
         <source>Weapons</source>
-        <translation>Bronie</translation>
+        <translation type="vanished">Bronie</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="101"/>
         <source>Armour</source>
-        <translation>Pancerz</translation>
+        <translation type="vanished">Pancerz</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="103"/>
         <source>Basic Armour:</source>
-        <translation>Pancerze podstawowy:</translation>
+        <translation type="vanished">Pancerze podstawowy:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="104"/>
         <source>Advanced Armour:</source>
-        <translation>Pancerz zaawansowany:</translation>
+        <translation type="vanished">Pancerz zaawansowany:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="109"/>
         <source>Experience Points</source>
-        <translation>Punkty doświadczenia</translation>
+        <translation type="vanished">Punkty doświadczenia</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="111"/>
         <source>Current:</source>
-        <translation>Aktualne:</translation>
+        <translation type="vanished">Aktualne:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="112"/>
         <source>Total:</source>
-        <translation>Całkowite:</translation>
+        <translation type="vanished">Całkowite:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="119"/>
         <source>Combat Movement</source>
-        <translation>Ruch w walce</translation>
+        <translation type="vanished">Ruch w walce</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="121"/>
         <source>Move/Disengage:</source>
-        <translation>Ruch/wyplątanie:</translation>
+        <translation type="vanished">Ruch/wyplątanie:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="122"/>
         <source>Charge Attack:</source>
-        <translation>Szarża:</translation>
+        <translation type="vanished">Szarża:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="123"/>
         <source>Run:</source>
-        <translation>Bieg:</translation>
+        <translation type="vanished">Bieg:</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="132"/>
         <source>Choose Character Image</source>
-        <translation>Wybierz obraz postaci</translation>
+        <translation type="vanished">Wybierz obraz postaci</translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character.py" line="132"/>
         <source>Image Files (*.png *.jpg *.bmp)</source>
-        <translation>Pliki (*.png *.jpg *.bmp)</translation>
+        <translation type="vanished">Pliki (*.png *.jpg *.bmp)</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../frontend/main_window.py" line="17"/>
+        <source>BFVTT Application</source>
+        <translation>Aplikacja BFVTT</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window.py" line="46"/>
+        <source>Chat</source>
+        <translation>Czat</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window.py" line="47"/>
+        <source>Characters</source>
+        <translation>Postaci</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window.py" line="48"/>
+        <source>Music Player</source>
+        <translation>Odtwarzacz muzyki</translation>
     </message>
 </context>
 </TS>
