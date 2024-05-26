@@ -2,7 +2,7 @@ import sys
 import os
 from PySide6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QWidget, QSplitter, QTabWidget
 from PySide6.QtGui import QIcon
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTranslator, QLocale
 
 from backend.musicManager.musicManager import MusicEventTypes
 from frontend.widgets.toolbar import Toolbar
@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("BFVTT Application")
+        self.setWindowTitle(self.tr("BFVTT Application"))
         self.setGeometry(100, 100, 1200, 800)
 
         # Set the application icon
@@ -46,13 +46,12 @@ class MainWindow(QMainWindow):
         items_view = ItemsView()
         options_view = OptionsView()
         
-
-        right_tab_widget.addTab(chat_view, "Chat")
-        right_tab_widget.addTab(characters_view, "Characters")
-        right_tab_widget.addTab(creatures_view, "Creatures")
-        right_tab_widget.addTab(items_view, "Items")
-        right_tab_widget.addTab(self.music_player_view, "Music Player")
-        right_tab_widget.addTab(options_view, "Options")
+        right_tab_widget.addTab(chat_view, self.tr("Chat"))
+        right_tab_widget.addTab(characters_view, self.tr("Characters"))
+        right_tab_widget.addTab(creatures_view, self.tr("Creatures"))
+        right_tab_widget.addTab(items_view, self.tr("Items"))
+        right_tab_widget.addTab(self.music_player_view, self.tr("Music Player"))
+        right_tab_widget.addTab(options_view, self.tr("Options"))
 
         # Splitter to allow resizing
         splitter = QSplitter(Qt.Horizontal)
@@ -93,6 +92,16 @@ def main():
             app.setStyleSheet(file.read())
     except FileNotFoundError:
         print(f"Stylesheet not found at {stylesheet_path}")
+
+    # Load translations
+    translator = QTranslator()
+    # Set the language you want to load, e.g., "pl" for Polish
+    language = "pl"
+    translation_file = f"translations/{language}.qm"
+    if translator.load(translation_file):
+        app.installTranslator(translator)
+    else:
+        print(f"Translation file not found: {translation_file}")
 
     main_window = MainWindow()
     main_window.show()
