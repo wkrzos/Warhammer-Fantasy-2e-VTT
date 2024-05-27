@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
 
-        self.ui.music_player_view = self.ui.create_music_player_view()
+        #self.ui.music_player_view = self.ui.create_music_player_view()
 
     def closeEvent(self, event):
         self.ui.music_player_view.music_manager.command = MusicEventTypes.CLOSE
