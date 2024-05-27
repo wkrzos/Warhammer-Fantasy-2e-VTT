@@ -2,15 +2,20 @@ import os
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QSplitter, QTabWidget
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
-from frontend.widgets.toolbar import Toolbar
 from frontend.widgets.mapview import MapView
 from frontend.widgets.chatview import ChatView, CharactersView, ItemsView, CreaturesView, MusicPlayerView, OptionsView
 from frontend.widgets.actionpanel import ActionPanel
+from models.toolbar_model import ToolbarModel
+from frontend.widgets.toolbar_ui import ToolbarUI
+from controlers.toolbar import ToolbarController
 
 class MainWindowUI:
     def __init__(self, main_window):
         self.main_window = main_window
         self.music_player_view = None
+        self.toolbar_model = ToolbarModel()
+        self.toolbar_view = ToolbarUI(self.main_window)
+        self.toolbar_controller = ToolbarController(self.toolbar_model, self.toolbar_view)
 
     def create_music_player_view(self):
         return MusicPlayerView()
@@ -27,8 +32,7 @@ class MainWindowUI:
     def initUI(self):
         main_layout = QHBoxLayout()
 
-        self.toolbar = Toolbar(self.main_window)
-        self.toolbar.setFixedWidth(60)
+        self.toolbar_view.setFixedWidth(60)
 
         self.map_view = MapView(self.main_window)
 
@@ -57,7 +61,7 @@ class MainWindowUI:
         self.action_panel = ActionPanel(self.main_window)
         self.action_panel.setFixedWidth(200)
 
-        main_layout.addWidget(self.toolbar)
+        main_layout.addWidget(self.toolbar_view)
         main_layout.addWidget(splitter)
         main_layout.addWidget(self.action_panel)
 

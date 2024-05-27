@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
 from PySide6.QtCore import Qt
 from backend.mechanic.actions.actionsImplementation import SelfAction, ActionOnAnother, SpecialAction
 from frontend.widgets.mapview import MapView
-from frontend.widgets.toolbar import Toolbar
+from frontend.widgets.toolbar_ui import ToolbarUI
 
 class ActionPanel(QWidget):
     def __init__(self, main_window, parent=None):
