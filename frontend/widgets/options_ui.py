@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QComboBox, QListWidgetItem
 from frontend.util.font import DEFAULT_FONT
 
 class OptionsViewUI(QWidget):
@@ -15,6 +15,11 @@ class OptionsViewUI(QWidget):
         self.option_list = QListWidget()
         self.option_list.setFont(DEFAULT_FONT)
         layout.addWidget(self.option_list)
+
+        self.language_selector = QComboBox()
+        self.language_selector.addItems(["en", "pl", "de"])  # Available languages
+        self.language_selector.setFont(DEFAULT_FONT)
+        layout.addWidget(self.language_selector)
 
         self.exit_button = QPushButton(self.tr("Exit"))
         self.exit_button.setFont(DEFAULT_FONT)
