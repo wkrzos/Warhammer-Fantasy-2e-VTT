@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(icon_path))
 
         self.music_player_view = MusicPlayerView()
+
         self.initUI()
 
     def initUI(self):
@@ -74,8 +75,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
     def closeEvent(self, event):
-        # self.music_player_view.music_manager.command = MusicEventTypes.CLOSE
-        # self.music_player_view.music_thread.join()
+        self.music_player_view.music_manager.command = MusicEventTypes.CLOSE
+        self.music_player_view.music_thread.join()
         event.accept()
 
     def update_action_panel(self):
