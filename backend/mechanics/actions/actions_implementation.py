@@ -1,10 +1,10 @@
-from backend.characterCard.cards import Creature, Character
-from backend.characterCard.equipment import Item, HitLocalisation
-from backend.characterCard.skillsAndTalents import Skills, AdvancedSkills
-from backend.characterCard.statistics import TestModificator
-from backend.mechanic.token import Token
-from backend.characterCard.characteristics import *
-from backend.mechanic.rolingMachine import *
+from backend.character_sheets.sheets import Creature, Character
+from backend.character_sheets.equipment import Item, HitLocalisation
+from backend.character_sheets.skills_and_talents import Skills, AdvancedSkills
+from backend.character_sheets.statistics import TestModificator
+from backend.mechanics.token import Token
+from backend.character_sheets.characteristics import *
+from backend.mechanics.rolling_machine import *
 from localisation.descriptions import RollDescriptionAggregator, FightDescriptionsType
 
 

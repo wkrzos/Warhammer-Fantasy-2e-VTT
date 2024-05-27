@@ -1,6 +1,6 @@
 from enum import Enum
 
-from backend.characterCard.characteristics import *
+from backend.character_sheets.characteristics import *
 
 
 class Statistics:

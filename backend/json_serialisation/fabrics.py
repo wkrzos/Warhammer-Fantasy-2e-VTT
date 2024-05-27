@@ -1,13 +1,13 @@
 from enum import Enum
 
-from backend.characterCard.cards import Creature, Character, CharacterDescription, Card
-from backend.characterCard.equipment import Item, Armor, Weapon, WeaponType, Equipment
-from backend.characterCard.statistics import TestModificator
-from backend.characterCard.characteristics import MainStats, SecondaryStats, AttributesType, Attributes
-from backend.characterCard.equipment import WeaponTrait, ArmorType, HitLocalisation, Item, Armor, Weapon
-from backend.characterCard.races import Races, MonsterCategory
-from backend.characterCard.skillsAndTalents import AdvancedSkills, BasicSkills
-from backend.characterCard.statistics import TestModificator, Statistics, Development
+from backend.character_sheets.sheets import Creature, Character, CharacterDescription, Card
+from backend.character_sheets.equipment import Item, Armor, Weapon, WeaponType, Equipment
+from backend.character_sheets.statistics import TestModificator
+from backend.character_sheets.characteristics import MainStats, SecondaryStats, AttributesType, Attributes
+from backend.character_sheets.equipment import WeaponTrait, ArmorType, HitLocalisation, Item, Armor, Weapon
+from backend.character_sheets.races import Races, MonsterCategory
+from backend.character_sheets.skills_and_talents import AdvancedSkills, BasicSkills
+from backend.character_sheets.statistics import TestModificator, Statistics, Development
 
 class ItemsFabric:
 

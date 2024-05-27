@@ -9,7 +9,7 @@ from frontend.util.color_constants import *
 from backend.characterCard.characteristics import Stats, Attributes  # , Development
 from backend.characterCard.races import Races
 from backend.characterCard.equipment import Equipment
-from backend.characterCard.skillsAndTalents import Talents
+from backend.characterCard.skills_and_talents import Talents
 from backend.characterCard.statistics import MainStats, TestModificator
 
 class CharacterSheet:

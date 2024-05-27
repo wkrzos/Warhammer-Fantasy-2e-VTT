@@ -1,5 +1,5 @@
-from backend.characterCard.characteristics import AttributesType
-from backend.mechanic import token
+from backend.character_sheets.characteristics import AttributesType
+from backend.mechanics import token
 
 
 class FightManager:

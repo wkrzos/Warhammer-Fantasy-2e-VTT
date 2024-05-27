@@ -5,9 +5,9 @@ from PySide6.QtGui import QIcon
 from model.toolbar_model import ToolbarModel
 from frontend.widgets.toolbar_ui import ToolbarUI
 from controller.toolbar_controller import ToolbarController
-from model.mapview_model import MapViewModel
-from frontend.widgets.mapview_ui import MapViewUI
-from controller.mapview_controller import MapViewController
+from model.map_model import MapViewModel
+from frontend.widgets.map_ui import MapViewUI
+from controller.map_controller import MapViewController
 from model.chat_model import ChatModel
 from frontend.widgets.chat_ui import ChatViewUI
 from controller.chat_controller import ChatController
@@ -20,12 +20,12 @@ from controller.items_controller import ItemsController
 from model.options_model import OptionsModel
 from frontend.widgets.options_ui import OptionsViewUI
 from controller.options_controller import OptionsController
-from model.musicplayer_model import MusicPlayerModel
-from frontend.widgets.musicplayer_ui import MusicPlayerViewUI
-from controller.musicplayer_controller import MusicPlayerController
-from model.actionpanel_model import ActionPanelModel
-from frontend.widgets.actionpanel_ui import ActionPanelUI
-from controller.actionpanel_controller import ActionPanelController
+from model.music_player_model import MusicPlayerModel
+from frontend.widgets.music_player_ui import MusicPlayerViewUI
+from controller.music_player_controller import MusicPlayerController
+from model.action_panel_model import ActionPanelModel
+from frontend.widgets.action_panel_ui import ActionPanelUI
+from controller.action_panel_controller import ActionPanelController
 
 class MainWindowView:
     def __init__(self, main_window):

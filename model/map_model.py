@@ -1,5 +1,5 @@
-from backend.characterCard.cards import Character
-from backend.mechanic.token import Token
+from backend.character_sheets.sheets import Character
+from backend.mechanics.token import Token
 
 class MapViewModel:
     def __init__(self):
