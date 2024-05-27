@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush
 from PySide6.QtCore import Qt, QPoint, QRect
+from frontend.util.font import DEFAULT_FONT, HEADING_FONT
 
 class MapViewUI(QWidget):
     def __init__(self, model, parent=None):
@@ -47,6 +48,7 @@ class MapViewUI(QWidget):
             screen_y = y * scaled_grid_size + offset[1]
             painter.setBrush(QColor(255, 0, 0) if token not in selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
+            painter.setFont(DEFAULT_FONT)
             painter.drawText(screen_x + 10, screen_y + 30, token.creature.name)
 
     def draw_measurement(self, painter):

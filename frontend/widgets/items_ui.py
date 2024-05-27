@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton
+from frontend.util.font import DEFAULT_FONT
 
 class ItemsViewUI(QWidget):
     def __init__(self, parent=None):
@@ -7,12 +8,16 @@ class ItemsViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel(self.tr("Items")))
+        label = QLabel(self.tr("Items"))
+        label.setFont(DEFAULT_FONT)
+        layout.addWidget(label)
 
         self.item_list = QListWidget()
+        self.item_list.setFont(DEFAULT_FONT)
         layout.addWidget(self.item_list)
 
         self.add_button = QPushButton(self.tr("Add Item"))
+        self.add_button.setFont(DEFAULT_FONT)
         layout.addWidget(self.add_button)
 
         self.setLayout(layout)

@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTextEdit
+from frontend.util.font import DEFAULT_FONT
 
 class ChatViewUI(QWidget):
     def __init__(self, parent=None):
@@ -7,9 +8,12 @@ class ChatViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel(self.tr("Chat View")))
+        label = QLabel(self.tr("Chat View"))
+        label.setFont(DEFAULT_FONT)
+        layout.addWidget(label)
 
         self.chat_area = QTextEdit()
+        self.chat_area.setFont(DEFAULT_FONT)
         self.chat_area.setReadOnly(True)
         layout.addWidget(self.chat_area)
 
