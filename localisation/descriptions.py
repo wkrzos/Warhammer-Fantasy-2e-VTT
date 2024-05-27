@@ -1,6 +1,6 @@
 import json
 from enum import Enum
-from backend.characterCard.characteristics import  *
+from backend.character_sheets.characteristics import  *
 
 class FightDescriptionsType(Enum):
     DMG_ROLL = "FDsc.1"

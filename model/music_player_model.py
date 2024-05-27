@@ -1,5 +1,5 @@
 import os
-from backend.musicManager.musicManager import MusicManager, MusicEventTypes
+from backend.musicManager.music_manager import MusicManager, MusicEventTypes
 from threading import Thread
 
 class MusicPlayerModel:

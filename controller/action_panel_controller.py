@@ -1,5 +1,5 @@
 from PySide6.QtCore import QObject
-from backend.mechanic.actions.actionsImplementation import SelfAction, ActionOnAnother, SpecialAction
+from backend.mechanics.actions.actions_implementation import SelfAction, ActionOnAnother, SpecialAction
 
 class ActionPanelController(QObject):
     def __init__(self, model, view):

@@ -1,5 +1,5 @@
 from enum import Enum
-from backend.characterCard.characteristics import MainStats
+from backend.character_sheets.characteristics import MainStats
 
 class Skills(Enum):
     pass

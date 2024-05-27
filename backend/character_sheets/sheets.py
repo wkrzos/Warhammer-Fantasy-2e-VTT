@@ -1,11 +1,11 @@
 import random
 
-from backend.mechanic.rolingMachine import RollGod
-from backend.characterCard.equipment import *
-from backend.characterCard.characteristics import *
-from backend.characterCard.races import *
-from backend.characterCard.skillsAndTalents import *
-from backend.characterCard.statistics import *
+from backend.mechanics.rolling_machine import RollGod
+from backend.character_sheets.equipment import *
+from backend.character_sheets.characteristics import *
+from backend.character_sheets.races import *
+from backend.character_sheets.skills_and_talents import *
+from backend.character_sheets.statistics import *
 from localisation.descriptions import RollDescriptionAggregator, FightDescriptionsType
 
 

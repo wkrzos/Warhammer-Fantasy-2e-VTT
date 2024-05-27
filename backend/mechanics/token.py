@@ -1,4 +1,4 @@
-from backend.characterCard.cards import Creature
+from backend.character_sheets.sheets import Creature
 
 class Token:
     def __init__(self, creature: Creature = Creature(), position: (int, int) = (0, 0)):

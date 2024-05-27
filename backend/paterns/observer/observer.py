@@ -1,4 +1,4 @@
-from backend.characterCard.equipment import HitLocalisation
+from backend.character_sheets.equipment import HitLocalisation
 
 class Observer:
     def reactForNotify(self, subject):

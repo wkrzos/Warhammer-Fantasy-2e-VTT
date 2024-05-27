@@ -1,9 +1,9 @@
 import json
 import os
 
-from backend.jsonSerialization.fabrics import *
-from backend.characterCard.cards import *
-from backend.characterCard.equipment import *
+from backend.json_serialisation.fabrics import *
+from backend.character_sheets.sheets import *
+from backend.character_sheets.equipment import *
 
 
 
