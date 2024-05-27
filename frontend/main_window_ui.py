@@ -27,12 +27,9 @@ from model.actionpanel_model import ActionPanelModel
 from frontend.widgets.actionpanel_ui import ActionPanelUI
 from controller.actionpanel_controller import ActionPanelController
 
-class MainWindowUI:
+class MainWindowView:
     def __init__(self, main_window):
         self.main_window = main_window
-        self.music_player_model = MusicPlayerModel(os.path.join(os.path.dirname(__file__), '../../music'))
-        self.music_player_view_ui = MusicPlayerViewUI(self.main_window)
-        self.music_player_controller = MusicPlayerController(self.music_player_model, self.music_player_view_ui)
         self.toolbar_model = ToolbarModel()
         self.toolbar_view = ToolbarUI(self.main_window)
         self.toolbar_controller = ToolbarController(self.toolbar_model, self.toolbar_view)
@@ -51,20 +48,23 @@ class MainWindowUI:
         self.options_model = OptionsModel()
         self.options_view_ui = OptionsViewUI(self.main_window)
         self.options_controller = OptionsController(self.options_model, self.options_view_ui)
+        self.music_player_model = MusicPlayerModel(os.path.join(os.path.dirname(__file__), '../../music'))
+        self.music_player_view_ui = MusicPlayerViewUI(self.main_window)
+        self.music_player_controller = MusicPlayerController(self.music_player_model, self.music_player_view_ui)
         self.action_panel_model = ActionPanelModel()
         self.action_panel_ui = ActionPanelUI(self.main_window)
         self.action_panel_controller = ActionPanelController(self.action_panel_model, self.action_panel_ui)
 
-    def setup_ui(self):
-        self.main_window.setWindowTitle(self.main_window.tr("BFVTT Application"))
-        self.main_window.setGeometry(100, 100, 1200, 800)
+    def setup_ui(self, model):
+        self.main_window.setWindowTitle(model.title)
+        self.main_window.setGeometry(*model.geometry)
 
-        icon_path = os.path.join(os.path.dirname(__file__), 'frontend/resources/logo/bfvtt_icon_no_bg.png')
+        icon_path = os.path.join(os.path.dirname(__file__), model.icon_path)
         self.main_window.setWindowIcon(QIcon(icon_path))
 
-        self.initUI()
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
         main_layout = QHBoxLayout()
 
         self.toolbar_view.setFixedWidth(60)

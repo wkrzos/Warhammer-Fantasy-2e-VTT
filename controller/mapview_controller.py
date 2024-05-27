@@ -1,11 +1,12 @@
 from PySide6.QtCore import QObject, QPoint, Qt, QRect
 
-class MapViewController(QObject):
+class MapViewController:
     def __init__(self, model, view, main_window):
         super().__init__()
         self.model = model
         self.view = view
         self.main_window = main_window
+        self.selected_tool = None
         self.view.setMouseTracking(True)
         self.connect_signals()
 
@@ -15,10 +16,13 @@ class MapViewController(QObject):
         self.view.mouseReleaseEvent = self.mouseReleaseEvent
         self.view.wheelEvent = self.wheelEvent
 
+    def set_selected_tool(self, tool):
+        self.selected_tool = tool
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.last_mouse_pos = event.position()
-            if self.main_window.toolbar.selected_tool == "select":
+            if self.selected_tool == "select":
                 token = self.get_token_at_position(event.position())
                 if token:
                     if token in self.model.get_selected_tokens():
@@ -30,9 +34,9 @@ class MapViewController(QObject):
                     self.model.set_selected_tokens([])
                     self.model.set_selection(event.position(), event.position())
                     self.selecting = True
-            elif self.main_window.toolbar.selected_tool == "pan":
+            elif self.selected_tool == "pan":
                 self.dragging = True
-            elif self.main_window.toolbar.selected_tool == "measure":
+            elif self.selected_tool == "measure":
                 self.model.set_measurement(event.position(), event.position())
                 self.measuring = True
             self.main_window.update_action_panel()
@@ -40,9 +44,9 @@ class MapViewController(QObject):
     def mouseMoveEvent(self, event):
         if self.dragging:
             delta = event.position() - self.last_mouse_pos
-            if self.main_window.toolbar.selected_tool == "select" and self.model.get_selected_tokens():
+            if self.selected_tool == "select" and self.model.get_selected_tokens():
                 self.move_tokens(delta, event.modifiers() & Qt.ShiftModifier)
-            elif self.main_window.toolbar.selected_tool == "pan":
+            elif self.selected_tool == "pan":
                 offset = self.model.get_offset()
                 self.model.set_offset((offset[0] + delta.x(), offset[1] + delta.y()))
             self.last_mouse_pos = event.position()
@@ -58,7 +62,7 @@ class MapViewController(QObject):
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.dragging = False
-            if self.main_window.toolbar.selected_tool == "select" and self.selecting:
+            if self.selected_tool == "select" and self.selecting:
                 self.selecting = False
                 self.update_selection()
             elif self.model.get_selected_tokens() and not (event.modifiers() & Qt.ShiftModifier):
@@ -95,11 +99,9 @@ class MapViewController(QObject):
             dy = delta.y() / (self.model.grid_size * self.model.get_zoom_level())
             for token in selected_tokens:
                 if shift_pressed:
-                    # Free movement
                     new_x = token.get_position()[0] + dx
                     new_y = token.get_position()[1] + dy
                 else:
-                    # Snap to grid
                     new_x = round(token.get_position()[0] + dx)
                     new_y = round(token.get_position()[1] + dy)
                 token.set_position(new_x, new_y)
