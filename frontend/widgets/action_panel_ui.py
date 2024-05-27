@@ -9,13 +9,13 @@ class ActionPanelUI(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        self.label = QLabel("Actions")
+        self.label = QLabel(self.tr("Actions"))
         layout.addWidget(self.label)
 
         self.action_list = QListWidget()
         layout.addWidget(self.action_list)
 
-        self.execute_button = QPushButton("Execute Action")
+        self.execute_button = QPushButton(self.tr("Execute Action"))
         layout.addWidget(self.execute_button)
 
         self.setLayout(layout)
@@ -24,7 +24,7 @@ class ActionPanelUI(QWidget):
         self.action_list.clear()
 
     def add_action(self, name, func):
-        item = QListWidgetItem(name)
+        item = QListWidgetItem(self.tr(name))
         item.setData(Qt.UserRole, func)
         self.action_list.addItem(item)
 

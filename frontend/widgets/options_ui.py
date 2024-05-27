@@ -7,12 +7,12 @@ class OptionsViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Options"))
+        layout.addWidget(QLabel(self.tr("Options")))
 
         self.option_list = QListWidget()
         layout.addWidget(self.option_list)
 
-        self.exit_button = QPushButton("Exit")
+        self.exit_button = QPushButton(self.tr("Exit"))
         layout.addWidget(self.exit_button)
 
         self.setLayout(layout)
@@ -20,4 +20,4 @@ class OptionsViewUI(QWidget):
     def update_option_list(self, options):
         self.option_list.clear()
         for key, value in options.items():
-            self.option_list.addItem(f"{key}: {value}")
+            self.option_list.addItem(self.tr(f"{key}: {value}"))

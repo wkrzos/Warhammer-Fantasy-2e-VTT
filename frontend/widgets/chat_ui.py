@@ -7,7 +7,7 @@ class ChatViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Chat View"))
+        layout.addWidget(QLabel(self.tr("Chat View")))
 
         self.chat_area = QTextEdit()
         self.chat_area.setReadOnly(True)

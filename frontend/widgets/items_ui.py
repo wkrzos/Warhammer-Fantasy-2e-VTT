@@ -7,12 +7,12 @@ class ItemsViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Items"))
+        layout.addWidget(QLabel(self.tr("Items")))
 
         self.item_list = QListWidget()
         layout.addWidget(self.item_list)
 
-        self.add_button = QPushButton("Add Item")
+        self.add_button = QPushButton(self.tr("Add Item"))
         layout.addWidget(self.add_button)
 
         self.setLayout(layout)
@@ -20,4 +20,4 @@ class ItemsViewUI(QWidget):
     def update_item_list(self, items):
         self.item_list.clear()
         for item in items:
-            self.item_list.addItem(item)
+            self.item_list.addItem(self.tr(item))

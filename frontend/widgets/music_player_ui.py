@@ -10,7 +10,7 @@ class MusicPlayerViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Music Player"))
+        layout.addWidget(QLabel(self.tr("Music Player")))
 
         self.playlist = QListWidget()
         self.playlist.setCurrentRow(0)
@@ -52,4 +52,4 @@ class MusicPlayerViewUI(QWidget):
     def update_playlist(self, songs):
         self.playlist.clear()
         for song in songs:
-            self.playlist.addItem(song)
+            self.playlist.addItem(self.tr(song))

@@ -63,7 +63,7 @@ class MapViewUI(QWidget):
             mid_point = (measure_start + measure_end) / 2
             painter.setFont(QFont('Arial', 14))
             painter.setPen(QColor(0, 0, 0))
-            painter.drawText(mid_point, f"{distance:.0f} squares")
+            painter.drawText(mid_point, self.tr(f"{distance:.0f} squares"))
 
     def draw_selection(self, painter):
         selection_start, selection_end = self.model.get_selection()

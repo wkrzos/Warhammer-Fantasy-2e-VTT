@@ -63,7 +63,7 @@ class CharacterSheet(QMainWindow):
         profile_layout = QGridLayout()
         stats = ['WS', 'BS', 'S', 'T', 'Ag', 'Int', 'WP', 'Fel']
         for i, stat in enumerate(stats):
-            profile_layout.addWidget(QLabel(stat), 0, i + 1)
+            profile_layout.addWidget(QLabel(self.tr(stat)), 0, i + 1)
         for i in range(3):  # 3 rows for Starting, Advance, Current
             for j in range(8):  # 8 stats columns
                 profile_layout.addWidget(QLineEdit(), i + 1, j + 1)
@@ -75,7 +75,7 @@ class CharacterSheet(QMainWindow):
         profile_layout_secondary = QGridLayout()
         stats_secondary = ['A', 'W', 'SB', 'TB', 'M', 'Mag', 'IP', 'FP']
         for i, stat in enumerate(stats_secondary):
-            profile_layout_secondary.addWidget(QLabel(stat), 0, i + 1)
+            profile_layout_secondary.addWidget(QLabel(self.tr(stat)), 0, i + 1)
         for i in range(3):  # 3 rows for Starting, Advance, Current
             for j in range(8):  # 8 stats columns
                 profile_layout_secondary.addWidget(QLineEdit(), i + 1, j + 1)

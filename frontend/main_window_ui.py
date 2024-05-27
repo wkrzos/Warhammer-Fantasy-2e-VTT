@@ -56,7 +56,7 @@ class MainWindowView:
         self.action_panel_controller = ActionPanelController(self.action_panel_model, self.action_panel_ui)
 
     def setup_ui(self, model):
-        self.main_window.setWindowTitle(model.title)
+        self.main_window.setWindowTitle(self.main_window.tr(model.title))
         self.main_window.setGeometry(*model.geometry)
 
         icon_path = os.path.join(os.path.dirname(__file__), model.icon_path)
@@ -96,4 +96,3 @@ class MainWindowView:
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.main_window.setCentralWidget(central_widget)
-

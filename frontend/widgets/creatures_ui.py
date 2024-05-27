@@ -7,12 +7,12 @@ class CreaturesViewUI(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Creatures"))
+        layout.addWidget(QLabel(self.tr("Creatures")))
 
         self.creature_list = QListWidget()
         layout.addWidget(self.creature_list)
 
-        self.add_button = QPushButton("Add Creature")
+        self.add_button = QPushButton(self.tr("Add Creature"))
         layout.addWidget(self.add_button)
 
         self.setLayout(layout)
@@ -20,4 +20,4 @@ class CreaturesViewUI(QWidget):
     def update_creature_list(self, creatures):
         self.creature_list.clear()
         for creature in creatures:
-            self.creature_list.addItem(creature)
+            self.creature_list.addItem(self.tr(creature))
