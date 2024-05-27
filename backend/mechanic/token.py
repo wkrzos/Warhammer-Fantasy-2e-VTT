@@ -1,10 +1,7 @@
-from pygame import Vector2
-
 from backend.characterCard.cards import Creature
 
-
 class Token:
-    def __init__(self, creature:Creature = Creature() , position:(int,int) = (0,0)):
+    def __init__(self, creature: Creature = Creature(), position: (int, int) = (0, 0)):
         self.position = position
         self.creature = creature
 
