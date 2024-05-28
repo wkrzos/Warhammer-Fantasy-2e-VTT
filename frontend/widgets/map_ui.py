@@ -4,9 +4,9 @@ from PySide6.QtCore import Qt, QPoint, QRect
 from frontend.util.font import DEFAULT_FONT, HEADING_FONT
 
 class MapViewUI(QWidget):
-    def __init__(self, model, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.model = model
+        self.model = None
 
     def paintEvent(self, event):
         painter = QPainter(self)

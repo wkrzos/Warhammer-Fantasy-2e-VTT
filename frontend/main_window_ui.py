@@ -30,7 +30,7 @@ from controller.action_panel_controller import ActionPanelController
 class MainWindowView:
     def __init__(self, main_window):
         self.main_window = main_window
-        self.map_view_ui = MapViewUI(self)
+        self.map_view_ui = MapViewUI(self.main_window)
         self.toolbar_view = ToolbarUI(self.main_window)
         self.chat_view_ui = ChatViewUI(self.main_window)
         self.creatures_view_ui = CreaturesViewUI(self.main_window)

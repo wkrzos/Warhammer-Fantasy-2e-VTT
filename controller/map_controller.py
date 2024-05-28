@@ -5,10 +5,12 @@ class MapViewController:
         super().__init__()
         self.model = model
         self.view = view
+        self.view.model = model
         self.main_window = main_window
         self.selected_tool = None
         self.view.setMouseTracking(True)
         self.connect_signals()
+
 
     def connect_signals(self):
         self.view.mousePressEvent = self.mousePressEvent
@@ -42,7 +44,7 @@ class MapViewController:
             self.main_window.update_action_panel()
 
     def mouseMoveEvent(self, event):
-        if self.dragging:
+        if self.draging:
             delta = event.position() - self.last_mouse_pos
             if self.selected_tool == "select" and self.model.get_selected_tokens():
                 self.move_tokens(delta, event.modifiers() & Qt.ShiftModifier)

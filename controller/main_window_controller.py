@@ -17,7 +17,6 @@ class MainWindowController:
         self.view = view
         self.view.setup_ui(self.model)
         self.map_view_controller = MapViewController(self.model.map_view_model, self.view.map_view_ui, self.view.main_window)
-        self.map_view_ui = MapViewUI(self.model.map_view_model, self.view.main_window)
         self.chat_controller = ChatController(self.model.chat_model, self.view.chat_view_ui)
         self.creatures_controller = CreaturesController(self.model.creatures_model, self.view.creatures_view_ui)
         self.items_controller = ItemsController(self.model.items_model, self.view.items_view_ui)
