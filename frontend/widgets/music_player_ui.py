@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QHBoxLayout, QPushButton, QAbstractItemView
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QHBoxLayout, QPushButton, QAbstractItemView, \
+    QListWidgetItem
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import QSize
 import os

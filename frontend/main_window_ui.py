@@ -30,31 +30,14 @@ from controller.action_panel_controller import ActionPanelController
 class MainWindowView:
     def __init__(self, main_window):
         self.main_window = main_window
-        self.toolbar_model = ToolbarModel()
+        self.map_view_ui = MapViewUI(self)
         self.toolbar_view = ToolbarUI(self.main_window)
-        self.toolbar_controller = ToolbarController(self.toolbar_model, self.toolbar_view)
-        self.map_view_model = MapViewModel()
-        self.map_view_ui = MapViewUI(self.map_view_model, self.main_window)
-        self.map_view_controller = MapViewController(self.map_view_model, self.map_view_ui, self.main_window)
-        self.chat_model = ChatModel()
         self.chat_view_ui = ChatViewUI(self.main_window)
-        self.chat_controller = ChatController(self.chat_model, self.chat_view_ui)
-        self.creatures_model = CreaturesModel()
         self.creatures_view_ui = CreaturesViewUI(self.main_window)
-        self.creatures_controller = CreaturesController(self.creatures_model, self.creatures_view_ui)
-        self.items_model = ItemsModel()
         self.items_view_ui = ItemsViewUI(self.main_window)
-        self.items_controller = ItemsController(self.items_model, self.items_view_ui)
-        self.options_model = OptionsModel()
         self.options_view_ui = OptionsViewUI(self.main_window)
-        self.options_controller = OptionsController(self.options_model, self.options_view_ui)
-        print(os.path.join(os.path.dirname(__file__), '../../music'))
-        self.music_player_model = MusicPlayerModel('../../music')
         self.music_player_view_ui = MusicPlayerViewUI(self.main_window)
-        self.music_player_controller = MusicPlayerController(self.music_player_model, self.music_player_view_ui)
-        self.action_panel_model = ActionPanelModel()
         self.action_panel_ui = ActionPanelUI(self.main_window)
-        self.action_panel_controller = ActionPanelController(self.action_panel_model, self.action_panel_ui)
 
     def setup_ui(self, model):
         self.main_window.setWindowTitle(self.main_window.tr(model.title))
