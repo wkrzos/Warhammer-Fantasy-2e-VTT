@@ -1,3 +1,4 @@
+xml
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1">
@@ -6,12 +7,12 @@
     <message>
         <location filename="../frontend/widgets/action_panel_ui.py" line="16"/>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Akcje</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/action_panel_ui.py" line="24"/>
         <source>Execute Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykonaj Akcję</translation>
     </message>
 </context>
 <context>
@@ -19,182 +20,182 @@
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="14"/>
         <source>Warhammer Fantasy Roleplay Character Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta Postaci Warhammer Fantasy Roleplay</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="22"/>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Postać</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="27"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Imię:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="30"/>
         <source>Human</source>
-        <translation type="unfinished"></translation>
+        <translation>Człowiek</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="30"/>
         <source>Elf</source>
-        <translation type="unfinished"></translation>
+        <translation>Elf</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="30"/>
         <source>Dwarf</source>
-        <translation type="unfinished"></translation>
+        <translation>Krasnolud</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="30"/>
         <source>Halfling</source>
-        <translation type="unfinished"></translation>
+        <translation>Halfling</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="31"/>
         <source>Race:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rasa:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="32"/>
         <source>Current Career:</source>
-        <translation type="unfinished"></translation>
+        <translation>Obecna Kariera:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="33"/>
         <source>Previous Careers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poprzednie Kariery:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="49"/>
         <source>Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Dane Osobiste</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="52"/>
         <source>Age:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiek:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="53"/>
         <source>Gender:</source>
-        <translation type="unfinished"></translation>
+        <translation>Płeć:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="54"/>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wzrost:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="55"/>
         <source>Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Waga:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="56"/>
         <source>Eyes Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolor Oczu:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="57"/>
         <source>Hair Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolor Włosów:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="58"/>
         <source>Star Sign:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znak Zodiaku:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="59"/>
         <source>Number of Siblings:</source>
-        <translation type="unfinished"></translation>
+        <translation>Liczba Rodzeństwa:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="60"/>
         <source>Birthplace:</source>
-        <translation type="unfinished"></translation>
+        <translation>Miejsce Urodzenia:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="61"/>
         <source>Distinguishing Marks:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaki Szczególne:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="66"/>
         <source>Character Profile Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Główny Profil Postaci</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="83"/>
         <source>Character Profile Secondary</source>
-        <translation type="unfinished"></translation>
+        <translation>Drugorzędny Profil Postaci</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="100"/>
         <source>Weapons</source>
-        <translation type="unfinished"></translation>
+        <translation>Bronie</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="120"/>
         <source>Armour</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbroja</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="123"/>
         <source>Basic Armour:</source>
-        <translation type="unfinished"></translation>
+        <translation>Podstawowa Zbroja:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="124"/>
         <source>Advanced Armour:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowana Zbroja:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="129"/>
         <source>Experience Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkty Doświadczenia</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="132"/>
         <source>Current:</source>
-        <translation type="unfinished"></translation>
+        <translation>Obecne:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="133"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Łącznie:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="140"/>
         <source>Combat Movement</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruch w Walce</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="143"/>
         <source>Move/Disengage:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruch/Wycofanie:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="144"/>
         <source>Charge Attack:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atak Szarżą:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="145"/>
         <source>Run:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bieg:</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="154"/>
         <source>Choose Character Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz Obrazek Postaci</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/sheet_character_ui.py" line="154"/>
         <source>Image Files (*.png *.jpg *.bmp)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliki Obrazów (*.png *.jpg *.bmp)</translation>
     </message>
 </context>
 <context>
@@ -202,7 +203,7 @@
     <message>
         <location filename="../frontend/widgets/chat_ui.py" line="11"/>
         <source>Chat View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok Czat</translation>
     </message>
 </context>
 <context>
@@ -210,12 +211,12 @@
     <message>
         <location filename="../frontend/widgets/creatures_ui.py" line="11"/>
         <source>Creatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreatury</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/creatures_ui.py" line="19"/>
         <source>Add Creature</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj Kreaturę</translation>
     </message>
 </context>
 <context>
@@ -223,20 +224,22 @@
     <message>
         <location filename="../frontend/widgets/items_ui.py" line="11"/>
         <source>Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Przedmioty</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/items_ui.py" line="19"/>
         <source>Add Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj Przedmiot</translation>
     </message>
-</context>
+</
+
+context>
 <context>
     <name>MapViewUI</name>
     <message>
         <location filename="../frontend/widgets/map_ui.py" line="68"/>
         <source>{distance:.0f} squares</source>
-        <translation type="unfinished"></translation>
+        <translation>{distance:.0f} kwadratów</translation>
     </message>
 </context>
 <context>
@@ -244,7 +247,7 @@
     <message>
         <location filename="../frontend/widgets/music_player_ui.py" line="14"/>
         <source>Music Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Odtwarzacz Muzyki</translation>
     </message>
 </context>
 <context>
@@ -252,17 +255,17 @@
     <message>
         <location filename="../frontend/widgets/options_ui.py" line="11"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/options_ui.py" line="19"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjście</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/options_ui.py" line="28"/>
         <source>{key}: {value}</source>
-        <translation type="unfinished"></translation>
+        <translation>{key}: {value}</translation>
     </message>
 </context>
 <context>
@@ -270,17 +273,17 @@
     <message>
         <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
         <source>Pan</source>
-        <translation type="unfinished"></translation>
+        <translation>Przesuń</translation>
     </message>
     <message>
         <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmierzyć</translation>
     </message>
 </context>
 <context>
@@ -288,32 +291,32 @@
     <message>
         <location filename="../frontend/main_window_ui.py" line="77"/>
         <source>Chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Czat</translation>
     </message>
     <message>
         <location filename="../frontend/main_window_ui.py" line="78"/>
         <source>Characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Postacie</translation>
     </message>
     <message>
         <location filename="../frontend/main_window_ui.py" line="79"/>
         <source>Creatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreatury</translation>
     </message>
     <message>
         <location filename="../frontend/main_window_ui.py" line="80"/>
         <source>Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Przedmioty</translation>
     </message>
     <message>
         <location filename="../frontend/main_window_ui.py" line="81"/>
         <source>Music Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Odtwarzacz Muzyki</translation>
     </message>
     <message>
         <location filename="../frontend/main_window_ui.py" line="82"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
 </context>
 </TS>
