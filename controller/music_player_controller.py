@@ -2,8 +2,9 @@ class MusicPlayerController:
     def __init__(self, model, view):
         self.model = model
         self.view = view
-        self.connect_signals()
         self.load_playlist()
+        self.connect_signals()
+
 
     def connect_signals(self):
         self.view.play_button.clicked.connect(self.play_music)
