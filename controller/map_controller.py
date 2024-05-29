@@ -71,7 +71,8 @@ class MapViewController:
             self.model.dragging = False
             if self.selected_tool == "select" and self.model.selecting:
                 self.model.selecting = False
-                self.update_selection()
+                self.update_selection() # DEBUG flag
+                self.model.set_selection(None, None)
             elif self.model.get_selected_tokens() and not (event.modifiers() & Qt.ShiftModifier):
                 self.snap_to_grid_multiple(self.model.get_selected_tokens())
             self.model.measuring = False
