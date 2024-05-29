@@ -11,6 +11,7 @@ class MapViewModel:
         self.tokens[1].set_position(10, 10)
         self.selected_tokens = []
         self.zoom_level = 1.0
+        self.dragging = False
         self.measuring = False
         self.measure_start = None
         self.measure_end = None

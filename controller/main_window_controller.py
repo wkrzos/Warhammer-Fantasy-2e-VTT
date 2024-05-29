@@ -31,3 +31,4 @@ class MainWindowController:
     def tool_selected(self, tool):
         # Propagate the selected tool to the map view controller
         self.map_view_controller.set_selected_tool(tool)
+
