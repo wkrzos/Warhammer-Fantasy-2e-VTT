@@ -5,12 +5,12 @@ from model.map_model import MapViewModel
 
 
 class MapViewController:
-    def __init__(self, model:MapViewModel, view:MapViewUI, main_window):
+    def __init__(self, model:MapViewModel, view:MapViewUI, main_window_model):
         super().__init__()
         self.model = model
         self.view = view
         self.view.model = model
-        self.main_window = main_window
+        self.main_window_model = main_window_model
 
         self.selected_tool = None
         self.view.setMouseTracking(True)
@@ -46,7 +46,7 @@ class MapViewController:
             elif self.selected_tool == "measure":
                 self.model.set_measurement(event.position(), event.position())
                 self.model.measuring = True
-            self.main_window.update_action_panel()
+            self.main_window_model.update_action_panel()
 
     def mouseMoveEvent(self, event):
         if self.model.dragging:
@@ -75,7 +75,7 @@ class MapViewController:
             elif self.model.get_selected_tokens() and not (event.modifiers() & Qt.ShiftModifier):
                 self.snap_to_grid_multiple(self.model.get_selected_tokens())
             self.model.measuring = False
-            self.main_window.update_action_panel()
+            self.main_window_model.update_action_panel()
 
     def wheelEvent(self, event):
         if event.angleDelta().y() > 0:

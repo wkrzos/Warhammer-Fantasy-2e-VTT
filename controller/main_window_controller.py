@@ -23,7 +23,7 @@ class MainWindowController:
         self.options_controller = OptionsController(self.model.options_model, self.view.options_view_ui)
         self.music_player_controller = MusicPlayerController(self.model.music_player_model, self.view.music_player_view_ui)
         self.action_panel_controller = ActionPanelController(self.model.action_panel_model, self.view.action_panel_ui)
-        self.toolbar_controller = ToolbarController(self.model.toolbar_model, self.view.toolbar_view)
+        self.toolbar_controller = ToolbarController(self.model.toolbar_model, self.view.toolbar_view, self)
         self.music_controller = MusicPlayerController(self.model.music_player_model, self.view.music_player_view_ui)
         # Connect the toolbar selection signal to the map view controller
         self.toolbar_controller.view.tool_selected = self.tool_selected
