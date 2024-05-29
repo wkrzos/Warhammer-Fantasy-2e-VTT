@@ -11,11 +11,14 @@ class MapViewUI(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        self.draw_grid(painter)
-        self.draw_tokens(painter)
-        self.draw_measurement(painter)
-        self.draw_selection(painter)
-        painter.end()
+        try:
+            self.draw_grid(painter)
+            self.draw_tokens(painter)
+            self.draw_measurement(painter)
+            self.draw_selection(painter)
+        finally:
+            painter.end()
+
 
     def draw_grid(self, painter):
         pen = QPen(QColor(200, 200, 200), 1)
@@ -26,14 +29,15 @@ class MapViewUI(QWidget):
         offset = self.model.get_offset()
 
         scaled_grid_size = int(grid_size * zoom_level)
-        start_x = offset[0] % scaled_grid_size
-        start_y = offset[1] % scaled_grid_size
+        start_x = int(offset[0] % scaled_grid_size)
+        start_y = int(offset[1] % scaled_grid_size)
 
         for x in range(start_x, self.width(), scaled_grid_size):
             painter.drawLine(x, 0, x, self.height())
 
         for y in range(start_y, self.height(), scaled_grid_size):
             painter.drawLine(0, y, self.width(), y)
+
 
     def draw_tokens(self, painter):
         zoom_level = self.model.get_zoom_level()
