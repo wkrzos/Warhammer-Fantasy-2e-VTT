@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
 from PySide6.QtGui import QFont, QIcon, QPixmap
 from PySide6.QtCore import Qt, QSize, QTranslator, QLocale
 
-from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription
+from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription, Card
 from frontend.util.font import HEADING_FONT, SUBHEADING_FONT, DEFAULT_FONT
 
 class CharacterSheet(QMainWindow):
@@ -197,8 +197,14 @@ class CharacterSheet(QMainWindow):
         name = self.name_input.text()
         
         match self.race_combo.currentIndex():
-            case 1: 
+            case 0: 
                 race = Races("r.1")
+            case 1:
+                race = Races("r.2")
+            case 2:
+                race = Races("r.3")
+            case 3:
+                race = Races("r.4")
         
         #race = Races(self.race_combo.currentText().upper())
         current_career = self.current_career_input.text()
@@ -247,16 +253,25 @@ class CharacterSheet(QMainWindow):
             fp=int(self.secondary_stats_inputs['FP'][0].text()),
             #attacks=int(self.secondary_stats_inputs['A'][0].text())
         )
-
+       
         character = Character(
             name=name,
             race=race,
             statistics=statistics,
-            description=character_description,
         )
 
-        print(character.__dict__())
-        return character.__dict__()
+        
+        card = Card(
+            playerName=name,
+            playerCharacter=character,
+            characterPicture=self.character_image_path,
+            characterDescription=character_description,
+            history = "History"
+        )
+
+
+        print(card.__dict__())
+        return card.__dict__()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
