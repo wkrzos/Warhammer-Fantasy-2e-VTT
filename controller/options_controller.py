@@ -1,3 +1,5 @@
+from PySide6.QtCore import QCoreApplication
+
 class OptionsController:
     def __init__(self, model, view):
         self.model = model
@@ -6,10 +8,31 @@ class OptionsController:
 
     def connect_signals(self):
         self.view.exit_button.clicked.connect(self.exit_application)
+        self.view.language_selector.currentTextChanged.connect(self.change_language)
 
     def set_option(self, key, value):
         self.model.set_option(key, value)
         self.view.update_option_list(self.model.get_all_options())
+
+    def change_language(self, language):
+        self.model.set_language(language)
+        self.update_language()
+
+    def update_language(self):
+        language = self.model.get_language()
+        translator = QCoreApplication.instance().translator()
+        if translator:
+            QCoreApplication.instance().removeTranslator(translator)
+
+        translator = QTranslator()
+        ts_file = f"translations/{language}.qm"
+        if translator.load(ts_file):
+            QCoreApplication.instance().installTranslator(translator)
+        else:
+            print(f"Failed to load language file: {ts_file}")
+
+        # Update UI with new language
+        self.view.initUI()
 
     def exit_application(self):
         # Logic to exit the application

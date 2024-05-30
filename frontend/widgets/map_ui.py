@@ -1,20 +1,24 @@
 from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush
 from PySide6.QtCore import Qt, QPoint, QRect
+from frontend.util.font import DEFAULT_FONT, HEADING_FONT
 
 class MapViewUI(QWidget):
-    def __init__(self, model, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.model = model
+        self.model = None
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        self.draw_grid(painter)
-        self.draw_tokens(painter)
-        self.draw_measurement(painter)
-        self.draw_selection(painter)
-        painter.end()
+        try:
+            self.draw_grid(painter)
+            self.draw_tokens(painter)
+            self.draw_measurement(painter)
+            self.draw_selection(painter)
+        finally:
+            painter.end()
+
 
     def draw_grid(self, painter):
         pen = QPen(QColor(200, 200, 200), 1)
@@ -25,14 +29,15 @@ class MapViewUI(QWidget):
         offset = self.model.get_offset()
 
         scaled_grid_size = int(grid_size * zoom_level)
-        start_x = offset[0] % scaled_grid_size
-        start_y = offset[1] % scaled_grid_size
+        start_x = int(offset[0] % scaled_grid_size)
+        start_y = int(offset[1] % scaled_grid_size)
 
         for x in range(start_x, self.width(), scaled_grid_size):
             painter.drawLine(x, 0, x, self.height())
 
         for y in range(start_y, self.height(), scaled_grid_size):
             painter.drawLine(0, y, self.width(), y)
+
 
     def draw_tokens(self, painter):
         zoom_level = self.model.get_zoom_level()
@@ -47,6 +52,7 @@ class MapViewUI(QWidget):
             screen_y = y * scaled_grid_size + offset[1]
             painter.setBrush(QColor(255, 0, 0) if token not in selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
+            painter.setFont(DEFAULT_FONT)
             painter.drawText(screen_x + 10, screen_y + 30, token.creature.name)
 
     def draw_measurement(self, painter):
@@ -63,7 +69,7 @@ class MapViewUI(QWidget):
             mid_point = (measure_start + measure_end) / 2
             painter.setFont(QFont('Arial', 14))
             painter.setPen(QColor(0, 0, 0))
-            painter.drawText(mid_point, f"{distance:.0f} squares")
+            painter.drawText(mid_point, self.tr(f"{distance:.0f} squares"))
 
     def draw_selection(self, painter):
         selection_start, selection_end = self.model.get_selection()

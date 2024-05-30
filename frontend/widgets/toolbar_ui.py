@@ -13,7 +13,7 @@ class ToolbarUI(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
 
         # List of tool icons and corresponding actions
-        tools = [("select", "Select"), ("pan", "Pan"), ("measure", "Measure")]
+        tools = [("select", self.tr("Select")), ("pan", self.tr("Pan")), ("measure", self.tr("Measure"))]
 
         for tool, action in tools:
             button = QPushButton()
