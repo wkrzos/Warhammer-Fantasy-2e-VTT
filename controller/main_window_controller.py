@@ -34,6 +34,3 @@ class MainWindowController:
 
     def update_action_panel(self):
         self.action_panel_controller.update_actions(self.map_view_controller.model.selected_tokens)
-
-
-    def select_character(self):
