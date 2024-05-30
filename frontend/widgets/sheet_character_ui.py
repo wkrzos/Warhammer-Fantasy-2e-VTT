@@ -195,7 +195,12 @@ class CharacterSheet(QMainWindow):
 
     def save_character(self):
         name = self.name_input.text()
-        race = Races(self.race_combo.currentIndex())
+        
+        match self.race_combo.currentIndex():
+            case 1: 
+                race = Races("r.1")
+        
+        #race = Races(self.race_combo.currentText().upper())
         current_career = self.current_career_input.text()
         previous_careers = self.previous_careers_input.text()
 
@@ -225,22 +230,22 @@ class CharacterSheet(QMainWindow):
         )
 
         statistics = Statistics(
-            weaponSkill=int(self.main_stats_inputs['WS'][0].text()),
-            ballisticSkill=int(self.main_stats_inputs['BS'][0].text()),
-            strength=int(self.main_stats_inputs['S'][0].text()),
-            toughness=int(self.main_stats_inputs['T'][0].text()),
-            agility=int(self.main_stats_inputs['Ag'][0].text()),
-            intelligence=int(self.main_stats_inputs['Int'][0].text()),
-            willPower=int(self.main_stats_inputs['WP'][0].text()),
-            fellowship=int(self.main_stats_inputs['Fel'][0].text()),
-            wounds=int(self.secondary_stats_inputs['W'][0].text()),
-            strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()),
-            toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()),
+            ws=int(self.main_stats_inputs['WS'][0].text()),
+            bs=int(self.main_stats_inputs['BS'][0].text()),
+            s=int(self.main_stats_inputs['S'][0].text()),
+            t=int(self.main_stats_inputs['T'][0].text()),
+            ag=int(self.main_stats_inputs['Ag'][0].text()),
+            int=int(self.main_stats_inputs['Int'][0].text()),
+            wp=int(self.main_stats_inputs['WP'][0].text()),
+            fel=int(self.main_stats_inputs['Fel'][0].text()),
+            w=int(self.secondary_stats_inputs['W'][0].text()),
+            #strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()),
+            #toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()),
             movement=int(self.secondary_stats_inputs['M'][0].text()),
             magic=int(self.secondary_stats_inputs['Mag'][0].text()),
-            insanityPoints=int(self.secondary_stats_inputs['IP'][0].text()),
-            fatePoints=int(self.secondary_stats_inputs['FP'][0].text()),
-            attacks=int(self.secondary_stats_inputs['A'][0].text())
+            ip=int(self.secondary_stats_inputs['IP'][0].text()),
+            fp=int(self.secondary_stats_inputs['FP'][0].text()),
+            #attacks=int(self.secondary_stats_inputs['A'][0].text())
         )
 
         character = Character(
@@ -251,6 +256,7 @@ class CharacterSheet(QMainWindow):
         )
 
         print(character.__dict__())
+        return character.__dict__()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

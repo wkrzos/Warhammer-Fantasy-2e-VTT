@@ -1,3 +1,10 @@
+import sys
+from PySide6.QtWidgets import QApplication
+from frontend.widgets.sheet_character_ui import CharacterSheet
+from backend.character_sheets.sheets import Character
+from model.creatures_model import CreaturesModel
+from frontend.widgets.creatures_ui import CreaturesViewUI
+
 class CreaturesController:
     def __init__(self, model, view):
         self.model = model
@@ -8,7 +15,23 @@ class CreaturesController:
         self.view.add_button.clicked.connect(self.add_creature)
 
     def add_creature(self):
-        # Logic to add a creature
-        creature_name = "New Creature"
-        self.model.add_creature(creature_name)
+        # Open character sheet
+        self.character_sheet = CharacterSheet()
+        self.character_sheet.show()
+        self.character_sheet.save_button.clicked.connect(self.save_character)
+
+    def save_character(self):
+        # Logic to save the character from the character sheet
+        character_data = self.character_sheet.save_character()
+        self.model.add_creature(character_data)
         self.view.update_creature_list(self.model.get_creatures())
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+
+    model = CreaturesModel()
+    view = CreaturesViewUI()
+    controller = CreaturesController(model, view)
+
+    view.show()
+    sys.exit(app.exec())
