@@ -271,7 +271,7 @@ class CharacterSheet(QMainWindow):
 
 
         print(card.__dict__())
-        return card.__dict__()
+        return card
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

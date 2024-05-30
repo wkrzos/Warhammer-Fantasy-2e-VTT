@@ -25,4 +25,4 @@ class CreaturesViewUI(QWidget):
     def update_creature_list(self, creatures):
         self.creature_list.clear()
         for creature in creatures:
-            self.creature_list.addItem(self.tr(creature.name))
+            self.creature_list.addItem(self.tr(creature.playerName))
