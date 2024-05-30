@@ -1,15 +1,15 @@
 {
-    "wtp.1": "",
-    "wtp.2": "",
-    "wtp.3": "",
-    "wtp.4": "",
-    "wtp.5": "",
-    "wtp.6": "",
-    "wtp.7": "",
-    "wtp.8": "",
-    "wtp.9": "",
-    "wtp.10": "",
-    "wtp.11": "",
-    "wtp.12": "",
-    "wtp.13": ""
+    "wtp.1": "Ordinary",
+    "wtp.2": "Two handed",
+    "wtp.3": "Cavalry",
+    "wtp.4": "Flail",
+    "wtp.5": "Parrying",
+    "wtp.6": "Fencing",
+    "wtp.7": "Immobilizing",
+    "wtp.8": "Long bow",
+    "wtp.9": "Firearm",
+    "wtp.10": "Crossbow",
+    "wtp.11": "Mechanical",
+    "wtp.12": "Thrown",
+    "wtp.13": "Slingshot"
 }
