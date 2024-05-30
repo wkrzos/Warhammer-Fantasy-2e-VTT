@@ -241,7 +241,7 @@ class CharacterSheet(QMainWindow):
             w=int(self.secondary_stats_inputs['W'][0].text()),
             #strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()),
             #toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()),
-            movement=int(self.secondary_stats_inputs['M'][0].text()),
+            m=int(self.secondary_stats_inputs['M'][0].text()),
             magic=int(self.secondary_stats_inputs['Mag'][0].text()),
             ip=int(self.secondary_stats_inputs['IP'][0].text()),
             fp=int(self.secondary_stats_inputs['FP'][0].text()),
