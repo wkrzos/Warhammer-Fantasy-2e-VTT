@@ -1,4 +1,5 @@
-from PySide6.QtCore import QCoreApplication
+from PySide6.QtCore import QCoreApplication, QTranslator
+
 
 class OptionsController:
     def __init__(self, model, view, main_controller):
