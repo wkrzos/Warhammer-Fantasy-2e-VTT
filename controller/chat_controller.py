@@ -1,4 +1,5 @@
 from backend.mechanics.rolling_machine import RollGod
+from frontend.util.muy_importante import GenerateurDeCitationsAleaoriosDeLaSabiduriaDeJanPapiez2QuotationsGeneradorDeCitasMemorables
 
 class ChatController:
     def __init__(self, model, view):
@@ -19,9 +20,12 @@ class ChatController:
         if message:
             if message.startswith('/roll'):
                 self.handle_roll_command(nickname, message)
+            elif message.startswith('/2137'):
+                self.add_message("Papas Greatest Battle Quotes", GenerateurDeCitationsAleaoriosDeLaSabiduriaDeJanPapiez2QuotationsGeneradorDeCitasMemorables.get_random_quote())
             else:
                 self.add_message(nickname, message)
             self.view.input_field.clear()
+
 
     def handle_roll_command(self, nickname, message):
         parts = message.split()
@@ -56,5 +60,7 @@ class ChatController:
 
     # Can be used to react to signals from the RollGod || Example: self.reactForNotify(signal). May be removed, causes the additional System[<roll outcome>] message.
     def reactForNotify(self, signal):
-        result, description = signal
-        self.add_message("System", f"{description}: {result}")
+            for msg in signal:
+                self.add_message("System",msg )
+
+

@@ -1,11 +1,13 @@
 import json
+import os.path
 from enum import Enum
 from backend.character_sheets.characteristics import  *
 
 class FightDescriptionsType(Enum):
     DMG_ROLL = "FDsc.1"
     INITIATIVE_ROLL = "FDsc.2"
-
+    HIT_LOCALISATION = "FDsc.3"
+    DMG_DEALT = "FDsc.4"
 
 
 
@@ -13,6 +15,8 @@ class RollDescriptionAggregator:
     fightDescriptions = {
         FightDescriptionsType.DMG_ROLL : "",
         FightDescriptionsType.INITIATIVE_ROLL : "",
+        FightDescriptionsType.HIT_LOCALISATION : "",
+        FightDescriptionsType.DMG_DEALT : "",
     }
 
     testDescriptions = {
@@ -47,7 +51,8 @@ class RollDescriptionAggregator:
     }
 
     @classmethod
-    def loadFigthDescriptions(cls, path: str) -> None:
+    def loadFigthDescriptions(cls, language: str) -> None:
+        path = os.path.join(os.path.dirname(__file__), "language", language, "testDesc.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -57,8 +62,9 @@ class RollDescriptionAggregator:
         except FileNotFoundError:
             pass
     @classmethod
-    def loadtestDescriptions(cls, path: str) -> None:
+    def loadtestDescriptions(cls, language: str) -> None:
         try:
+            path = os.path.join(os.path.dirname(__file__),"language",language, "testDesc.json")
             with open(path, "r") as f:
                 jsonData = json.load(f)
                 for key in cls.testDescriptions.keys():
