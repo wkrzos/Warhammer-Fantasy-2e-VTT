@@ -1,6 +1,7 @@
 # welcome_screen.py
 
-from PySide6.QtCore import Qt, QTimer, QPropertyAnimation, QRect
+from PySide6.QtCore import Qt, QPropertyAnimation, QRect
+from PySide6.QtGui import QPainter, QBrush, QColor, QLinearGradient
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 
 class SplashScreen(QWidget):
@@ -30,6 +31,20 @@ class SplashScreen(QWidget):
         layout.addWidget(version)
         layout.addWidget(authors)
         self.setLayout(layout)
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing)
+        rect = self.rect()
+
+        # Create gradient for feathered edges
+        gradient = QLinearGradient(rect.topLeft(), rect.bottomRight())
+        gradient.setColorAt(0, QColor(0, 0, 0, 250))  # translucent black
+        gradient.setColorAt(1, QColor(0, 0, 0, 0))  # Fully transparent
+
+        painter.setBrush(QBrush(gradient))
+        painter.setPen(Qt.NoPen)
+        painter.drawRoundedRect(rect, 30, 30)  # Adjust corner radius as needed
 
     def fade_out(self):
         self.animation = QPropertyAnimation(self, b"geometry")
