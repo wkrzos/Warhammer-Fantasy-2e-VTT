@@ -151,10 +151,10 @@ class DmgManager(Observable):
         hitLocalisation = DmgManager.calculateHitLocalisation(rollValue)
         dmgReduction = DmgManager.calculateDmgReduction(other, hitLocalisation)
         dmgRoll = RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL] + " " + player.creature.name )[0]
-        dmg = dmgBonus - dmgReduction  + dmgRoll
-        msgLocalisation = player.creature.name + " " +  RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + ItemsTextAggregator.hitLocalisationNames[hitLocalisation]
-        msgDmgDealt = ""
-        DmgManager.notify((dmg,hitLocalisation,player.creature.name))
+        dmg = dmgBonus - dmgReduction + dmgRoll
+        msgLocalisation = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + ItemsTextAggregator.hitLocalisationNames[hitLocalisation]
+        msgDmgDealt = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + int(dmg)
+        DmgManager.notify([msgLocalisation, msgDmgDealt])
         return dmg
 
     @staticmethod
