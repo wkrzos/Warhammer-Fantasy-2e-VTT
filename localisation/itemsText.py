@@ -1,4 +1,5 @@
 import json
+import os
 
 from backend.character_sheets.equipment import WeaponType, WeaponTrait, ArmorType, HitLocalisation
 
@@ -31,7 +32,8 @@ class ItemsTextAggregator:
         return {hitLocalisation.value: cls.hitLocalisationNames[hitLocalisation] for hitLocalisation in HitLocalisation}
 
     @classmethod
-    def load_weapon_types_names(cls,path:str):
+    def load_weapon_types_names(cls,language:str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "weaponTypesNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -41,7 +43,8 @@ class ItemsTextAggregator:
         except FileNotFoundError:
             pass
     @classmethod
-    def load_weapon_trait_names(cls,path:str):
+    def load_weapon_trait_names(cls,language:str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "weaponTraitsNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -51,7 +54,8 @@ class ItemsTextAggregator:
         except FileNotFoundError:
             pass
     @classmethod
-    def load_armor_types_names(cls,path:str):
+    def load_armor_types_names(cls,language:str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "armorTypesNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -61,7 +65,8 @@ class ItemsTextAggregator:
         except FileNotFoundError:
             pass
     @classmethod
-    def load_hit_localisation_names(cls,path:str):
+    def load_hit_localisation_names(cls,language:str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "hitLocalisationNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)

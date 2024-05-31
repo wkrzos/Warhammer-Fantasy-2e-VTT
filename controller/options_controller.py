@@ -1,10 +1,11 @@
 from PySide6.QtCore import QCoreApplication
 
 class OptionsController:
-    def __init__(self, model, view):
+    def __init__(self, model, view, main_controller):
         self.model = model
         self.view = view
         self.connect_signals()
+        self.main_controller = main_controller
 
     def connect_signals(self):
         self.view.exit_button.clicked.connect(self.exit_application)
@@ -16,6 +17,7 @@ class OptionsController:
 
     def change_language(self, language):
         self.model.set_language(language)
+        self.main_controller.load_backend_localisation()
         self.update_language()
 
     def update_language(self):

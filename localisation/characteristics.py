@@ -1,4 +1,5 @@
 import json
+import os
 
 from backend.character_sheets.characteristics import MainStats, SecondaryStats, AttributesType
 from backend.character_sheets.races import Races
@@ -120,7 +121,8 @@ class CharacterTextAggregator:
         return {talent.value: cls.talentsName[talent] for talent in cls.talentsName.keys()}
 
     @classmethod
-    def load_races_names(cls,path:str):
+    def load_races_names(cls,language:str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "racesNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -131,7 +133,8 @@ class CharacterTextAggregator:
             pass
 
     @classmethod
-    def load_stats_names(cls, path: str):
+    def load_stats_names(cls, language: str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -142,7 +145,9 @@ class CharacterTextAggregator:
             pass
 
     @classmethod
-    def load_attributes_names(cls, path: str):
+    def load_attributes_names(cls, language: str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
+
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -153,7 +158,9 @@ class CharacterTextAggregator:
             pass
 
     @classmethod
-    def load_skills_names(cls, path: str):
+    def load_skills_names(cls, language: str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
+
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)
@@ -164,7 +171,9 @@ class CharacterTextAggregator:
             pass
 
     @classmethod
-    def load_talents_names(cls, path: str):
+    def load_talents_names(cls, language: str):
+        path = os.path.join(os.path.dirname(__file__), "language", language, "talentsNames.json")
+
         try:
             with open(path, "r") as f:
                 jsonData = json.load(f)

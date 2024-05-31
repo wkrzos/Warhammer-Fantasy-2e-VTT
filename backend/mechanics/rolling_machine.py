@@ -21,7 +21,8 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         for i in range(d):
             result.append(randrange(0, 4)+1)
 
-        cls.notify((result,dsc))
+        msg = dsc + ": " + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod
@@ -29,7 +30,8 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 6) + 1)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod
@@ -37,7 +39,8 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 8) + 1)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod
@@ -45,14 +48,16 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 10) + 1)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
     @classmethod
     def rollD12(cls,d: int = 1,dsc:str = "") -> list[int]:
         result = []
         for i in range(d):
             result.append(randrange(0, 12) + 1)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod
@@ -60,7 +65,8 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 20) + 1)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod
@@ -68,8 +74,8 @@ class RollGod(Observable): #Przetestować czy to cos działa XDD
         result = []
         for i in range(d):
             result.append(randrange(0, 100) + 1)
-        print(cls._observers)
-        cls.notify((result,dsc))
+        msg = dsc + ":" + str(result)
+        cls.notify([msg])
         return result
 
     @classmethod

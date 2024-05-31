@@ -46,7 +46,8 @@ class Attributes:
         self.attributesActive.add(attributes)
 
     def remove(self, attributes: AttributesType) -> None:
-        self.attributesActive.remove(attributes)
+        if attributes in self.attributesActive:
+            self.attributesActive.remove(attributes)
     def restartAttributes(self) -> None:
         if AttributesType.DEAD not in self.attributesActive or AttributesType.UNCONSCIOUS not in self.attributesActive:
             self.actionsRemain = 2
