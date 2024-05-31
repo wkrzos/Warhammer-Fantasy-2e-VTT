@@ -6,6 +6,7 @@ from PySide6.QtCore import Qt, QSize, QTranslator, QLocale
 from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription, Card
 from frontend.util.font import HEADING_FONT, SUBHEADING_FONT, DEFAULT_FONT
 
+
 class CharacterSheet(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -206,7 +207,6 @@ class CharacterSheet(QMainWindow):
             case 3:
                 race = Races("r.4")
         
-        #race = Races(self.race_combo.currentText().upper())
         current_career = self.current_career_input.text()
         previous_careers = self.previous_careers_input.text()
 
@@ -245,20 +245,22 @@ class CharacterSheet(QMainWindow):
             wp=int(self.main_stats_inputs['WP'][0].text()),
             fel=int(self.main_stats_inputs['Fel'][0].text()),
             w=int(self.secondary_stats_inputs['W'][0].text()),
-            #strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()),
-            #toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()),
+            #strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()), # Can be calculated from sheets.py, cant be modified
+            #toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()), # Can be calculated from sheets.py, cant be modifiec
             m=int(self.secondary_stats_inputs['M'][0].text()),
             magic=int(self.secondary_stats_inputs['Mag'][0].text()),
-            ip=int(self.secondary_stats_inputs['IP'][0].text()),
-            fp=int(self.secondary_stats_inputs['FP'][0].text()),
-            #attacks=int(self.secondary_stats_inputs['A'][0].text())
+            ip=int(self.secondary_stats_inputs['IP'][0].text()), # Modifiable, cant be developed 
+            fp=int(self.secondary_stats_inputs['FP'][0].text()), # Modifiable, cant be developed
+            #attacks=int(self.secondary_stats_inputs['A'][0].text()) # Can be modifiec, can be developed
         )
+        #properties uwu
        
         character = Character(
             name=name,
             race=race,
             statistics=statistics,
         )
+
 
         
         card = Card(
@@ -270,7 +272,9 @@ class CharacterSheet(QMainWindow):
         )
 
 
+
         print(card.__dict__())
+        # add json output to save folder, use json factory, each card is a separate json file
         return card
 
 if __name__ == '__main__':
