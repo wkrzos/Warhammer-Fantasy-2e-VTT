@@ -17,11 +17,11 @@ class SaveManager:
             os.makedirs(localisation)
         path = os.path.join(localisation,saveName+".json" )
         with open(path, 'w') as file:
-            json.dump(characterCard.__dict__(), file)
+            json.dump(characterCard.__dict__(), file, indent=4)
             file.close()
 
     @staticmethod
-    def loadCharacterCard(localisation:str)->Card:
+    def loadCharacterCard(localisation:str)-> Card|None:
         try:
             with open(localisation, 'r') as file:
                 return  CardFabric.createCard(json.load(file))
@@ -34,7 +34,7 @@ class SaveManager:
             os.makedirs(localisation)
         path = os.path.join(localisation,saveName+".json" )
         with open(path, 'w') as file:
-            json.dump(creature.__dict__(), file)
+            json.dump(creature.__dict__(), file,indent=4)
             file.close()
 
     @staticmethod
@@ -54,7 +54,7 @@ class SaveManager:
             preparedToSave = []
             for item in lst:
                 preparedToSave.append(item.__dict__())
-            json.dump(preparedToSave, file)
+            json.dump(preparedToSave, file,indent=4)
             file.close()
 
     @staticmethod
