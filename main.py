@@ -23,6 +23,6 @@ if __name__ == '__main__':
         main_window_controller = MainWindowController(main_window_model, main_window_view)
         main_window.show()
 
-    QTimer.singleShot(2000, start_main_window)  # Display the splash screen for 2 seconds
+    QTimer.singleShot(4500, start_main_window)  # Display the splash screen for 2 seconds
 
     sys.exit(app.exec())
