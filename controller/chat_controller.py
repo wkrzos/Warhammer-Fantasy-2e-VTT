@@ -56,5 +56,7 @@ class ChatController:
 
     # Can be used to react to signals from the RollGod || Example: self.reactForNotify(signal). May be removed, causes the additional System[<roll outcome>] message.
     def reactForNotify(self, signal):
-        result, description = signal
-        self.add_message("System", f"{description}: {result}")
+            for msg in signal:
+                self.add_message("System",msg )
+
+

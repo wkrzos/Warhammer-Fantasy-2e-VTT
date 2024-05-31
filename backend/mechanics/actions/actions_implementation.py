@@ -6,6 +6,7 @@ from backend.mechanics.token import Token
 from backend.character_sheets.characteristics import *
 from backend.mechanics.rolling_machine import *
 from localisation.descriptions import RollDescriptionAggregator, FightDescriptionsType
+from localisation.itemsText import ItemsTextAggregator
 
 
 class Action:
@@ -147,10 +148,13 @@ class DmgManager(Observable):
     @staticmethod
     def calculateDmg(player: Token, other: Token, rollValue:int) -> int:
         dmgBonus = DmgManager.calculateDmgBonus(player)
-        dmgReduction = DmgManager.calculateDmgReduction(other,DmgManager.calculateHitLocalisation(rollValue))
+        hitLocalisation = DmgManager.calculateHitLocalisation(rollValue)
+        dmgReduction = DmgManager.calculateDmgReduction(other, hitLocalisation)
         dmgRoll = RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL] + " " + player.creature.name )[0]
-        dmg = dmgBonus - dmgReduction  + dmgRoll
-        DmgManager.notify(dmg)
+        dmg = dmgBonus - dmgReduction + dmgRoll
+        msgLocalisation = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + ItemsTextAggregator.hitLocalisationNames[hitLocalisation]
+        msgDmgDealt = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + int(dmg)
+        DmgManager.notify([msgLocalisation, msgDmgDealt])
         return dmg
 
     @staticmethod
