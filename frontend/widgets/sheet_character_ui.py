@@ -273,7 +273,7 @@ class CharacterSheet(QMainWindow):
         SaveManager.saveCharacterCard(characterCard=card, saveName=name.replace(" ", "_"))
         return card
 
-    def load_character(self, character_card: Card):
+    def load_character(self, character_card: Card = SaveManager.loadCharacterCard("saves/cards/default.json")):
         self.name_input.setText(character_card.playerName)
         #race_index = ["r.1", "r.2", "r.3", "r.4"].index(character_card.playerCharacter.race.id)
         # DEBUG set to 1 for now

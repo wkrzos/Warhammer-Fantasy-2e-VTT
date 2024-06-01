@@ -18,6 +18,7 @@ class CharactersController:
     def add_character(self):
         # Open character sheet
         self.character_sheet = CharacterSheet()
+        self.character_sheet.load_character()
         self.character_sheet.show()
         self.character_sheet.save_button.clicked.connect(self.save_character)
 
