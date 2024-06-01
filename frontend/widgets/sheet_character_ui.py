@@ -257,6 +257,7 @@ class CharacterSheet(QMainWindow):
             name=name,
             race=race,
             statistics=statistics,
+            characterPicture=self.character_image_path
         )
 
 
@@ -264,7 +265,6 @@ class CharacterSheet(QMainWindow):
         card = Card(
             playerName=name,
             playerCharacter=character,
-            characterPicture=self.character_image_path,
             characterDescription=character_description,
             history = "History"
         )
