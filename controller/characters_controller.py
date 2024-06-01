@@ -5,12 +5,14 @@ from model.characters_model import CharactersModel
 from frontend.widgets.characters_ui import CharactersViewUI
 from backend.mechanics.token import Token
 from model.map_model import MapViewModel
+from frontend.widgets.map_ui import MapViewUI
 
 class CharactersController:
     def __init__(self, model, view, map_model):
         self.model = model
         self.view = view
         self.map_model = map_model
+        self.map_view = MapViewUI()
         self.connect_signals()
         self.view.update_creature_list(self.model.get_characters())
 
@@ -49,8 +51,17 @@ class CharactersController:
         character = self.model.get_character_by_name(character_name)
         if character:
             token = Token(creature=character)
+            
+            # Calculate the center position
+            map_width = self.map_view.width()
+            map_height = self.map_view.height()
+            center_x = (map_width / 2 - self.map_model.get_offset()[0]) / (self.map_model.grid_size * self.map_model.get_zoom_level())
+            center_y = (map_height / 2 - self.map_model.get_offset()[1]) / (self.map_model.grid_size * self.map_model.get_zoom_level())
+            token.set_position(center_x, center_y)
+            
             self.map_model.tokens.append(token)  # Add token to the map model
             self.view.update_creature_list(self.model.get_characters())
+            self.map_model.set_selected_tokens([token])
             self.view.update()  # Update the map view to display the new token
 
 if __name__ == '__main__':
