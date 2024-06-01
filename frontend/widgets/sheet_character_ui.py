@@ -5,6 +5,7 @@ from PySide6.QtCore import Qt, QSize, QTranslator, QLocale
 
 from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription, Card
 from frontend.util.font import HEADING_FONT, SUBHEADING_FONT, DEFAULT_FONT
+from backend.json_serialisation.save_manager import *
 
 
 class CharacterSheet(QMainWindow):
@@ -270,11 +271,9 @@ class CharacterSheet(QMainWindow):
             characterDescription=character_description,
             history = "History"
         )
-
-
-
-        print(card.__dict__())
+        
         # add json output to save folder, use json factory, each card is a separate json file
+        SaveManager.saveCharacterCard(characterCard=card, saveName=name.replace(" ", "_"))
         return card
 
 if __name__ == '__main__':
