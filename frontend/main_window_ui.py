@@ -26,6 +26,7 @@ from controller.music_player_controller import MusicPlayerController
 from model.action_panel_model import ActionPanelModel
 from frontend.widgets.action_panel_ui import ActionPanelUI
 from controller.action_panel_controller import ActionPanelController
+from frontend.widgets.characters_ui import CharactersViewUI
 
 import os
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QSplitter, QTabWidget
@@ -38,6 +39,7 @@ class MainWindowView:
         self.map_view_ui = MapViewUI(self.main_window)
         self.toolbar_view = ToolbarUI(self.main_window)
         self.chat_view_ui = ChatViewUI(self.main_window)
+        self.characters_view_ui = CharactersViewUI(self.main_window)
         self.creatures_view_ui = CreaturesViewUI(self.main_window)
         self.items_view_ui = ItemsViewUI(self.main_window)
         self.options_view_ui = OptionsViewUI(self.main_window)
@@ -65,11 +67,9 @@ class MainWindowView:
 
         right_tab_widget = QTabWidget()
         right_tab_widget.setFixedWidth(300)
-
-        characters_view = CreaturesViewUI(self.main_window)
         
         right_tab_widget.addTab(self.chat_view_ui, self.main_window.tr("Chat"))
-        right_tab_widget.addTab(characters_view, self.main_window.tr("Characters"))
+        right_tab_widget.addTab(self.characters_view_ui, self.main_window.tr("Characters"))
         right_tab_widget.addTab(self.creatures_view_ui, self.main_window.tr("Creatures"))
         right_tab_widget.addTab(self.items_view_ui, self.main_window.tr("Items"))
         right_tab_widget.addTab(self.music_player_view_ui, self.main_window.tr("Music Player"))
