@@ -14,6 +14,8 @@ from localisation.characteristics import CharacterTextAggregator
 from localisation.descriptions import RollDescriptionAggregator
 from localisation.itemsText import ItemsTextAggregator
 from model.main_window_model import MainWindowModel
+from model.map_model import MapViewModel
+from controller.characters_controller import CharactersController
 
 
 class MainWindowController:
@@ -23,6 +25,7 @@ class MainWindowController:
         self.view.setup_ui(self.model)
         self.map_view_controller = MapViewController(self.model.map_view_model, self.view.map_view_ui, self)
         self.chat_controller = ChatController(self.model.chat_model, self.view.chat_view_ui)
+        self.characters_controller = CharactersController(self.model.characters_model, self.view.characters_view_ui, self.model.map_view_model)
         self.creatures_controller = CreaturesController(self.model.creatures_model, self.view.creatures_view_ui)
         self.items_controller = ItemsController(self.model.items_model, self.view.items_view_ui)
         self.options_controller = OptionsController(self.model.options_model, self.view.options_view_ui,self)

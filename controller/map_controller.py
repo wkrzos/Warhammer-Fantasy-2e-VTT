@@ -1,11 +1,9 @@
 from PySide6.QtCore import QObject, QPoint, Qt, QRect
-
 from frontend.widgets.map_ui import MapViewUI
 from model.map_model import MapViewModel
 
-
 class MapViewController:
-    def __init__(self, model:MapViewModel, view:MapViewUI, main_window_model):
+    def __init__(self, model: MapViewModel, view: MapViewUI, main_window_model):
         super().__init__()
         self.model = model
         self.view = view
@@ -15,7 +13,6 @@ class MapViewController:
         self.selected_tool = None
         self.view.setMouseTracking(True)
         self.connect_signals()
-
 
     def connect_signals(self):
         self.view.mousePressEvent = self.mousePressEvent
@@ -71,7 +68,7 @@ class MapViewController:
             self.model.dragging = False
             if self.selected_tool == "select" and self.model.selecting:
                 self.model.selecting = False
-                self.update_selection() # DEBUG flag
+                self.update_selection()  # DEBUG flag
                 self.model.set_selection(None, None)
             elif self.model.get_selected_tokens() and not (event.modifiers() & Qt.ShiftModifier):
                 self.snap_to_grid_multiple(self.model.get_selected_tokens())
@@ -139,3 +136,4 @@ class MapViewController:
             if token_rect.contains(position.toPoint()):
                 return token
         return None
+

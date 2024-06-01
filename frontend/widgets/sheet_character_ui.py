@@ -2,7 +2,11 @@ import sys
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QFormLayout, QLineEdit, QComboBox, QLabel, QGridLayout, QGroupBox, QHBoxLayout, QPushButton, QFileDialog)
 from PySide6.QtGui import QFont, QIcon, QPixmap
 from PySide6.QtCore import Qt, QSize, QTranslator, QLocale
-from frontend.util.font import DEFAULT_FONT, HEADING_FONT, SUBHEADING_FONT
+
+from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription, Card
+from frontend.util.font import HEADING_FONT, SUBHEADING_FONT, DEFAULT_FONT
+from backend.json_serialisation.save_manager import *
+
 
 class CharacterSheet(QMainWindow):
     def __init__(self):
@@ -23,16 +27,19 @@ class CharacterSheet(QMainWindow):
         character_group.setFont(HEADING_FONT)
         character_layout = QHBoxLayout()
 
-        form_layout = QFormLayout()
-        form_layout.addRow(self.tr('Name:'), QLineEdit())
-        race_combo = QComboBox()
-        race_combo.setFont(DEFAULT_FONT)
-        race_combo.addItems([self.tr('Human'), self.tr('Elf'), self.tr('Dwarf'), self.tr('Halfling')])
-        form_layout.addRow(self.tr('Race:'), race_combo)
-        form_layout.addRow(self.tr('Current Career:'), QLineEdit())
-        form_layout.addRow(self.tr('Previous Careers:'), QLineEdit())
+        self.form_layout = QFormLayout()
+        self.name_input = QLineEdit()
+        self.form_layout.addRow(self.tr('Name:'), self.name_input)
+        self.race_combo = QComboBox()
+        self.race_combo.setFont(DEFAULT_FONT)
+        self.race_combo.addItems([self.tr('Human'), self.tr('Elf'), self.tr('Dwarf'), self.tr('Halfling')])
+        self.form_layout.addRow(self.tr('Race:'), self.race_combo)
+        self.current_career_input = QLineEdit()
+        self.form_layout.addRow(self.tr('Current Career:'), self.current_career_input)
+        self.previous_careers_input = QLineEdit()
+        self.form_layout.addRow(self.tr('Previous Careers:'), self.previous_careers_input)
 
-        character_layout.addLayout(form_layout)
+        character_layout.addLayout(self.form_layout)
 
         # Character icon button
         self.character_icon_button = QPushButton()
@@ -48,69 +55,87 @@ class CharacterSheet(QMainWindow):
         # Personal Details Section
         personal_group = QGroupBox(self.tr("Personal Details"))
         personal_group.setFont(HEADING_FONT)
-        personal_layout = QFormLayout()
-        personal_layout.addRow(self.tr('Age:'), QLineEdit())
-        personal_layout.addRow(self.tr('Gender:'), QLineEdit())
-        personal_layout.addRow(self.tr('Height:'), QLineEdit())
-        personal_layout.addRow(self.tr('Weight:'), QLineEdit())
-        personal_layout.addRow(self.tr('Eyes Color:'), QLineEdit())
-        personal_layout.addRow(self.tr('Hair Color:'), QLineEdit())
-        personal_layout.addRow(self.tr('Star Sign:'), QLineEdit())
-        personal_layout.addRow(self.tr('Number of Siblings:'), QLineEdit())
-        personal_layout.addRow(self.tr('Birthplace:'), QLineEdit())
-        personal_layout.addRow(self.tr('Distinguishing Marks:'), QLineEdit())
-        personal_group.setLayout(personal_layout)
+        self.personal_layout = QFormLayout()
+        self.age_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Age:'), self.age_input)
+        self.gender_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Gender:'), self.gender_input)
+        self.height_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Height:'), self.height_input)
+        self.weight_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Weight:'), self.weight_input)
+        self.eyes_color_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Eyes Color:'), self.eyes_color_input)
+        self.hair_color_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Hair Color:'), self.hair_color_input)
+        self.star_sign_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Star Sign:'), self.star_sign_input)
+        self.siblings_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Number of Siblings:'), self.siblings_input)
+        self.birthplace_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Birthplace:'), self.birthplace_input)
+        self.distinguishing_marks_input = QLineEdit()
+        self.personal_layout.addRow(self.tr('Distinguishing Marks:'), self.distinguishing_marks_input)
+        personal_group.setLayout(self.personal_layout)
         layout.addWidget(personal_group)
 
         # Character Profile Main Section
         profile_group = QGroupBox(self.tr("Character Profile Main"))
         profile_group.setFont(HEADING_FONT)
-        profile_layout = QGridLayout()
+        self.profile_layout = QGridLayout()
         stats = ['WS', 'BS', 'S', 'T', 'Ag', 'Int', 'WP', 'Fel']
+        self.main_stats_inputs = {}
         for i, stat in enumerate(stats):
             label = QLabel(self.tr(stat))
             label.setFont(SUBHEADING_FONT)
-            profile_layout.addWidget(label, 0, i + 1)
-        for i in range(3):  # 3 rows for Starting, Advance, Current
-            for j in range(8):  # 8 stats columns
+            self.profile_layout.addWidget(label, 0, i + 1)
+            self.main_stats_inputs[stat] = []
+            for j in range(3):  # 3 rows for Starting, Advance, Current
                 line_edit = QLineEdit()
                 line_edit.setFont(DEFAULT_FONT)
-                profile_layout.addWidget(line_edit, i + 1, j + 1)
-        profile_group.setLayout(profile_layout)
+                self.profile_layout.addWidget(line_edit, j + 1, i + 1)
+                self.main_stats_inputs[stat].append(line_edit)
+        profile_group.setLayout(self.profile_layout)
         layout.addWidget(profile_group)
         
         # Character Profile Secondary Section
         profile_group_secondary = QGroupBox(self.tr("Character Profile Secondary"))
         profile_group_secondary.setFont(HEADING_FONT)
-        profile_layout_secondary = QGridLayout()
+        self.profile_layout_secondary = QGridLayout()
         stats_secondary = ['A', 'W', 'SB', 'TB', 'M', 'Mag', 'IP', 'FP']
+        self.secondary_stats_inputs = {}
         for i, stat in enumerate(stats_secondary):
             label = QLabel(self.tr(stat))
             label.setFont(SUBHEADING_FONT)
-            profile_layout_secondary.addWidget(label, 0, i + 1)
-        for i in range(3):  # 3 rows for Starting, Advance, Current
-            for j in range(8):  # 8 stats columns
+            self.profile_layout_secondary.addWidget(label, 0, i + 1)
+            self.secondary_stats_inputs[stat] = []
+            for j in range(3):  # 3 rows for Starting, Advance, Current
                 line_edit = QLineEdit()
                 line_edit.setFont(DEFAULT_FONT)
-                profile_layout_secondary.addWidget(line_edit, i + 1, j + 1)
-        profile_group_secondary.setLayout(profile_layout_secondary)
+                self.profile_layout_secondary.addWidget(line_edit, j + 1, i + 1)
+                self.secondary_stats_inputs[stat].append(line_edit)
+        profile_group_secondary.setLayout(self.profile_layout_secondary)
         layout.addWidget(profile_group_secondary)
         
         # Weapons Section
         weapons_group = QGroupBox(self.tr("Weapons"))
         weapons_group.setFont(HEADING_FONT)
-        weapons_layout = QGridLayout()
+        self.weapons_layout = QGridLayout()
         weapons_headers = ['Name', 'Enc', 'Group', 'Damage', 'Range', 'Reload', 'Qualities']
+        self.weapon_inputs = []
         for i, header in enumerate(weapons_headers):
             label = QLabel(self.tr(header))
             label.setFont(SUBHEADING_FONT)
-            weapons_layout.addWidget(label, 0, i)
+            self.weapons_layout.addWidget(label, 0, i)
         for i in range(5):  # 5 rows for weapon entries
+            row_inputs = []
             for j in range(len(weapons_headers)):
                 line_edit = QLineEdit()
                 line_edit.setFont(DEFAULT_FONT)
-                weapons_layout.addWidget(line_edit, i + 1, j)
-        weapons_group.setLayout(weapons_layout)
+                self.weapons_layout.addWidget(line_edit, i + 1, j)
+                row_inputs.append(line_edit)
+            self.weapon_inputs.append(row_inputs)
+        weapons_group.setLayout(self.weapons_layout)
         layout.addWidget(weapons_group)
 
         # Armour, Experience Points and Combat Movement Sections Side by Side
@@ -119,19 +144,23 @@ class CharacterSheet(QMainWindow):
         # Armour Section
         armour_group = QGroupBox(self.tr("Armour"))
         armour_group.setFont(HEADING_FONT)
-        armour_layout = QFormLayout()
-        armour_layout.addRow(self.tr('Basic Armour:'), QLineEdit())
-        armour_layout.addRow(self.tr('Advanced Armour:'), QLineEdit())
-        armour_group.setLayout(armour_layout)
+        self.armour_layout = QFormLayout()
+        self.basic_armour_input = QLineEdit()
+        self.armour_layout.addRow(self.tr('Basic Armour:'), self.basic_armour_input)
+        self.advanced_armour_input = QLineEdit()
+        self.armour_layout.addRow(self.tr('Advanced Armour:'), self.advanced_armour_input)
+        armour_group.setLayout(self.armour_layout)
         armour_exp_layout.addWidget(armour_group)
 
         # Experience Points Section
         exp_group = QGroupBox(self.tr("Experience Points"))
         exp_group.setFont(HEADING_FONT)
-        exp_layout = QFormLayout()
-        exp_layout.addRow(self.tr('Current:'), QLineEdit())
-        exp_layout.addRow(self.tr('Total:'), QLineEdit())
-        exp_group.setLayout(exp_layout)
+        self.exp_layout = QFormLayout()
+        self.current_exp_input = QLineEdit()
+        self.exp_layout.addRow(self.tr('Current:'), self.current_exp_input)
+        self.total_exp_input = QLineEdit()
+        self.exp_layout.addRow(self.tr('Total:'), self.total_exp_input)
+        exp_group.setLayout(self.exp_layout)
         armour_exp_layout.addWidget(exp_group)
 
         layout.addLayout(armour_exp_layout)
@@ -139,12 +168,21 @@ class CharacterSheet(QMainWindow):
         # Combat Movement Section
         combat_group = QGroupBox(self.tr("Combat Movement"))
         combat_group.setFont(HEADING_FONT)
-        combat_layout = QFormLayout()
-        combat_layout.addRow(self.tr('Move/Disengage:'), QLineEdit())
-        combat_layout.addRow(self.tr('Charge Attack:'), QLineEdit())
-        combat_layout.addRow(self.tr('Run:'), QLineEdit())
-        combat_group.setLayout(combat_layout)
+        self.combat_layout = QFormLayout()
+        self.move_input = QLineEdit()
+        self.combat_layout.addRow(self.tr('Move/Disengage:'), self.move_input)
+        self.charge_attack_input = QLineEdit()
+        self.combat_layout.addRow(self.tr('Charge Attack:'), self.charge_attack_input)
+        self.run_input = QLineEdit()
+        self.combat_layout.addRow(self.tr('Run:'), self.run_input)
+        combat_group.setLayout(self.combat_layout)
         armour_exp_layout.addWidget(combat_group)
+
+        # Save Button
+        self.save_button = QPushButton(self.tr("Save Character"))
+        self.save_button.setFont(DEFAULT_FONT)
+        self.save_button.clicked.connect(self.save_character)
+        layout.addWidget(self.save_button)
 
         widget.setLayout(layout)
         self.show()
@@ -155,6 +193,120 @@ class CharacterSheet(QMainWindow):
         if file_path:
             self.character_icon_button.setIcon(QIcon(file_path))
             self.character_icon_button.setIconSize(QSize(100, 100))
+            self.character_image_path = file_path
+
+    def save_character(self):
+        name = self.name_input.text()
+        
+        match self.race_combo.currentIndex():
+            case 0: 
+                race = Races("r.1")
+            case 1:
+                race = Races("r.2")
+            case 2:
+                race = Races("r.3")
+            case 3:
+                race = Races("r.4")
+        
+        current_career = self.current_career_input.text()
+        previous_careers = self.previous_careers_input.text()
+
+        age = int(self.age_input.text())
+        gender = self.gender_input.text()
+        height = int(self.height_input.text())
+        weight = int(self.weight_input.text())
+        eyes_color = self.eyes_color_input.text()
+        hair_color = self.hair_color_input.text()
+        star_sign = self.star_sign_input.text()
+        siblings = int(self.siblings_input.text())
+        birthplace = self.birthplace_input.text()
+        distinguishing_marks = self.distinguishing_marks_input.text()
+
+        character_description = CharacterDescription(
+            colorOfEyes=eyes_color,
+            colorOfHairs=hair_color,
+            weight=weight,
+            height=height,
+            sex=gender,
+            age=age,
+            starSign=star_sign,
+            birthplace=birthplace,
+            distenguishingMarks=distinguishing_marks,
+            previousProfession=previous_careers,
+            currentProfession=current_career
+        )
+
+        statistics = Statistics(
+            ws=int(self.main_stats_inputs['WS'][0].text()),
+            bs=int(self.main_stats_inputs['BS'][0].text()),
+            s=int(self.main_stats_inputs['S'][0].text()),
+            t=int(self.main_stats_inputs['T'][0].text()),
+            ag=int(self.main_stats_inputs['Ag'][0].text()),
+            int=int(self.main_stats_inputs['Int'][0].text()),
+            wp=int(self.main_stats_inputs['WP'][0].text()),
+            fel=int(self.main_stats_inputs['Fel'][0].text()),
+            w=int(self.secondary_stats_inputs['W'][0].text()),
+            m=int(self.secondary_stats_inputs['M'][0].text()),
+            magic=int(self.secondary_stats_inputs['Mag'][0].text()),
+            ip=int(self.secondary_stats_inputs['IP'][0].text()), # Modifiable, cant be developed 
+            fp=int(self.secondary_stats_inputs['FP'][0].text()) # Modifiable, cant be developed
+        )
+        #properties uwu
+       
+        character = Character(
+            name=name,
+            race=race,
+            statistics=statistics,
+        )
+
+
+        
+        card = Card(
+            playerName=name,
+            playerCharacter=character,
+            characterPicture=self.character_image_path,
+            characterDescription=character_description,
+            history = "History"
+        )
+        
+        # add json output to save folder, use json factory, each card is a separate json file
+        SaveManager.saveCharacterCard(characterCard=card, saveName=name.replace(" ", "_"))
+        return card
+
+    def load_character(self, character_card: Card = SaveManager.loadCharacterCard("saves/cards/default.json")):
+        self.name_input.setText(character_card.playerName)
+        #race_index = ["r.1", "r.2", "r.3", "r.4"].index(character_card.playerCharacter.race.id)
+        # DEBUG set to 1 for now
+        self.race_combo.setCurrentIndex(1)
+        self.current_career_input.setText(character_card.characterDescription.currentProfession)
+        self.previous_careers_input.setText(character_card.characterDescription.previousProfession)
+        self.character_icon_button.setIcon(QIcon(character_card.characterPicture))
+        self.character_icon_button.setIconSize(QSize(100, 100))
+
+        self.age_input.setText(str(character_card.characterDescription.age))
+        self.gender_input.setText(character_card.characterDescription.sex)
+        self.height_input.setText(str(character_card.characterDescription.height))
+        self.weight_input.setText(str(character_card.characterDescription.weight))
+        self.eyes_color_input.setText(character_card.characterDescription.colorOfEyes)
+        self.hair_color_input.setText(character_card.characterDescription.colorOfHairs)
+        self.star_sign_input.setText(character_card.characterDescription.starSign)
+        #self.siblings_input.setText(str(character_card.characterDescription.siblings))
+        self.birthplace_input.setText(character_card.characterDescription.birthplace)
+        self.distinguishing_marks_input.setText(character_card.characterDescription.distenguishingMarks)
+
+        self.main_stats_inputs['WS'][0].setText(str(character_card.playerCharacter.statistics.weaponSkill))
+        self.main_stats_inputs['BS'][0].setText(str(character_card.playerCharacter.statistics.ballisticSkill))
+        self.main_stats_inputs['S'][0].setText(str(character_card.playerCharacter.statistics.strength))
+        self.main_stats_inputs['T'][0].setText(str(character_card.playerCharacter.statistics.toughness))
+        self.main_stats_inputs['Ag'][0].setText(str(character_card.playerCharacter.statistics.agility))
+        self.main_stats_inputs['Int'][0].setText(str(character_card.playerCharacter.statistics.intelligence))
+        self.main_stats_inputs['WP'][0].setText(str(character_card.playerCharacter.statistics.willPower))
+        self.main_stats_inputs['Fel'][0].setText(str(character_card.playerCharacter.statistics.fellowship))
+        self.secondary_stats_inputs['W'][0].setText(str(character_card.playerCharacter.statistics.wounds))
+        self.secondary_stats_inputs['M'][0].setText(str(character_card.playerCharacter.statistics.movement))
+        self.secondary_stats_inputs['Mag'][0].setText(str(character_card.playerCharacter.statistics.magic))
+        self.secondary_stats_inputs['IP'][0].setText(str(character_card.playerCharacter.statistics.insanityPoints))
+        self.secondary_stats_inputs['FP'][0].setText(str(character_card.playerCharacter.statistics.fatePoint))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -168,3 +320,4 @@ if __name__ == '__main__':
 
     ex = CharacterSheet()
     sys.exit(app.exec())
+

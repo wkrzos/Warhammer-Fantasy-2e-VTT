@@ -5,10 +5,7 @@ class MapViewModel:
     def __init__(self):
         self.grid_size = 50
         self.offset = (0, 0)
-        self.characters = [Character("Hero"), Character("Enemy")]
-        self.tokens = [Token(character) for character in self.characters]
-        self.tokens[0].set_position(5, 5)
-        self.tokens[1].set_position(10, 10)
+        self.tokens = []
         self.selected_tokens = []
         self.zoom_level = 1.0
         self.dragging = False

@@ -8,6 +8,7 @@ from model.map_model import MapViewModel
 from model.music_player_model import MusicPlayerModel
 from model.options_model import OptionsModel
 from model.toolbar_model import ToolbarModel
+from model.characters_model import CharactersModel
 
 
 class MainWindowModel:
@@ -19,6 +20,7 @@ class MainWindowModel:
         self.map_view_model = MapViewModel()
         self.chat_model = ChatModel()
         self.items_model = ItemsModel()
+        self.characters_model = CharactersModel()
         self.creatures_model = CreaturesModel()
         self.options_model = OptionsModel()
         self.music_player_model = MusicPlayerModel((os.path.join(os.path.dirname(__file__), '../music')))
