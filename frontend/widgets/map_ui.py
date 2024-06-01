@@ -19,7 +19,6 @@ class MapViewUI(QWidget):
         finally:
             painter.end()
 
-
     def draw_grid(self, painter):
         pen = QPen(QColor(200, 200, 200), 1)
         painter.setPen(pen)
@@ -38,7 +37,6 @@ class MapViewUI(QWidget):
         for y in range(start_y, self.height(), scaled_grid_size):
             painter.drawLine(0, y, self.width(), y)
 
-
     def draw_tokens(self, painter):
         zoom_level = self.model.get_zoom_level()
         offset = self.model.get_offset()
@@ -53,7 +51,7 @@ class MapViewUI(QWidget):
             painter.setBrush(QColor(255, 0, 0) if token not in selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
             painter.setFont(DEFAULT_FONT)
-            painter.drawText(screen_x + 10, screen_y + 30, token.creature.name)
+            painter.drawText(screen_x + 10, screen_y + 30, token.creature.playerName)
 
     def draw_measurement(self, painter):
         measure_start, measure_end = self.model.get_measurement()

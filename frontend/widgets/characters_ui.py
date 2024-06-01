@@ -20,6 +20,10 @@ class CharactersViewUI(QWidget):
         self.add_button.setFont(DEFAULT_FONT)
         layout.addWidget(self.add_button)
 
+        self.add_token_button = QPushButton(self.tr("Add Token"))  # Add Token button
+        self.add_token_button.setFont(DEFAULT_FONT)
+        layout.addWidget(self.add_token_button)
+
         self.setLayout(layout)
 
     def update_creature_list(self, creatures):
