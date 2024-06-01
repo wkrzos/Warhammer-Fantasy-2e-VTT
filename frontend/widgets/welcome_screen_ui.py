@@ -57,8 +57,8 @@ class SplashScreen(QWidget):
 
         # Create gradient for feathered edges
         gradient = QLinearGradient(rect.topLeft(), rect.bottomRight())
-        gradient.setColorAt(0, QColor(0, 0, 0, 250))  # 40% translucent black
-        gradient.setColorAt(1, QColor(0, 0, 0, 100))  # Fully transparent
+        gradient.setColorAt(0, QColor(0, 0, 0, 150))  # 40% translucent black
+        gradient.setColorAt(1, QColor(0, 0, 0, 250))  # Fully transparent
 
         painter.setBrush(QBrush(gradient))
         painter.setPen(Qt.NoPen)
