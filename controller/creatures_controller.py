@@ -1,7 +1,6 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from frontend.widgets.sheet_character_ui import CharacterSheet
-from backend.character_sheets.sheets import Character
 from model.creatures_model import CreaturesModel
 from frontend.widgets.creatures_ui import CreaturesViewUI
 
@@ -10,6 +9,7 @@ class CreaturesController:
         self.model = model
         self.view = view
         self.connect_signals()
+        self.view.update_creature_list(self.model.get_creatures())
 
     def connect_signals(self):
         self.view.add_button.clicked.connect(self.add_creature)

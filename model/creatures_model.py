@@ -1,6 +1,11 @@
+from backend.json_serialisation.save_manager import SaveManager
+
 class CreaturesModel:
     def __init__(self):
-        self.creatures = []
+        self.creatures = self.load_creatures()
+
+    def load_creatures(self):
+        return SaveManager.loadAllCharacterCards()
 
     def add_creature(self, creature):
         self.creatures.append(creature)

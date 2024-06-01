@@ -32,6 +32,18 @@ class SaveManager:
                 return CardFabric.createCard(json.load(file))
         except FileNotFoundError:
             return None
+        
+    @staticmethod
+    def loadAllCharacterCards(directory: str = _DEFAULT_CARDS_LOCALISATION) -> list:
+        directory = os.path.normpath(directory)
+        cards = []
+        if os.path.exists(directory):
+            for filename in os.listdir(directory):
+                if filename.endswith('.json'):
+                    card = SaveManager.loadCharacterCard(os.path.join(directory, filename))
+                    if card:
+                        cards.append(card)
+        return cards
 
     @staticmethod
     def saveCreature(creature: Creature, localisation: str = _DEFAULT_CREATURES_LOCALISATION, saveName: str = "default") -> None:
