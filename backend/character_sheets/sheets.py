@@ -10,13 +10,15 @@ from localisation.descriptions import RollDescriptionAggregator, FightDescriptio
 
 
 class Creature:
-    def __init__(self, name:str = "", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None):
+    def __init__(self, name:str = "", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), characterPicture : str= "" , currentHp:int = None):
         self.name = name
         self.statistics = statistics
         self.skills = skills
         self.talents = talents
         self.development = development
         self.attributes = attributes
+        self.characterPicture = characterPicture
+
         self.currentHp = self.statistics.wounds if currentHp is None else currentHp
 
     def skillTest(self,skill:Skills, modificator:TestModificator = TestModificator.COMMON) -> (bool,int,int): #(Test sucsesfully, Value of roll, Number of succeses)
@@ -86,6 +88,7 @@ class Creature:
             "talents" : talents,
             "development" : self.development.__dict__(),
             "attributes" : self.attributes.__dict__(),
+            'characterPicture': self.characterPicture,
             "currentHp" : self.currentHp
 
         }
@@ -161,8 +164,8 @@ class Creature:
     def maxHP(self):
         return self.statistics.wounds
 class Character(Creature):
-    def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment()):
-        super().__init__(name, statistics,skills,talents,development,attributes,currentHp)
+    def __init__(self, name:str="", statistics:Statistics = Statistics(), skills:set = set(), talents:set = set(), development:Development = Development(), attributes: Attributes = Attributes(), currentHp:int = None, race: Races = Races.HUMAN, equipment: Equipment = Equipment(),characterPicture : str= "" ):
+        super().__init__(name, statistics,skills,talents,development,attributes,characterPicture,currentHp)
         self.equipment = equipment
         self.race = race
 
@@ -182,6 +185,7 @@ class Character(Creature):
             'development': self.development.__dict__(),
             'attributes': self.attributes.__dict__(),
             'currentHp': self.currentHp,
+            'characterPicture': self.characterPicture,
             'equipment': self.equipment.__dict__(),
             'race' : self.race.value
         }
@@ -220,10 +224,9 @@ class CharacterDescription:
 
 
 class Card:
-    def __init__(self, playerName:str = "", playerCharacter:Character = Character(), characterPicture = "", characterDescription:CharacterDescription = CharacterDescription(),history:str =""):
+    def __init__(self, playerName:str = "", playerCharacter:Character = Character(),  characterDescription:CharacterDescription = CharacterDescription(),history:str =""):
         self.playerName = playerName
         self.playerCharacter = playerCharacter
-        self.characterPicture = characterPicture
         self.characterDescription = characterDescription
         self.history = history
 
@@ -231,7 +234,6 @@ class Card:
         return {
             'playerName' : self.playerName,
             'playerCharacter' : self.playerCharacter.__dict__(),
-            'characterPicture' : self.characterPicture,
             'characterDescription' : self.characterDescription.__dict__(),
             'history' : self.history
 
