@@ -48,7 +48,7 @@ class CharactersController:
 
     def add_character_token(self):
         character_name = self.selected_character_name
-        character = self.model.get_character_by_name(character_name)
+        character = self.model.get_character_by_name(character_name).playerCharacter
         if character:
             token = Token(creature=character)
             
