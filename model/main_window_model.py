@@ -14,7 +14,7 @@ class MainWindowModel:
     def __init__(self):
         self.title = "BFVTT Application"
         self.geometry = (100, 100, 1200, 800)
-        self.icon_path = 'frontend/resources/logo/bfvtt_icon_no_bg.png'
+        self.icon_path = os.path.normpath("frontend/resources/logo/bfvtt_icon_no_bg.png")
         self.toolbar_model = ToolbarModel()
         self.map_view_model = MapViewModel()
         self.chat_model = ChatModel()
