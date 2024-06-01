@@ -246,13 +246,10 @@ class CharacterSheet(QMainWindow):
             wp=int(self.main_stats_inputs['WP'][0].text()),
             fel=int(self.main_stats_inputs['Fel'][0].text()),
             w=int(self.secondary_stats_inputs['W'][0].text()),
-            #strengthBonus=int(self.secondary_stats_inputs['SB'][0].text()), # Can be calculated from sheets.py, cant be modified
-            #toughnessBonus=int(self.secondary_stats_inputs['TB'][0].text()), # Can be calculated from sheets.py, cant be modifiec
             m=int(self.secondary_stats_inputs['M'][0].text()),
             magic=int(self.secondary_stats_inputs['Mag'][0].text()),
             ip=int(self.secondary_stats_inputs['IP'][0].text()), # Modifiable, cant be developed 
-            fp=int(self.secondary_stats_inputs['FP'][0].text()), # Modifiable, cant be developed
-            #attacks=int(self.secondary_stats_inputs['A'][0].text()) # Can be modifiec, can be developed
+            fp=int(self.secondary_stats_inputs['FP'][0].text()) # Modifiable, cant be developed
         )
         #properties uwu
        
@@ -276,6 +273,41 @@ class CharacterSheet(QMainWindow):
         SaveManager.saveCharacterCard(characterCard=card, saveName=name.replace(" ", "_"))
         return card
 
+    def load_character(self, character_card: Card):
+        self.name_input.setText(character_card.playerName)
+        #race_index = ["r.1", "r.2", "r.3", "r.4"].index(character_card.playerCharacter.race.id)
+        # DEBUG set to 1 for now
+        self.race_combo.setCurrentIndex(1)
+        self.current_career_input.setText(character_card.characterDescription.currentProfession)
+        self.previous_careers_input.setText(character_card.characterDescription.previousProfession)
+        self.character_icon_button.setIcon(QIcon(character_card.characterPicture))
+        self.character_icon_button.setIconSize(QSize(100, 100))
+
+        self.age_input.setText(str(character_card.characterDescription.age))
+        self.gender_input.setText(character_card.characterDescription.sex)
+        self.height_input.setText(str(character_card.characterDescription.height))
+        self.weight_input.setText(str(character_card.characterDescription.weight))
+        self.eyes_color_input.setText(character_card.characterDescription.colorOfEyes)
+        self.hair_color_input.setText(character_card.characterDescription.colorOfHairs)
+        self.star_sign_input.setText(character_card.characterDescription.starSign)
+        self.siblings_input.setText(str(character_card.characterDescription.siblings))
+        self.birthplace_input.setText(character_card.characterDescription.birthplace)
+        self.distinguishing_marks_input.setText(character_card.characterDescription.distenguishingMarks)
+
+        self.main_stats_inputs['WS'][0].setText(str(character_card.playerCharacter.statistics.ws))
+        self.main_stats_inputs['BS'][0].setText(str(character_card.playerCharacter.statistics.bs))
+        self.main_stats_inputs['S'][0].setText(str(character_card.playerCharacter.statistics.s))
+        self.main_stats_inputs['T'][0].setText(str(character_card.playerCharacter.statistics.t))
+        self.main_stats_inputs['Ag'][0].setText(str(character_card.playerCharacter.statistics.ag))
+        self.main_stats_inputs['Int'][0].setText(str(character_card.playerCharacter.statistics.int))
+        self.main_stats_inputs['WP'][0].setText(str(character_card.playerCharacter.statistics.wp))
+        self.main_stats_inputs['Fel'][0].setText(str(character_card.playerCharacter.statistics.fel))
+        self.secondary_stats_inputs['W'][0].setText(str(character_card.playerCharacter.statistics.w))
+        self.secondary_stats_inputs['M'][0].setText(str(character_card.playerCharacter.statistics.m))
+        self.secondary_stats_inputs['Mag'][0].setText(str(character_card.playerCharacter.statistics.magic))
+        self.secondary_stats_inputs['IP'][0].setText(str(character_card.playerCharacter.statistics.ip))
+        self.secondary_stats_inputs['FP'][0].setText(str(character_card.playerCharacter.statistics.fp))
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
@@ -288,3 +320,4 @@ if __name__ == '__main__':
 
     ex = CharacterSheet()
     sys.exit(app.exec())
+

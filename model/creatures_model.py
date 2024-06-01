@@ -7,3 +7,9 @@ class CreaturesModel:
 
     def get_creatures(self):
         return self.creatures
+
+    def get_creature_by_name(self, name):
+        for creature in self.creatures:
+            if creature.playerName == name:
+                return creature
+        return None

@@ -13,12 +13,21 @@ class CreaturesController:
 
     def connect_signals(self):
         self.view.add_button.clicked.connect(self.add_creature)
+        self.view.creature_list.itemDoubleClicked.connect(self.open_character_sheet)
 
     def add_creature(self):
         # Open character sheet
         self.character_sheet = CharacterSheet()
         self.character_sheet.show()
         self.character_sheet.save_button.clicked.connect(self.save_character)
+
+    def open_character_sheet(self, item):
+        creature_name = item.text()
+        creature = self.model.get_creature_by_name(creature_name)
+        if creature:
+            self.character_sheet = CharacterSheet()
+            self.character_sheet.load_character(creature)
+            self.character_sheet.show()
 
     def save_character(self):
         # Logic to save the character from the character sheet
