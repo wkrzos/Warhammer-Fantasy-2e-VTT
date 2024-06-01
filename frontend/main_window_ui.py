@@ -27,6 +27,11 @@ from model.action_panel_model import ActionPanelModel
 from frontend.widgets.action_panel_ui import ActionPanelUI
 from controller.action_panel_controller import ActionPanelController
 
+import os
+from PySide6.QtWidgets import QHBoxLayout, QWidget, QSplitter, QTabWidget
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
+
 class MainWindowView:
     def __init__(self, main_window):
         self.main_window = main_window
@@ -43,7 +48,12 @@ class MainWindowView:
         self.main_window.setWindowTitle(self.main_window.tr(model.title))
         self.main_window.setGeometry(*model.geometry)
 
-        icon_path = os.path.join(os.path.dirname(__file__), model.icon_path)
+        icon_path = model.icon_path
+        if not os.path.exists(icon_path):
+            print(f"Icon path does not exist: {icon_path}")
+        else:
+            print(f"Setting icon from: {icon_path}")
+        
         self.main_window.setWindowIcon(QIcon(icon_path))
 
         self.init_ui()
