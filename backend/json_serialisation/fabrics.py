@@ -114,6 +114,7 @@ class CreaturesFabric:
                 talents=EnumFabric.createEnumSet(dic["talents"]),
                 development=CreaturesFabric._createDevelopmnets(dic["development"]),
                 attributes=CreaturesFabric._createAtributes(dic["attributes"]),
+                characterPicture=dic['characterPicture'],
                 currentHp=dic["currentHp"],
                 race=EnumFabric.createEnum(dic["race"]),
                 equipment=CreaturesFabric._createEquipment(dic["equipment"])
@@ -128,6 +129,7 @@ class CreaturesFabric:
                 statistics=CreaturesFabric._createStatistics(dic["statistics"]),
                 skills=EnumFabric.createEnumSet(dic["skills"]),
                 talents=EnumFabric.createEnumSet(dic["talents"]),
+                characterPicture=dic['characterPicture'],
                 development=CreaturesFabric._createDevelopmnets(dic["development"]),
                 attributes=CreaturesFabric._createAtributes(dic["attributes"]),
                 currentHp=dic["currentHp"]
@@ -204,7 +206,6 @@ class CardFabric:
             result = Card(
                 playerName=dic["playerName"],
                 playerCharacter=CreaturesFabric.createCharacter(dic['playerCharacter']),
-                characterPicture= dic['characterPicture'],
                 history=dic['history']
             )
         except KeyError:
