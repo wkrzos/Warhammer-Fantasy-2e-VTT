@@ -26,6 +26,7 @@ from controller.music_player_controller import MusicPlayerController
 from model.action_panel_model import ActionPanelModel
 from frontend.widgets.action_panel_ui import ActionPanelUI
 from frontend.widgets.characters_ui import CharactersViewUI
+from frontend.widgets.welcome_screen_ui import SplashScreen
 
 class MainWindowView:
     def __init__(self, main_window):
@@ -39,6 +40,7 @@ class MainWindowView:
         self.options_view_ui = OptionsViewUI(self.main_window)
         self.music_player_view_ui = MusicPlayerViewUI(self.main_window)
         self.action_panel_ui = ActionPanelUI(self.main_window)
+        self.welcome_screen_view = SplashScreen()
 
     def setup_ui(self, model):
         self.main_window.setWindowTitle(self.main_window.tr(model.title))

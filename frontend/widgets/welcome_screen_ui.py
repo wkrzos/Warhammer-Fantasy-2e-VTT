@@ -1,10 +1,10 @@
-# splash_screen.py
-
-from PySide6.QtCore import Qt, QPropertyAnimation, QRect
+from PySide6.QtCore import Qt, QPropertyAnimation, QRect, Signal
 from PySide6.QtGui import QPainter, QBrush, QColor, QLinearGradient, QPixmap
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton
 
 class SplashScreen(QWidget):
+    language_selected = Signal()
+
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.FramelessWindowHint)
@@ -14,10 +14,10 @@ class SplashScreen(QWidget):
 
     def init_ui(self):
         main_layout = QVBoxLayout()
-        
+
         # Horizontal layout for logo and text
         logo_and_text_layout = QHBoxLayout()
-        
+
         # Logo
         logo = QLabel()
         logo_pixmap = QPixmap("frontend/resources/logo/bfvtt_icon_no_bg.png")  # Ensure the path is correct
@@ -43,12 +43,32 @@ class SplashScreen(QWidget):
         text_layout.addWidget(title)
         text_layout.addWidget(version)
         text_layout.addWidget(authors)
-        
+
         logo_and_text_layout.addWidget(logo)
         logo_and_text_layout.addLayout(text_layout)
-        
+
         main_layout.addLayout(logo_and_text_layout)
+
+        # Language selection
+        language_layout = QHBoxLayout()
+        language_label = QLabel("Select Language:")
+        language_label.setStyleSheet("font-size: 18px; color: white;")
+        self.language_combo = QComboBox()
+        self.language_combo.addItems(["English", "Polish", "German"])
+        language_layout.addWidget(language_label)
+        language_layout.addWidget(self.language_combo)
+        main_layout.addLayout(language_layout)
+
+        # Start button
+        start_button = QPushButton("Start")
+        start_button.setStyleSheet("font-size: 18px; color: white; background-color: #5A9;")
+        start_button.clicked.connect(self.on_start_clicked)
+        main_layout.addWidget(start_button)
+
         self.setLayout(main_layout)
+
+    def on_start_clicked(self):
+        self.language_selected.emit()
 
     def paintEvent(self, event):
         painter = QPainter(self)

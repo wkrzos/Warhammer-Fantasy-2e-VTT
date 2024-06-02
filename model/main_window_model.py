@@ -9,6 +9,7 @@ from model.music_player_model import MusicPlayerModel
 from model.options_model import OptionsModel
 from model.toolbar_model import ToolbarModel
 from model.characters_model import CharactersModel
+from model.welcome_screen_model import WelcomeScreenModel
 
 class MainWindowModel:
     def __init__(self):
@@ -24,3 +25,4 @@ class MainWindowModel:
         self.options_model = OptionsModel()
         self.music_player_model = MusicPlayerModel((os.path.join(os.path.dirname(__file__), '../music')))
         self.action_panel_model = ActionPanelModel()
+        self.welcome_screen_model = WelcomeScreenModel()
