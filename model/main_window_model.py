@@ -10,7 +10,6 @@ from model.options_model import OptionsModel
 from model.toolbar_model import ToolbarModel
 from model.characters_model import CharactersModel
 
-
 class MainWindowModel:
     def __init__(self):
         self.title = "BFVTT Application"

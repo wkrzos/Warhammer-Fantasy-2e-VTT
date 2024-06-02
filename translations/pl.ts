@@ -1,4 +1,3 @@
-xml
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1">
@@ -231,9 +230,7 @@ xml
         <source>Add Item</source>
         <translation>Dodaj Przedmiot</translation>
     </message>
-</
-
-context>
+</context>
 <context>
     <name>MapViewUI</name>
     <message>
