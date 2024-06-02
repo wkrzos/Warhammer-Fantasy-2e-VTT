@@ -260,6 +260,39 @@
     </message>
 </context>
 <context>
+    <name>MainWindowView</name>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="77"/>
+        <source>Chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="78"/>
+        <source>Characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="79"/>
+        <source>Creatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="80"/>
+        <source>Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="81"/>
+        <source>Music Player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="82"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MapViewUI</name>
     <message>
         <location filename="../frontend/widgets/map_ui.py" line="70"/>
@@ -278,22 +311,17 @@
 <context>
     <name>OptionsViewUI</name>
     <message>
-        <location filename="../frontend/widgets/options_ui.py" line="14"/>
+        <location filename="../frontend/widgets/options_ui.py" line="13"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/options_ui.py" line="27"/>
-        <source>Apply Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/widgets/options_ui.py" line="32"/>
+        <location filename="../frontend/widgets/options_ui.py" line="21"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/options_ui.py" line="41"/>
+        <location filename="../frontend/widgets/options_ui.py" line="30"/>
         <source>{key}: {value}</source>
         <translation type="unfinished"></translation>
     </message>
@@ -313,50 +341,6 @@
     <message>
         <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>self.main_window</name>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="65"/>
-        <location filename="../frontend/main_window_ui.py" line="93"/>
-        <source>Chat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="66"/>
-        <location filename="../frontend/main_window_ui.py" line="94"/>
-        <source>Characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="67"/>
-        <location filename="../frontend/main_window_ui.py" line="95"/>
-        <source>Creatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="68"/>
-        <location filename="../frontend/main_window_ui.py" line="96"/>
-        <source>Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="69"/>
-        <location filename="../frontend/main_window_ui.py" line="97"/>
-        <source>Music Player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="70"/>
-        <location filename="../frontend/main_window_ui.py" line="98"/>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frontend/main_window_ui.py" line="89"/>
-        <source>BFVTT Application</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

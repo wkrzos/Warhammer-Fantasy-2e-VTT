@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
         main_window = QMainWindow()
         main_window_model = MainWindowModel()
-        main_window_view = MainWindowView(main_window)
+        main_window_view = MainWindowView(main_window)  
         main_window_controller = MainWindowController(main_window_model, main_window_view)
         main_window.show()
 

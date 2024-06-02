@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>ActionPanelUI</name>
     <message>
@@ -228,137 +228,155 @@
         <translation>Widok Czatu</translation>
     </message>
     <message>
-    <location filename="../frontend/widgets/chat_ui.py" line="31"/>
-    <source>Send</source>
-    <translation>Wyślij</translation>
-</message>
+        <location filename="../frontend/widgets/chat_ui.py" line="31"/>
+        <source>Send</source>
+        <translation>Wyślij</translation>
+    </message>
 </context>
 <context>
-<name>CreaturesViewUI</name>
-<message>
-    <location filename="../frontend/widgets/creatures_ui.py" line="11"/>
-    <source>Creatures</source>
-    <translation>Stworzenia</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/creatures_ui.py" line="19"/>
-    <source>Add Creature</source>
-    <translation>Dodaj Stworzenie</translation>
-</message>
+    <name>CreaturesViewUI</name>
+    <message>
+        <location filename="../frontend/widgets/creatures_ui.py" line="11"/>
+        <source>Creatures</source>
+        <translation>Stworzenia</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/creatures_ui.py" line="19"/>
+        <source>Add Creature</source>
+        <translation>Dodaj Stworzenie</translation>
+    </message>
 </context>
 <context>
-<name>ItemsViewUI</name>
-<message>
-    <location filename="../frontend/widgets/items_ui.py" line="11"/>
-    <source>Items</source>
-    <translation>Przedmioty</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/items_ui.py" line="19"/>
-    <source>Add Item</source>
-    <translation>Dodaj Przedmiot</translation>
-</message>
+    <name>ItemsViewUI</name>
+    <message>
+        <location filename="../frontend/widgets/items_ui.py" line="11"/>
+        <source>Items</source>
+        <translation>Przedmioty</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/items_ui.py" line="19"/>
+        <source>Add Item</source>
+        <translation>Dodaj Przedmiot</translation>
+    </message>
 </context>
 <context>
-<name>MapViewUI</name>
-<message>
-    <location filename="../frontend/widgets/map_ui.py" line="70"/>
-    <source>{distance:.0f} squares</source>
-    <translation>{distance:.0f} kwadratów</translation>
-</message>
+    <name>MainWindowView</name>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="77"/>
+        <source>Chat</source>
+        <translation>Czat</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="78"/>
+        <source>Characters</source>
+        <translation type="unfinished">Postacie</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="79"/>
+        <source>Creatures</source>
+        <translation type="unfinished">Stworzenia</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="80"/>
+        <source>Items</source>
+        <translation type="unfinished">Przedmioty</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="81"/>
+        <source>Music Player</source>
+        <translation type="unfinished">Odtwarzacz Muzyki</translation>
+    </message>
+    <message>
+        <location filename="../frontend/main_window_ui.py" line="82"/>
+        <source>Options</source>
+        <translation type="unfinished">Opcje</translation>
+    </message>
 </context>
 <context>
-<name>MusicPlayerViewUI</name>
-<message>
-    <location filename="../frontend/widgets/music_player_ui.py" line="15"/>
-    <source>Music Player</source>
-    <translation>Odtwarzacz Muzyki</translation>
-</message>
+    <name>MapViewUI</name>
+    <message>
+        <location filename="../frontend/widgets/map_ui.py" line="70"/>
+        <source>{distance:.0f} squares</source>
+        <translation>{distance:.0f} kwadratów</translation>
+    </message>
 </context>
 <context>
-<name>OptionsViewUI</name>
-<message>
-    <location filename="../frontend/widgets/options_ui.py" line="14"/>
-    <source>Options</source>
-    <translation>Opcje</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/options_ui.py" line="27"/>
-    <source>Apply Language</source>
-    <translation>Zastosuj Język</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/options_ui.py" line="32"/>
-    <source>Exit</source>
-    <translation>Wyjście</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/options_ui.py" line="41"/>
-    <source>{key}: {value}</source>
-    <translation>{key}: {value}</translation>
-</message>
+    <name>MusicPlayerViewUI</name>
+    <message>
+        <location filename="../frontend/widgets/music_player_ui.py" line="15"/>
+        <source>Music Player</source>
+        <translation>Odtwarzacz Muzyki</translation>
+    </message>
 </context>
 <context>
-<name>ToolbarUI</name>
-<message>
-    <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
-    <source>Select</source>
-    <translation>Wybierz</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
-    <source>Pan</source>
-    <translation>Przesuń</translation>
-</message>
-<message>
-    <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
-    <source>Measure</source>
-    <translation>Zmierz</translation>
-</message>
+    <name>OptionsViewUI</name>
+    <message>
+        <location filename="../frontend/widgets/options_ui.py" line="13"/>
+        <source>Options</source>
+        <translation>Opcje</translation>
+    </message>
+    <message>
+        <source>Apply Language</source>
+        <translation type="vanished">Zastosuj Język</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/options_ui.py" line="21"/>
+        <source>Exit</source>
+        <translation>Wyjście</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/options_ui.py" line="30"/>
+        <source>{key}: {value}</source>
+        <translation>{key}: {value}</translation>
+    </message>
 </context>
 <context>
-<name>self.main_window</name>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="65"/>
-    <location filename="../frontend/main_window_ui.py" line="93"/>
-    <source>Chat</source>
-    <translation>Czat</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="66"/>
-    <location filename="../frontend/main_window_ui.py" line="94"/>
-    <source>Characters</source>
-    <translation>Postacie</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="67"/>
-    <location filename="../frontend/main_window_ui.py" line="95"/>
-    <source>Creatures</source>
-    <translation>Stworzenia</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="68"/>
-    <location filename="../frontend/main_window_ui.py" line="96"/>
-    <source>Items</source>
-    <translation>Przedmioty</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="69"/>
-    <location filename="../frontend/main_window_ui.py" line="97"/>
-    <source>Music Player</source>
-    <translation>Odtwarzacz Muzyki</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="70"/>
-    <location filename="../frontend/main_window_ui.py" line="98"/>
-    <source>Options</source>
-    <translation>Opcje</translation>
-</message>
-<message>
-    <location filename="../frontend/main_window_ui.py" line="89"/>
-    <source>BFVTT Application</source>
-    <translation>Aplikacja BFVTT</translation>
-</message>
+    <name>ToolbarUI</name>
+    <message>
+        <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
+        <source>Select</source>
+        <translation>Wybierz</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
+        <source>Pan</source>
+        <translation>Przesuń</translation>
+    </message>
+    <message>
+        <location filename="../frontend/widgets/toolbar_ui.py" line="16"/>
+        <source>Measure</source>
+        <translation>Zmierz</translation>
+    </message>
+</context>
+<context>
+    <name>self.main_window</name>
+    <message>
+        <source>Chat</source>
+        <translation type="vanished">Czat</translation>
+    </message>
+    <message>
+        <source>Characters</source>
+        <translation type="vanished">Postacie</translation>
+    </message>
+    <message>
+        <source>Creatures</source>
+        <translation type="vanished">Stworzenia</translation>
+    </message>
+    <message>
+        <source>Items</source>
+        <translation type="vanished">Przedmioty</translation>
+    </message>
+    <message>
+        <source>Music Player</source>
+        <translation type="vanished">Odtwarzacz Muzyki</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="vanished">Opcje</translation>
+    </message>
+    <message>
+        <source>BFVTT Application</source>
+        <translation type="vanished">Aplikacja BFVTT</translation>
+    </message>
 </context>
 </TS>
-
