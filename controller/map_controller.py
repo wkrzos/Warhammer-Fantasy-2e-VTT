@@ -1,3 +1,4 @@
+import math
 from PySide6.QtCore import QObject, QPoint, Qt, QRect
 from frontend.widgets.map_ui import MapViewUI
 from model.map_model import MapViewModel
@@ -81,21 +82,35 @@ class MapViewController:
         else:
             self.zoom_out()
 
+
     def update_selection(self):
         selected_tokens = []
         selection_start, selection_end = self.model.get_selection()
         if selection_start and selection_end:
             rect = QRect(QPoint(selection_start.toPoint()), QPoint(selection_end.toPoint())).normalized()
-            for token in self.model.get_tokens():
+            tokens = self.model.get_tokens()
+            
+            # Calculate distances to selection_start
+            token_distances = []
+            for token in tokens:
                 x, y = token.get_position()
                 scaled_grid_size = self.model.grid_size * self.model.get_zoom_level()
                 screen_x = x * scaled_grid_size + self.model.get_offset()[0]
                 screen_y = y * scaled_grid_size + self.model.get_offset()[1]
                 token_rect = QRect(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
                 if rect.intersects(token_rect):
-                    selected_tokens.append(token)
+                    distance = math.sqrt((screen_x - selection_start.x()) ** 2 + (screen_y - selection_start.y()) ** 2)
+                    token_distances.append((distance, token))
+            
+            # Sort tokens by distance to selection_start
+            token_distances.sort(key=lambda x: x[0])
+            
+            # Add sorted tokens to selected_tokens
+            selected_tokens = [token for _, token in token_distances]
+
         self.model.set_selected_tokens(selected_tokens)
         self.view.update()
+
 
     def move_tokens(self, delta, shift_pressed):
         selected_tokens = self.model.get_selected_tokens()
