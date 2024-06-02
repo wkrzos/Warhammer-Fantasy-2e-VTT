@@ -45,19 +45,19 @@
         "currentHp": 12,
         "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/lyra.png",
         "equipment": {
-            "items": ["Lockpicks", "Smoke Bombs", "Dagger"],
-            "equiptArmors": ["Light Leather Armor"],
+            "items": [],
+            "equiptArmors": [],
             "weapon": {
                 "class": "weapon",
-                "name": "Shortbow",
-                "price": 120,
-                "description": "A lightweight shortbow, perfect for quick and precise shots.",
-                "weight": 2,
-                "traits": ["Quick", "Silent"],
-                "type": "wtp.2",
-                "range": 10,
-                "dmgModifier": 2,
-                "strengthModificator": false
+                "name": "",
+                "price": 0,
+                "description": "",
+                "weight": 0,
+                "traits": [],
+                "type": "wtp.1",
+                "range": 1,
+                "dmgModifier": -3,
+                "strengthModificator": true
             }
         },
         "race": "r.2"

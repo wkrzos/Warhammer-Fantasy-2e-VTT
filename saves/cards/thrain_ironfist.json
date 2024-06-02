@@ -45,22 +45,22 @@
         "currentHp": 20,
         "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/thrain.png",
         "equipment": {
-            "items": ["Hammer", "Pickaxe", "Shield"],
-            "equiptArmors": ["Heavy Plate Armor"],
+            "items": [],
+            "equiptArmors": [],
             "weapon": {
                 "class": "weapon",
-                "name": "Warhammer",
-                "price": 200,
-                "description": "A massive warhammer, capable of crushing the toughest of armor.",
-                "weight": 5,
-                "traits": ["Crushing", "Heavy"],
-                "type": "wtp.3",
+                "name": "",
+                "price": 0,
+                "description": "",
+                "weight": 0,
+                "traits": [],
+                "type": "wtp.1",
                 "range": 1,
-                "dmgModifier": 4,
+                "dmgModifier": -3,
                 "strengthModificator": true
             }
         },
-        "race": "r.3"
+        "race": "r.2"
     },
     "characterDescription": {
         "colorOfEyes": "Brown",

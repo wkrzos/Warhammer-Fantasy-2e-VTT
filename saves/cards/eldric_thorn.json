@@ -45,22 +45,22 @@
         "currentHp": 15,
         "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/eldric.png",
         "equipment": {
-            "items": ["Healing Potion", "Rope", "Torch"],
-            "equiptArmors": ["Leather Armor"],
+            "items": [],
+            "equiptArmors": [],
             "weapon": {
                 "class": "weapon",
-                "name": "Longsword",
-                "price": 150,
-                "description": "A finely crafted longsword with a steel blade and a leather-wrapped hilt.",
-                "weight": 3,
-                "traits": ["Balanced", "Sharp"],
+                "name": "",
+                "price": 0,
+                "description": "",
+                "weight": 0,
+                "traits": [],
                 "type": "wtp.1",
                 "range": 1,
-                "dmgModifier": 3,
+                "dmgModifier": -3,
                 "strengthModificator": true
             }
         },
-        "race": "r.1"
+        "race": "r.2"
     },
     "characterDescription": {
         "colorOfEyes": "Blue",

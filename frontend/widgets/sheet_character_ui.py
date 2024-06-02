@@ -279,7 +279,7 @@ class CharacterSheet(QMainWindow):
             return
         
         name = self.name_input.text()
-        race = Races(self.race_combo.currentIndex() + 1)
+        race = Races(1)
         current_career = self.current_career_input.text()
         previous_careers = self.previous_careers_input.text()
 
@@ -413,7 +413,9 @@ class CharacterSheet(QMainWindow):
         self.previous_careers_input.setText(character_card.characterDescription.previousProfession)
         self.character_icon_button.setIcon(QIcon(character_card.playerCharacter.characterPicture))
         self.character_icon_button.setIconSize(QSize(100, 100))
-
+        ###
+        print(character_card.characterDescription.age)
+        ###
         self.age_input.setText(str(character_card.characterDescription.age))
         self.gender_input.setText(character_card.characterDescription.sex)
         self.height_input.setText(str(character_card.characterDescription.height))
@@ -441,6 +443,7 @@ class CharacterSheet(QMainWindow):
 
         # Update summary statistics
         self.update_summary_statistics(character_card.playerCharacter)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

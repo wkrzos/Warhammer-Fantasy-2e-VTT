@@ -34,6 +34,10 @@ class CharactersController:
         creature = self.model.get_character_by_name(creature_name)
         if creature:
             self.character_sheet = CharacterSheet()
+            ###
+            print(creature)
+            print(creature.__dict__())
+            ###
             self.character_sheet.load_character(creature)
             self.character_sheet.show()
 
