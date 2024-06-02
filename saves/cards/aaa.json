@@ -1,0 +1,79 @@
+{
+    "playerName": "aaa",
+    "playerCharacter": {
+        "class": "character",
+        "name": "aaa",
+        "statistics": {
+            "weaponSkill": 0,
+            "ballisticSkill": 0,
+            "strength": 0,
+            "toughness": 0,
+            "agility": 0,
+            "intelligence": 0,
+            "willPower": 0,
+            "fellowship": 0,
+            "attacks": 1,
+            "wounds": 0,
+            "movement": 0,
+            "magic": 0,
+            "insanityPoints": 0,
+            "fatePoints": 0
+        },
+        "skills": [],
+        "talents": [],
+        "development": {
+            "exp": 0,
+            "updates": {
+                "ms.1": 0,
+                "ms.2": 0,
+                "ms.3": 0,
+                "ms.4": 0,
+                "ms.5": 0,
+                "ms.6": 0,
+                "ms.7": 0,
+                "ms.8": 0,
+                "ss.1": 0,
+                "ss.2": 0,
+                "ss.6": 0,
+                "ss.5": 0
+            }
+        },
+        "attributes": {
+            "actionsRemain": 2,
+            "attributesActive": []
+        },
+        "currentHp": 0,
+        "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/12.png",
+        "equipment": {
+            "items": [],
+            "equiptArmors": [],
+            "weapon": {
+                "class": "weapon",
+                "name": "",
+                "price": 0,
+                "description": "",
+                "weight": 0,
+                "traits": [],
+                "type": "wtp.1",
+                "range": 1,
+                "dmgModifier": -3,
+                "strengthModificator": true
+            }
+        },
+        "race": "r.2"
+    },
+    "characterDescription": {
+        "colorOfEyes": "",
+        "colorOfHairs": "",
+        "weight": 0,
+        "height": 0,
+        "sex": "",
+        "age": 0,
+        "starSign": "",
+        "birthplace": "",
+        "distenguishingMarks": "",
+        "previousProfession": "",
+        "currentProfession": ""
+    },
+    "history": "History"
+}

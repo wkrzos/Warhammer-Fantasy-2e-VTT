@@ -16,7 +16,7 @@ for root, dirs, files in os.walk(frontend_dir):
             py_files.append(os.path.join(root, file))
 
 # Join the files into a single string
-py_files_str = ' '.join(py_files)
+py_files_str = ' '.join(py_files) + ' ' + 'controller/action_panel_controller.py'
 
 # Run pyside6-lupdate for each language to update .ts files
 for lang in languages:
