@@ -128,6 +128,7 @@ class Creature:
     @property
     def summaryHp(self):
         return self.statistics.wounds + self.development.getStatsBonus(SecondaryStats.WOUNDS)
+    @property
     def summaryAttacks(self):
         return self.statistics.attacks + self.development.getStatsBonus(SecondaryStats.ATTACKS)
     @property
