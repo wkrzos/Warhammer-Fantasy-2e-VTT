@@ -10,6 +10,7 @@ from controller.options_controller import OptionsController
 from controller.toolbar_controller import ToolbarController
 from frontend.main_window_ui import MainWindowView
 from frontend.widgets.map_ui import MapViewUI
+from localisation.actionsText import ActionsTextAggregator
 from localisation.characteristics import CharacterTextAggregator
 from localisation.descriptions import RollDescriptionAggregator
 from localisation.itemsText import ItemsTextAggregator
@@ -33,12 +34,11 @@ class MainWindowController:
         self.action_panel_controller = ActionPanelController(self.model.action_panel_model, self.view.action_panel_ui)
         self.toolbar_controller = ToolbarController(self.model.toolbar_model, self.view.toolbar_view, self)
         self.music_controller = MusicPlayerController(self.model.music_player_model, self.view.music_player_view_ui)
-        self.welcome_screen_controller = WelcomeScreenController(self.model.welcome_screen_model, self.view.welcome_screen_view)
+        self.welcome_screen_controller = WelcomeScreenController(self.model.welcome_screen_model, self.view.welcome_screen_view) #Not needed?
         
         # Connect the toolbar selection signal to the map view controller
         self.toolbar_controller.view.tool_selected = self.tool_selected
 
-        self.load_backend_localisation()
 
     def tool_selected(self, tool):
         # Propagate the selected tool to the map view controller
@@ -58,3 +58,5 @@ class MainWindowController:
         ItemsTextAggregator.load_armor_types_names(self.welcome_screen_controller.model.get_language())
         ItemsTextAggregator.load_weapon_trait_names(self.welcome_screen_controller.model.get_language())
         ItemsTextAggregator.load_hit_localisation_names(self.welcome_screen_controller.model.get_language())
+        ActionsTextAggregator.load_double_actions(self.welcome_screen_controller.model.get_language())
+        ActionsTextAggregator.load_basic_actions(self.welcome_screen_controller.model.get_language())

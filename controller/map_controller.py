@@ -110,6 +110,7 @@ class MapViewController:
 
         self.model.set_selected_tokens(selected_tokens)
         self.view.update()
+        print(selected_tokens)
 
 
     def move_tokens(self, delta, shift_pressed):

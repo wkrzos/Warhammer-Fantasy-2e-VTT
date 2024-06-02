@@ -1,5 +1,8 @@
 from PySide6.QtCore import QObject
 from backend.mechanics.actions.actions_implementation import SelfAction, ActionOnAnother, SpecialAction
+from backend.mechanics.actions.actions_type import BasicActions, DoubleActions
+from localisation.actionsText import ActionsTextAggregator
+
 
 class ActionPanelController(QObject):
     def __init__(self, model, view):
@@ -18,22 +21,22 @@ class ActionPanelController(QObject):
         if len(tokens) == 1:
             token = tokens[0]
             actions.extend([
-                (self.tr("Parry"), lambda: SelfAction.parry(token)),
-                (self.tr("Aiming"), lambda: SelfAction.aiming(token)),
-                (self.tr("Wake Up"), lambda: SelfAction.wakeUp(token)),
-                (self.tr("Defense Stand"), lambda: SelfAction.defenseStand(token)),
-                (self.tr("Use Talent"), lambda: SelfAction.useTalent(token))
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.PARRY]), lambda: SelfAction.parry(token)),
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.AIMING]), lambda: SelfAction.aiming(token)),
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.WAKE_UP]), lambda: SelfAction.wakeUp(token)),
+                (self.tr(ActionsTextAggregator.doubleActionsText[DoubleActions.DEFENSE_STAND]), lambda: SelfAction.defenseStand(token)),
+                #(self.tr("Use Talent"), lambda: SelfAction.useTalent(token))
             ])
 
         if len(tokens) == 2:
             player, other = tokens
             actions.extend([
-                (self.tr("Simple Attack"), lambda: ActionOnAnother.simpleAtack(player, other)),
-                (self.tr("Multiple Attack"), lambda: ActionOnAnother.multipleAtack(player, other)),
-                (self.tr("Furious Attack"), lambda: ActionOnAnother.furiousAtack(player, other)),
-                (self.tr("Careful Attack"), lambda: ActionOnAnother.carefullAtack(player, other)),
-                (self.tr("Push"), lambda: ActionOnAnother.push(player, other)),
-                (self.tr("Feint"), lambda: ActionOnAnother.feint(player, other))
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.SIMPLE_ATACK]), lambda: ActionOnAnother.simpleAtack(player, other)),
+                (self.tr(ActionsTextAggregator.doubleActionsText[DoubleActions.MULTIPLE_ATACK]), lambda: ActionOnAnother.multipleAtack(player, other)),
+                (self.tr(ActionsTextAggregator.doubleActionsText[DoubleActions.FURIOUS_ATACK]), lambda: ActionOnAnother.furiousAtack(player, other)),
+                (self.tr(ActionsTextAggregator.doubleActionsText[DoubleActions.CAREFULL_ATACK]), lambda: ActionOnAnother.carefullAtack(player, other)),
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.PUSH]), lambda: ActionOnAnother.push(player, other)),
+                (self.tr(ActionsTextAggregator.basicActionsText[BasicActions.FEINT]), lambda: ActionOnAnother.feint(player, other))
             ])
 
         # Set actions in the model
