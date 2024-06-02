@@ -1,0 +1,79 @@
+{
+    "playerName": "Thrain Ironfist",
+    "playerCharacter": {
+        "class": "character",
+        "name": "Thrain Ironfist",
+        "statistics": {
+            "weaponSkill": 50,
+            "ballisticSkill": 20,
+            "strength": 45,
+            "toughness": 60,
+            "agility": 25,
+            "intelligence": 30,
+            "willPower": 55,
+            "fellowship": 20,
+            "attacks": 1,
+            "wounds": 20,
+            "movement": 3,
+            "magic": 0,
+            "insanityPoints": 0,
+            "fatePoints": 1
+        },
+        "skills": ["Mining", "Smithing", "Endurance"],
+        "talents": ["Very Resilient", "Sturdy"],
+        "development": {
+            "exp": 300,
+            "updates": {
+                "ms.1": 1,
+                "ms.2": 0,
+                "ms.3": 1,
+                "ms.4": 1,
+                "ms.5": 0,
+                "ms.6": 0,
+                "ms.7": 0,
+                "ms.8": 0,
+                "ss.1": 1,
+                "ss.2": 2,
+                "ss.6": 0,
+                "ss.5": 0
+            }
+        },
+        "attributes": {
+            "actionsRemain": 2,
+            "attributesActive": []
+        },
+        "currentHp": 20,
+        "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/thrain.png",
+        "equipment": {
+            "items": [],
+            "equiptArmors": [],
+            "weapon": {
+                "class": "weapon",
+                "name": "",
+                "price": 0,
+                "description": "",
+                "weight": 0,
+                "traits": [],
+                "type": "wtp.1",
+                "range": 1,
+                "dmgModifier": -3,
+                "strengthModificator": true
+            }
+        },
+        "race": "r.2"
+    },
+    "characterDescription": {
+        "colorOfEyes": "Brown",
+        "colorOfHairs": "Red",
+        "weight": 100,
+        "height": 150,
+        "sex": "Male",
+        "age": 40,
+        "starSign": "The Anvil",
+        "birthplace": "Karaz-a-Karak",
+        "distenguishingMarks": "Braided beard adorned with iron rings",
+        "previousProfession": "Blacksmith",
+        "currentProfession": "Warrior"
+    },
+    "history": "Thrain Ironfist is a dwarven warrior from the great hold of Karaz-a-Karak. Trained as a blacksmith, he now wields his warhammer in battle, fighting with the resilience and strength of his people."
+}
