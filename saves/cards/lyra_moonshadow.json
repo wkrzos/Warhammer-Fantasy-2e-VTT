@@ -1,0 +1,79 @@
+{
+    "playerName": "Lyra Moonshadow",
+    "playerCharacter": {
+        "class": "character",
+        "name": "Lyra Moonshadow",
+        "statistics": {
+            "weaponSkill": 30,
+            "ballisticSkill": 50,
+            "strength": 25,
+            "toughness": 30,
+            "agility": 45,
+            "intelligence": 40,
+            "willPower": 35,
+            "fellowship": 30,
+            "attacks": 1,
+            "wounds": 12,
+            "movement": 5,
+            "magic": 1,
+            "insanityPoints": 0,
+            "fatePoints": 1
+        },
+        "skills": ["Stealth", "Perception", "Lockpicking"],
+        "talents": ["Night Vision", "Marksman"],
+        "development": {
+            "exp": 250,
+            "updates": {
+                "ms.1": 0,
+                "ms.2": 1,
+                "ms.3": 0,
+                "ms.4": 0,
+                "ms.5": 1,
+                "ms.6": 0,
+                "ms.7": 0,
+                "ms.8": 0,
+                "ss.1": 0,
+                "ss.2": 1,
+                "ss.6": 1,
+                "ss.5": 0
+            }
+        },
+        "attributes": {
+            "actionsRemain": 2,
+            "attributesActive": []
+        },
+        "currentHp": 12,
+        "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/lyra.png",
+        "equipment": {
+            "items": ["Lockpicks", "Smoke Bombs", "Dagger"],
+            "equiptArmors": ["Light Leather Armor"],
+            "weapon": {
+                "class": "weapon",
+                "name": "Shortbow",
+                "price": 120,
+                "description": "A lightweight shortbow, perfect for quick and precise shots.",
+                "weight": 2,
+                "traits": ["Quick", "Silent"],
+                "type": "wtp.2",
+                "range": 10,
+                "dmgModifier": 2,
+                "strengthModificator": false
+            }
+        },
+        "race": "r.2"
+    },
+    "characterDescription": {
+        "colorOfEyes": "Green",
+        "colorOfHairs": "Black",
+        "weight": 60,
+        "height": 165,
+        "sex": "Female",
+        "age": 22,
+        "starSign": "The Shadow",
+        "birthplace": "Everwood",
+        "distenguishingMarks": "Tattoo of a crescent moon on her left wrist",
+        "previousProfession": "Thief",
+        "currentProfession": "Ranger"
+    },
+    "history": "Lyra Moonshadow, hailing from the forested village of Everwood, is a former thief who turned her skills to the service of her people as a ranger. Her sharp eyes and nimble fingers make her a deadly shot with her shortbow."
+}

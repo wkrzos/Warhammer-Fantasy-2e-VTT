@@ -1,0 +1,79 @@
+{
+    "playerName": "Eldric Thorn",
+    "playerCharacter": {
+        "class": "character",
+        "name": "Eldric Thorn",
+        "statistics": {
+            "weaponSkill": 45,
+            "ballisticSkill": 35,
+            "strength": 40,
+            "toughness": 50,
+            "agility": 30,
+            "intelligence": 35,
+            "willPower": 40,
+            "fellowship": 25,
+            "attacks": 1,
+            "wounds": 15,
+            "movement": 4,
+            "magic": 0,
+            "insanityPoints": 0,
+            "fatePoints": 2
+        },
+        "skills": ["Athletics", "Dodge", "Endurance"],
+        "talents": ["Warrior Born", "Marksman"],
+        "development": {
+            "exp": 200,
+            "updates": {
+                "ms.1": 1,
+                "ms.2": 0,
+                "ms.3": 1,
+                "ms.4": 1,
+                "ms.5": 0,
+                "ms.6": 0,
+                "ms.7": 0,
+                "ms.8": 0,
+                "ss.1": 0,
+                "ss.2": 1,
+                "ss.6": 0,
+                "ss.5": 0
+            }
+        },
+        "attributes": {
+            "actionsRemain": 2,
+            "attributesActive": []
+        },
+        "currentHp": 15,
+        "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/eldric.png",
+        "equipment": {
+            "items": ["Healing Potion", "Rope", "Torch"],
+            "equiptArmors": ["Leather Armor"],
+            "weapon": {
+                "class": "weapon",
+                "name": "Longsword",
+                "price": 150,
+                "description": "A finely crafted longsword with a steel blade and a leather-wrapped hilt.",
+                "weight": 3,
+                "traits": ["Balanced", "Sharp"],
+                "type": "wtp.1",
+                "range": 1,
+                "dmgModifier": 3,
+                "strengthModificator": true
+            }
+        },
+        "race": "r.1"
+    },
+    "characterDescription": {
+        "colorOfEyes": "Blue",
+        "colorOfHairs": "Blonde",
+        "weight": 80,
+        "height": 180,
+        "sex": "Male",
+        "age": 25,
+        "starSign": "The Warrior",
+        "birthplace": "Aldorf",
+        "distenguishingMarks": "Scar over left eye",
+        "previousProfession": "Squire",
+        "currentProfession": "Knight"
+    },
+    "history": "Eldric Thorn, born in Aldorf, was a squire before earning his knighthood through acts of bravery in battle. He carries the scar from a duel against a formidable foe, which only adds to his stoic and determined demeanor."
+}
