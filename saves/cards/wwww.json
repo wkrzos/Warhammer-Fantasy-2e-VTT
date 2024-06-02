@@ -59,9 +59,10 @@
                 "strengthModificator": true
             }
         },
-        "race": "r.1"
+        "race": "r.1",
+        "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/temp/5dec1cb950da6517537d3929c0e6c6a9.jpg"
     },
-    "characterPicture": "C:/Users/wojci/OneDrive/Pulpit/temp/5dec1cb950da6517537d3929c0e6c6a9.jpg",
+
     "characterDescription": {
         "colorOfEyes": "",
         "colorOfHairs": "",

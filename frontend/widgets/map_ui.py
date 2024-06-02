@@ -51,7 +51,7 @@ class MapViewUI(QWidget):
             painter.setBrush(QColor(255, 0, 0) if token not in selected_tokens else QColor(0, 255, 0))
             painter.drawEllipse(screen_x, screen_y, scaled_grid_size, scaled_grid_size)
             painter.setFont(DEFAULT_FONT)
-            painter.drawText(screen_x + 10, screen_y + 30, token.creature.playerName)
+            painter.drawText(screen_x + 10, screen_y + 30, token.creature.name)
 
     def draw_measurement(self, painter):
         measure_start, measure_end = self.model.get_measurement()

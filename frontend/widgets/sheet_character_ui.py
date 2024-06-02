@@ -257,6 +257,7 @@ class CharacterSheet(QMainWindow):
             name=name,
             race=race,
             statistics=statistics,
+            characterPicture=self.character_image_path
         )
 
 
@@ -264,7 +265,6 @@ class CharacterSheet(QMainWindow):
         card = Card(
             playerName=name,
             playerCharacter=character,
-            characterPicture=self.character_image_path,
             characterDescription=character_description,
             history = "History"
         )
@@ -280,7 +280,7 @@ class CharacterSheet(QMainWindow):
         self.race_combo.setCurrentIndex(1)
         self.current_career_input.setText(character_card.characterDescription.currentProfession)
         self.previous_careers_input.setText(character_card.characterDescription.previousProfession)
-        self.character_icon_button.setIcon(QIcon(character_card.characterPicture))
+        self.character_icon_button.setIcon(QIcon(character_card.playerCharacter.characterPicture))
         self.character_icon_button.setIconSize(QSize(100, 100))
 
         self.age_input.setText(str(character_card.characterDescription.age))
