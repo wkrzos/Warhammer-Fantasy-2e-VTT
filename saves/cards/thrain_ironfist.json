@@ -19,8 +19,8 @@
             "insanityPoints": 0,
             "fatePoints": 1
         },
-        "skills": ["Mining", "Smithing", "Endurance"],
-        "talents": ["Very Resilient", "Sturdy"],
+        "skills": [],
+        "talents": [],
         "development": {
             "exp": 300,
             "updates": {

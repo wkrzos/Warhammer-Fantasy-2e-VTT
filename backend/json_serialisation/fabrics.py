@@ -206,7 +206,8 @@ class CardFabric:
             result = Card(
                 playerName=dic["playerName"],
                 playerCharacter=CreaturesFabric.createCharacter(dic['playerCharacter']),
-                history=dic['history']
+                history=dic['history'],
+                characterDescription=CardFabric._createDescription(dic['characterDescription'])
             )
         except KeyError:
             result = Card()
