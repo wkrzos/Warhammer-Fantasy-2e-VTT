@@ -86,17 +86,3 @@ class MainWindowView:
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.main_window.setCentralWidget(central_widget)
-
-    def retranslateUi(self):
-        self.main_window.setWindowTitle(self.main_window.tr("BFVTT Application"))
-        # Update tab titles
-        right_tab_widget = self.main_window.centralWidget().findChild(QTabWidget)
-        if right_tab_widget:
-            right_tab_widget.setTabText(0, self.main_window.tr("Chat"))
-            right_tab_widget.setTabText(1, self.main_window.tr("Characters"))
-            right_tab_widget.setTabText(2, self.main_window.tr("Creatures"))
-            right_tab_widget.setTabText(3, self.main_window.tr("Items"))
-            right_tab_widget.setTabText(4, self.main_window.tr("Music Player"))
-            right_tab_widget.setTabText(5, self.main_window.tr("Options"))
-        # Add similar calls for other UI elements here
-
