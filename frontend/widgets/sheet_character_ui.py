@@ -6,12 +6,15 @@ from PySide6.QtCore import Qt, QSize, QTranslator, QLocale
 from backend.character_sheets.sheets import Character, Statistics, Development, Attributes, Equipment, Races, CharacterDescription, Card
 from frontend.util.font import HEADING_FONT, SUBHEADING_FONT, DEFAULT_FONT
 from backend.json_serialisation.save_manager import *
+from translations.gui_translator import GuiTranslator
 
 
 class CharacterSheet(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
+        
+        
 
     def initUI(self):
         self.setGeometry(100, 100, 800, 1000)
@@ -311,12 +314,8 @@ class CharacterSheet(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    # Load translations
-    translator = QTranslator()
-    locale = QLocale.system().name()
-    translation_file = f"translations_{locale}.qm"
-    if translator.load(translation_file):
-        app.installTranslator(translator)
+    translator = GuiTranslator.load_translations(app, "pl")
+    app.installTranslator(translator)
 
     ex = CharacterSheet()
     sys.exit(app.exec())

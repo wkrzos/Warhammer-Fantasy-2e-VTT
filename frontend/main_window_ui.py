@@ -1,3 +1,5 @@
+# main_window_ui.py
+
 import os
 from PySide6.QtWidgets import QHBoxLayout, QWidget, QSplitter, QTabWidget
 from PySide6.QtCore import Qt
@@ -25,15 +27,18 @@ from frontend.widgets.music_player_ui import MusicPlayerViewUI
 from controller.music_player_controller import MusicPlayerController
 from model.action_panel_model import ActionPanelModel
 from frontend.widgets.action_panel_ui import ActionPanelUI
-from controller.action_panel_controller import ActionPanelController
 from frontend.widgets.characters_ui import CharactersViewUI
+from frontend.widgets.welcome_screen_ui import SplashScreen
+from translations.gui_translator import GuiTranslator
 
-import os
-from PySide6.QtWidgets import QHBoxLayout, QWidget, QSplitter, QTabWidget
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QHBoxLayout, QPushButton, QAbstractItemView, \
+    QListWidgetItem
 from PySide6.QtGui import QIcon
+from PySide6.QtCore import QSize, QObject
+import os
+from frontend.util.font import DEFAULT_FONT
 
-class MainWindowView:
+class MainWindowView(QWidget):
     def __init__(self, main_window):
         self.main_window = main_window
         self.map_view_ui = MapViewUI(self.main_window)
@@ -45,7 +50,8 @@ class MainWindowView:
         self.options_view_ui = OptionsViewUI(self.main_window)
         self.music_player_view_ui = MusicPlayerViewUI(self.main_window)
         self.action_panel_ui = ActionPanelUI(self.main_window)
-
+        self.welcome_screen_view = SplashScreen()
+        
     def setup_ui(self, model):
         self.main_window.setWindowTitle(self.main_window.tr(model.title))
         self.main_window.setGeometry(*model.geometry)
@@ -65,19 +71,19 @@ class MainWindowView:
 
         self.toolbar_view.setFixedWidth(60)
 
-        right_tab_widget = QTabWidget()
-        right_tab_widget.setFixedWidth(300)
+        self.right_tab_widget = QTabWidget()
+        self.right_tab_widget.setFixedWidth(300)
         
-        right_tab_widget.addTab(self.chat_view_ui, self.main_window.tr("Chat"))
-        right_tab_widget.addTab(self.characters_view_ui, self.main_window.tr("Characters"))
-        right_tab_widget.addTab(self.creatures_view_ui, self.main_window.tr("Creatures"))
-        right_tab_widget.addTab(self.items_view_ui, self.main_window.tr("Items"))
-        right_tab_widget.addTab(self.music_player_view_ui, self.main_window.tr("Music Player"))
-        right_tab_widget.addTab(self.options_view_ui, self.main_window.tr("Options"))
+        self.right_tab_widget.addTab(self.chat_view_ui, self.tr("Chat"))
+        self.right_tab_widget.addTab(self.characters_view_ui, self.tr("Characters"))
+        self.right_tab_widget.addTab(self.creatures_view_ui, self.tr("Creatures"))
+        self.right_tab_widget.addTab(self.items_view_ui, self.tr("Items"))
+        self.right_tab_widget.addTab(self.music_player_view_ui, self.tr("Music Player"))
+        self.right_tab_widget.addTab(self.options_view_ui, self.tr("Options"))
 
         splitter = QSplitter(Qt.Horizontal)
         splitter.addWidget(self.map_view_ui)
-        splitter.addWidget(right_tab_widget)
+        splitter.addWidget(self.right_tab_widget)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 0)
 
