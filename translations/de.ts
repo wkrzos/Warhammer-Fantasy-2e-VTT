@@ -2,6 +2,64 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>ActionPanelController</name>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="21"/>
+        <source>Parry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="22"/>
+        <source>Aiming</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="23"/>
+        <source>Wake Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="24"/>
+        <source>Defense Stand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="25"/>
+        <source>Use Talent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="31"/>
+        <source>Simple Attack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="32"/>
+        <source>Multiple Attack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="33"/>
+        <source>Furious Attack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="34"/>
+        <source>Careful Attack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="35"/>
+        <source>Push</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../controller/action_panel_controller.py" line="36"/>
+        <source>Feint</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ActionPanelUI</name>
     <message>
         <location filename="../frontend/widgets/action_panel_ui.py" line="16"/>
@@ -17,187 +75,187 @@
 <context>
     <name>CharacterSheet</name>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="18"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="21"/>
         <source>Warhammer Fantasy Roleplay Character Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="26"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="29"/>
         <source>Character</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="32"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="35"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="35"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="38"/>
         <source>Human</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="35"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="38"/>
         <source>Elf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="35"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="38"/>
         <source>Dwarf</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="35"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="38"/>
         <source>Halfling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="36"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="39"/>
         <source>Race:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="38"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="41"/>
         <source>Current Career:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="40"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="43"/>
         <source>Previous Careers:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="56"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="59"/>
         <source>Personal Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="60"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="63"/>
         <source>Age:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="62"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="65"/>
         <source>Gender:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="64"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="67"/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="66"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="69"/>
         <source>Weight:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="68"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="71"/>
         <source>Eyes Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="70"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="73"/>
         <source>Hair Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="72"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="75"/>
         <source>Star Sign:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="74"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="77"/>
         <source>Number of Siblings:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="76"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="79"/>
         <source>Birthplace:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="78"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="81"/>
         <source>Distinguishing Marks:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="83"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="86"/>
         <source>Character Profile Main</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="102"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="105"/>
         <source>Character Profile Secondary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="121"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="124"/>
         <source>Weapons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="145"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="148"/>
         <source>Armour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="149"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="152"/>
         <source>Basic Armour:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="151"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="154"/>
         <source>Advanced Armour:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="156"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="159"/>
         <source>Experience Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="160"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="163"/>
         <source>Current:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="162"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="165"/>
         <source>Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="169"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="172"/>
         <source>Combat Movement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="173"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="176"/>
         <source>Move/Disengage:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="175"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="178"/>
         <source>Charge Attack:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="177"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="180"/>
         <source>Run:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="182"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="185"/>
         <source>Save Character</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="192"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="195"/>
         <source>Choose Character Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../frontend/widgets/sheet_character_ui.py" line="192"/>
+        <location filename="../frontend/widgets/sheet_character_ui.py" line="195"/>
         <source>Image Files (*.png *.jpg *.bmp)</source>
         <translation type="unfinished"></translation>
     </message>

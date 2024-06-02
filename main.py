@@ -24,6 +24,7 @@ if __name__ == '__main__':
 
         selected_language = welcome_model.get_language()
         translator = GuiTranslator.load_translations(app, selected_language)
+        app.installTranslator(translator)
 
         main_window = QMainWindow()
         main_window_model = MainWindowModel()
