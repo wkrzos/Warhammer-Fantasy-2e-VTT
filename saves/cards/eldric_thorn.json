@@ -19,8 +19,8 @@
             "insanityPoints": 0,
             "fatePoints": 2
         },
-        "skills": ["Athletics", "Dodge", "Endurance"],
-        "talents": ["Warrior Born", "Marksman"],
+        "skills": [],
+        "talents": [],
         "development": {
             "exp": 200,
             "updates": {

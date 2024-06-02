@@ -19,8 +19,8 @@
             "insanityPoints": 0,
             "fatePoints": 1
         },
-        "skills": ["Stealth", "Perception", "Lockpicking"],
-        "talents": ["Night Vision", "Marksman"],
+        "skills": [],
+        "talents": [],
         "development": {
             "exp": 250,
             "updates": {
