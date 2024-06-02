@@ -1,7 +1,6 @@
 class OptionsModel:
     def __init__(self):
         self.options = {}
-        self.language = 'en'  # Default language
 
     def set_option(self, key, value):
         self.options[key] = value
