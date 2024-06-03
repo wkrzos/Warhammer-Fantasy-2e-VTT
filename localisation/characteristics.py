@@ -124,7 +124,7 @@ class CharacterTextAggregator:
     def load_races_names(cls,language:str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "racesNames.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.racesNames.keys():
                     if key.value in jsonData.keys():
@@ -136,7 +136,7 @@ class CharacterTextAggregator:
     def load_stats_names(cls, language: str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.statsNames.keys():
                     if key.value in jsonData.keys():
@@ -149,7 +149,7 @@ class CharacterTextAggregator:
         path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
 
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.attributesNames.keys():
                     if key.value in jsonData.keys():
@@ -162,7 +162,7 @@ class CharacterTextAggregator:
         path = os.path.join(os.path.dirname(__file__), "language", language, "statsNames.json")
 
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.skillsNames.keys():
                     if key.value in jsonData.keys():
@@ -175,7 +175,7 @@ class CharacterTextAggregator:
         path = os.path.join(os.path.dirname(__file__), "language", language, "talentsNames.json")
 
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.talentsName.keys():
                     if key.value in jsonData.keys():

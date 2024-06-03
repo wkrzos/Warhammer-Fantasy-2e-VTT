@@ -51,10 +51,10 @@ class RollDescriptionAggregator:
     }
 
     @classmethod
-    def loadFigthDescriptions(cls, language: str) -> None:
-        path = os.path.join(os.path.dirname(__file__), "language", language, "testDesc.json")
+    def loadFigthDescriptions(cls, language: str,) -> None:
+        path = os.path.join(os.path.dirname(__file__), "language", language, "fightDesc.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.fightDescriptions.keys():
                     if key.value in jsonData.keys():
@@ -65,7 +65,7 @@ class RollDescriptionAggregator:
     def loadtestDescriptions(cls, language: str) -> None:
         try:
             path = os.path.join(os.path.dirname(__file__),"language",language, "testDesc.json")
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.testDescriptions.keys():
                     if key.value in jsonData.keys():
