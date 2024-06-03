@@ -22,10 +22,10 @@ class Statistics:
 
     @property
     def strengthBonus(self):
-        return self.strength /10
+        return self.strength // 10
     @property
     def  toughnessBonus(self):
-        return self.toughness /10
+        return self.toughness //10
     @property
     def burden(self):
         return self.strength * 10
