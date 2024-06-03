@@ -59,8 +59,7 @@ class ActionOnAnother(Action):
                     dmg = DmgManager.calculateDmg(player, other,rollValue)
             else:
                 dmg = DmgManager.calculateDmg(player, other,rollValue)
-        other.creature.currentHp -= dmg
-
+        other.creature.currentHp -= max(dmg,0)
     @staticmethod
     def multipleAtack(player:Token,other:Token):
         for i in range(player.creature.statistics.attacks):
