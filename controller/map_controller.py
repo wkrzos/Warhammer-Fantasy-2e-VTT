@@ -1,5 +1,6 @@
 import math
 from PySide6.QtCore import QObject, QPoint, Qt, QRect
+from PySide6.QtGui import QKeyEvent
 from frontend.widgets.map_ui import MapViewUI
 from model.map_model import MapViewModel
 
@@ -20,9 +21,19 @@ class MapViewController:
         self.view.mouseMoveEvent = self.mouseMoveEvent
         self.view.mouseReleaseEvent = self.mouseReleaseEvent
         self.view.wheelEvent = self.wheelEvent
+        self.view.keyPressEvent = self.keyPressEvent
 
     def set_selected_tool(self, tool):
         self.selected_tool = tool
+        self.main_window_model.update_action_panel()
+
+    def keyPressEvent(self, event: QKeyEvent):
+        if event.key() == Qt.Key_S:
+            self.set_selected_tool("select")
+        elif event.key() == Qt.Key_P:
+            self.set_selected_tool("pan")
+        elif event.key() == Qt.Key_M:
+            self.set_selected_tool("measure")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -82,7 +93,6 @@ class MapViewController:
         else:
             self.zoom_out()
 
-
     def update_selection(self):
         selected_tokens = []
         selection_start, selection_end = self.model.get_selection()
@@ -111,7 +121,6 @@ class MapViewController:
         self.model.set_selected_tokens(selected_tokens)
         self.view.update()
         print(selected_tokens)
-
 
     def move_tokens(self, delta, shift_pressed):
         selected_tokens = self.model.get_selected_tokens()
@@ -152,4 +161,3 @@ class MapViewController:
             if token_rect.contains(position.toPoint()):
                 return token
         return None
-

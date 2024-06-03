@@ -28,7 +28,7 @@ class SplashScreen(QWidget):
         # Text layout
         text_layout = QVBoxLayout()
 
-        title = QLabel("BFVTT Application")
+        title = QLabel("BFVTT")
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("font-size: 36px; color: white;")
 
