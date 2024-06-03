@@ -34,25 +34,27 @@ class MusicManager(Observable):
             with self.lock:
                 if self.command == MusicEventTypes.UNPAUSE:
                     self.unpause()
-                    self.command = MusicEventTypes.WAIT
+                    self.command = MusicEventTypes.KEEP_RUNNING
                 elif self.command == MusicEventTypes.PAUSE:
                     self.pause()
                     self.command = MusicEventTypes.WAIT
                 elif self.command == MusicEventTypes.NEXT:
                     self.next()
-                    self.command = MusicEventTypes.WAIT
+                    self.command = MusicEventTypes.KEEP_RUNNING
                     MusicManager.notify(self.currentIndex)
                 elif self.command == MusicEventTypes.PREVIOUS:
                     self.previous()
-                    self.command = MusicEventTypes.WAIT
+                    self.command = MusicEventTypes.KEEP_RUNNING
                     MusicManager.notify(self.currentIndex)
-                elif self.command == MusicEventTypes.REWIND:
+                elif self.command == MusicEventTypes.KEEP_RUNNING:
                     self.rewind()
                     self.command = MusicEventTypes.WAIT
                 elif self.command == MusicEventTypes.PLAY:
                     if not mixer.music.get_busy():
                         self.play()
-                    self.command = MusicEventTypes.WAIT
+                    self.command = MusicEventTypes.KEEP_RUNNING
+                elif self.command == MusicEventTypes.KEEP_RUNNING and not mixer.music.get_busy():
+                    self.next()
                 elif self.command == MusicEventTypes.CLOSE:
                     return 0
     def play(self) -> None:
@@ -104,6 +106,7 @@ class MusicManager(Observable):
 
 
 class MusicEventTypes(Enum):
+    KEEP_RUNNING = -3
     CLOSE = -2,
     WAIT = -1
     PLAY = 0

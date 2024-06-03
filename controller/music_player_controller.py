@@ -27,15 +27,12 @@ class MusicPlayerController(Observer):
 
     def play_music(self):
         self.model.play_music()
-        self.view.toggle_button.setIcon(self.view.stop_icon)
 
     def stop_music(self):
         self.model.stop_music()
-        self.view.toggle_button.setIcon(self.view.play_icon)
 
     def pause_music(self):
         self.model.pause_music()
-        self.view.toggle_button.setIcon(self.view.play_icon)
 
 
     def next_music(self):

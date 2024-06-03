@@ -9,6 +9,7 @@ class WelcomeScreenController:
         self.model = model
         self.view = view
         self.connect_signals()
+        self.load_backend_localisation()
 
 
     def connect_signals(self):

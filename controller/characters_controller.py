@@ -8,11 +8,12 @@ from model.map_model import MapViewModel
 from frontend.widgets.map_ui import MapViewUI
 
 class CharactersController:
-    def __init__(self, model, view, map_model):
+    def __init__(self, model, view, map_model, map_controller):
         self.model = model
         self.view = view
         self.map_model = map_model
-        self.map_view = MapViewUI()
+        self.map_view = map_controller.view
+        self.map_controller = map_controller
         self.connect_signals()
         self.view.update_creature_list(self.model.get_characters())
 
@@ -68,6 +69,7 @@ class CharactersController:
             self.view.update_creature_list(self.model.get_characters())
             self.map_model.set_selected_tokens([token])
             self.view.update()  # Update the map view to display the new token
+            self.map_view.update()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -21,7 +21,7 @@ class ActionsTextAggregator:
     def load_basic_actions(cls, language: str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "basicActionsText.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.basicActionsText.keys():
                     if key.value in jsonData.keys():
@@ -33,7 +33,7 @@ class ActionsTextAggregator:
     def load_double_actions(cls, language: str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "doubleActionsText.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.doubleActionsText.keys():
                     if key.value in jsonData.keys():

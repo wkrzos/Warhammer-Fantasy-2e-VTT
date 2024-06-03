@@ -57,7 +57,7 @@ class ItemsTextAggregator:
     def load_armor_types_names(cls,language:str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "armorTypesNames.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.armorTypesNames.keys():
                     if key.value in jsonData.keys():
@@ -68,7 +68,7 @@ class ItemsTextAggregator:
     def load_hit_localisation_names(cls,language:str):
         path = os.path.join(os.path.dirname(__file__), "language", language, "hitLocalisationNames.json")
         try:
-            with open(path, "r") as f:
+            with open(path, "r",encoding='utf-8') as f:
                 jsonData = json.load(f)
                 for key in cls.hitLocalisationNames.keys():
                     if key.value in jsonData.keys():

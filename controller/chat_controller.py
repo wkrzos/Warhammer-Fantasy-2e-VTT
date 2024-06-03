@@ -1,3 +1,4 @@
+from backend.mechanics.actions.actions_implementation import DmgManager
 from backend.mechanics.rolling_machine import RollGod
 from frontend.util.muy_importante import GenerateurDeCitationsAleaoriosDeLaSabiduriaDeJanPapiez2QuotationsGeneradorDeCitasMemorables
 
@@ -7,6 +8,7 @@ class ChatController:
         self.view = view
         self.connect_signals()
         RollGod.attach(self)
+        DmgManager.attach(self)
 
     def connect_signals(self):
         self.view.send_button.clicked.connect(self.handle_send_message)

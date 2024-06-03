@@ -110,16 +110,12 @@ class DmgManager(Observable):
     def calculateHitLocalisation(roll:int) -> HitLocalisation:
         reversRoll = roll / 10 + roll % 10 * 10
         if reversRoll <= 15:
-            DmgManager.notify(HitLocalisation.HEAD)
             return HitLocalisation.HEAD
         elif reversRoll <= 55:
-            DmgManager.notify(HitLocalisation.ARMS)
             return HitLocalisation.ARMS
         elif reversRoll <= 80:
-            DmgManager.notify(HitLocalisation.BODY)
             return HitLocalisation.BODY
         else:
-            DmgManager.notify(HitLocalisation.LEGS)
             return HitLocalisation.LEGS
 
 
@@ -127,7 +123,7 @@ class DmgManager(Observable):
     def calculateDmgReduction(player: Token, location: HitLocalisation) -> int:
         reduction = player.creature.toughnessBonus
         if isinstance(player.creature, Character):
-            for item in player.creature.equipment.armors:
+            for item in player.creature.equipment.equiptArmors:
                 if location in item.protectedLocalisations:
                     reduction += item.armorPoints
         return reduction
@@ -153,7 +149,7 @@ class DmgManager(Observable):
         dmgRoll = RollGod.rollD10(dsc= RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_ROLL] + " " + player.creature.name )[0]
         dmg = dmgBonus - dmgReduction + dmgRoll
         msgLocalisation = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + ItemsTextAggregator.hitLocalisationNames[hitLocalisation]
-        msgDmgDealt = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.HIT_LOCALISATION] + " " + int(dmg)
+        msgDmgDealt = player.creature.name + " " + RollDescriptionAggregator.fightDescriptions[FightDescriptionsType.DMG_DEALT] + " " + str(dmg)
         DmgManager.notify([msgLocalisation, msgDmgDealt])
         return dmg
 
