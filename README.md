@@ -102,7 +102,7 @@ Please ensure your code follows our [Code of Conduct](CODE_OF_CONDUCT.md) and [C
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Creative Commons License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
