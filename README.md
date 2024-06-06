@@ -1,7 +1,7 @@
 # ⚠️ THIS SECTION IS A WIP, SOME INFORMATION MAY BE INCORRECT OR INCOMPLETE ⚠️
 # Warhammer Fantasy Roleplay 2nd Edition Virtual Tabletop (VTT)
 
-Welcome to the Warhammer Fantasy Roleplay 2nd Edition Virtual Tabletop (VTT) project! This project aims to provide a comprehensive and user-friendly virtual tabletop experience for Warhammer Fantasy Roleplay 2nd Edition, allowing players and game masters to easily manage their games online.
+Welcome to the Warhammer Fantasy Roleplay 2nd Edition Virtual Tabletop (VTT) project! This project aims to provide a comprehensive and user-friendly virtual tabletop experience for Warhammer Fantasy Roleplay 2nd Edition, allowing players and game masters to easily manage their games  online.
 
 ## Table of Contents
 
@@ -15,12 +15,12 @@ Welcome to the Warhammer Fantasy Roleplay 2nd Edition Virtual Tabletop (VTT) pro
 ## Features
 
 - **Character Management**: Create, edit, and manage player characters and NPCs with ease.
-- **Combat Tracker**: Easily track combat encounters, initiative, and statuses.
+- [WIP] **Combat Tracker**: Easily track combat encounters, initiative, and statuses.
 - **Map and Token Management**: Upload and manage maps, place tokens, and control visibility.
 - **Dice Roller**: Integrated dice roller supporting all Warhammer Fantasy Roleplay 2nd Edition mechanics.
-- **Handouts and Notes**: Share handouts and keep game notes accessible to all players.
+- [WIP] **Handouts and Notes**: Share handouts and keep game notes accessible to all players.
 - **Audio Integration**: Play ambient sounds and music to enhance the gaming experience.
-- **Customizable UI**: Tailor the interface to fit your group's needs and preferences.
+- [WIP] **Customizable UI**: Tailor the interface to fit your group's needs and preferences.
 - **Secure and Reliable**: Ensure data integrity and security with robust backend solutions.
 
 ## Installation
@@ -36,7 +36,7 @@ To get started with the Warhammer Fantasy Roleplay 2nd Edition VTT, follow these
 
 ```bash
 git clone https://github.com/wkrzos/bardzofajenvtt.git
-cd warhammer-vtt
+cd bardzofajenvtt
 ```
 
 ### Create a Virtual Environment
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 Create a `.env` file in the root directory and add your environment variables. For example:
 
 ```
-MONGO_URI=mongodb://localhost:27017/warhammer-vtt
+MONGO_URI=mongodb://localhost:27017/bardzofajenvtt
 SECRET_KEY=your_secret_key
 ```
 
@@ -67,23 +67,21 @@ SECRET_KEY=your_secret_key
 flask run
 ```
 
-Open your browser and navigate to `http://localhost:5000` to start using the VTT.
-
 ## Usage
 
 ### Creating a Game
-
-1. Log in or create an account.
-2. Click on "Create New Game" and fill in the game details.
-3. Invite players to join your game.
+Currently the app supports hot-seat only mode:
+1. Run the applicataion.
+2. Choose the language.
+3. You're all set.
 
 ### Managing Characters
 
 1. Navigate to the "Characters" section.
-2. Click "Create New Character" and enter the character details.
+2. Click "Add Character" and enter the character details.
 3. Edit or update character information as needed.
 
-### Running a Session
+### [WIP] Running a Session
 
 1. Use the "Combat Tracker" to manage encounters.
 2. Upload maps and place tokens for visual representation.
